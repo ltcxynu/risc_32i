@@ -57,7 +57,7 @@ wire [`RegBus]      reg1_sll_reg2_res;
 wire [`RegBus]      reg1_srl_reg2_res;
 wire [`RegBus]      shift_mask;
 wire                op1_eq_op2_res;
-wire [`RegBus]      op1_jump_and_op2_jump_res;
+wire [`RegBus]      op1_jump_add_op2_jump_res;
 wire [1:0]          mem_w_mask;
 wire [1:0]          mem_r_mask;
 
@@ -85,7 +85,7 @@ assign shift_mask_reg2      = 32'hffff_ffff >> reg2_rdata_i[4:0];
 assign reg1_srli_imm_res    = (reg1_rdata_i[31] == 1'b1) ? (reg1_rdata_i >> inst_i[24:20])|(~shift_mask) : reg1_rdata_i >> inst_i[24:20];
 assign reg1_srl_reg2_res    = (reg1_rdata_i[31] == 1'b1) ? (reg1_rdata_i >> reg2_rdata_i[4:0])|(~shift_mask) : reg1_rdata_i >> reg2_rdata_i[4:0];
 assign op1_eq_op2_res       = op1_i == op2_i;
-assign op1_jump_and_op2_jump_res = op1_jump_i+op2_jump_i;
+assign op1_jump_add_op2_jump_res = op1_jump_i+op2_jump_i;
 assign mem_w_mask           = op1_and_op2_res&2'b11;
 assign mem_r_mask           = op1_and_op2_res&2'b11;
 
@@ -200,7 +200,7 @@ always @(*) begin
                 `INST_BEQ :begin
                     jump_flag = op1_eq_op2_res;
                     hold_flag = `HoldDisable;
-                    jump_addr = op1_eq_op2_res ? op1_jump_and_op2_jump_res : 32'h0;
+                    jump_addr = op1_eq_op2_res ? op1_jump_add_op2_jump_res : 32'h0;
                     mem_waddr_o = `ZeroWord;
                     mem_raddr_o = `ZeroWord;
                     mem_wdata_o = `ZeroWord;
@@ -210,7 +210,7 @@ always @(*) begin
                 `INST_BNE :begin
                     jump_flag = ~op1_eq_op2_res;
                     hold_flag = `HoldDisable;
-                    jump_addr = ~op1_eq_op2_res ? op1_jump_and_op2_jump_res : 32'h0;
+                    jump_addr = ~op1_eq_op2_res ? op1_jump_add_op2_jump_res : 32'h0;
                     mem_waddr_o = `ZeroWord;
                     mem_raddr_o = `ZeroWord;
                     mem_wdata_o = `ZeroWord;
@@ -220,7 +220,7 @@ always @(*) begin
                 `INST_BLT :begin
                     jump_flag = ~op1_ge_op2_signed;
                     hold_flag = `HoldDisable;
-                    jump_addr = ~op1_ge_op2_signed ? op1_jump_and_op2_jump_res : 32'h0;
+                    jump_addr = ~op1_ge_op2_signed ? op1_jump_add_op2_jump_res : 32'h0;
                     mem_waddr_o = `ZeroWord;
                     mem_raddr_o = `ZeroWord;
                     mem_wdata_o = `ZeroWord;
@@ -230,7 +230,7 @@ always @(*) begin
                 `INST_BGE :begin
                     jump_flag = op1_ge_op2_signed;
                     hold_flag = `HoldDisable;
-                    jump_addr = op1_ge_op2_signed ? op1_jump_and_op2_jump_res : 32'h0;
+                    jump_addr = op1_ge_op2_signed ? op1_jump_add_op2_jump_res : 32'h0;
                     mem_waddr_o = `ZeroWord;
                     mem_raddr_o = `ZeroWord;
                     mem_wdata_o = `ZeroWord;
@@ -240,7 +240,7 @@ always @(*) begin
                 `INST_BLTU:begin
                     jump_flag = ~op1_ge_op2_unsigned;
                     hold_flag = `HoldDisable;
-                    jump_addr = ~op1_ge_op2_unsigned ? op1_jump_and_op2_jump_res : 32'h0;
+                    jump_addr = ~op1_ge_op2_unsigned ? op1_jump_add_op2_jump_res : 32'h0;
                     mem_waddr_o = `ZeroWord;
                     mem_raddr_o = `ZeroWord;
                     mem_wdata_o = `ZeroWord;
@@ -250,7 +250,7 @@ always @(*) begin
                 `INST_BGEU:begin
                     jump_flag = op1_ge_op2_unsigned;
                     hold_flag = `HoldDisable;
-                    jump_addr = op1_ge_op2_unsigned ? op1_jump_and_op2_jump_res : 32'h0;
+                    jump_addr = op1_ge_op2_unsigned ? op1_jump_add_op2_jump_res : 32'h0;
                     mem_waddr_o = `ZeroWord;
                     mem_raddr_o = `ZeroWord;
                     mem_wdata_o = `ZeroWord;
@@ -611,17 +611,60 @@ always @(*) begin
                 end
             endcase
         end
-        
-        `INST_JAL   :
-        `INST_JALR  :
-        `INST_LUI   :
-        `INST_AUIPC :
-        `INST_NOP_OP:
-        `INST_FENCE :
-        default:
-    endcase
+        `INST_JAL,`INST_JALR   :begin //二者的区分在id.v已经做了
+            hold_flag = `HoldDisable;
+            mem_waddr_o = `ZeroWord;
+            mem_raddr_o = `ZeroWord;
+            mem_we      = `WriteDisable;     
+            mem_wdata_o = `ZeroWord;  
 
-    
+            jump_flag = `JumpEnable;
+            jump_addr = op1_jump_add_op2_jump_res;
+            reg_wdata = op1_add_op2_res;
+        end
+        `INST_LUI,`INST_AUIPC   :begin
+            hold_flag = `HoldDisable;
+            mem_waddr_o = `ZeroWord;
+            mem_raddr_o = `ZeroWord;
+            mem_we      = `WriteDisable;     
+            mem_wdata_o = `ZeroWord;  
+            jump_flag = `JumpDisable;
+            jump_addr = `ZeroWord;
+            //LUI用以加载一个无符号立即数到目标寄存器的高20位，将低12位置为0 。
+            //AUIPC用以加一个高20位有效，低12位为0 的 立即数到PC上，将结果存入目标寄存器。
+            reg_wdata = op1_add_op2_res;           
+        end
+        `INST_NOP_OP:begin
+            hold_flag = `HoldDisable;
+            mem_waddr_o = `ZeroWord;
+            mem_raddr_o = `ZeroWord;
+            mem_we      = `WriteDisable;     
+            mem_wdata_o = `ZeroWord;  
+            jump_flag = `JumpDisable;
+            jump_addr = `ZeroWord;
+            reg_wdata = `ZeroWord;
+        end
+        `INST_FENCE :begin
+            hold_flag = `HoldDisable;
+            mem_waddr_o = `ZeroWord;
+            mem_raddr_o = `ZeroWord;
+            mem_we      = `WriteDisable;     
+            mem_wdata_o = `ZeroWord;  
+            jump_flag = `JumpEnable;
+            jump_addr = op1_jump_add_op2_jump_res;
+            reg_wdata = `ZeroWord;            
+        end
+        default:begin
+            hold_flag = `HoldDisable;
+            mem_waddr_o = `ZeroWord;
+            mem_raddr_o = `ZeroWord;
+            mem_we      = `WriteDisable;     
+            mem_wdata_o = `ZeroWord;  
+            jump_flag = `JumpDisable;
+            jump_addr = `ZeroWord;
+            reg_wdata = `ZeroWord;
+        end
+    endcase
 
 end
 endmodule
