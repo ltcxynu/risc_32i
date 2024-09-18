@@ -5,19 +5,19 @@ module ex(
     input wire                  clk,
     input wire                  rst,
     //from id_ex
-    input reg[`MemAddrBus]      op1_i,//
-    input reg[`MemAddrBus]      op2_i,
-    input reg[`MemAddrBus]      op1_jump_i,
-    input reg[`MemAddrBus]      op2_jump_i,
-    input reg[`InstBus]         inst_i,
-    input reg[`InstAddrBus]     inst_addr_i,     
-    input reg [`RegBus]         reg1_rdata_i,
-    input reg [`RegBus]         reg2_rdata_i,
-    input reg                   reg_we_i,
-    input reg [`RegAddrBus]     reg_waddr_i,
-    input reg                   csr_we_i,
-    input reg [`RegBus]         csr_rdata_i,
-    input reg [`MemAddrBus]     csr_waddr_i,
+    input wire[`MemAddrBus]      op1_i,//
+    input wire[`MemAddrBus]      op2_i,
+    input wire[`MemAddrBus]      op1_jump_i,
+    input wire[`MemAddrBus]      op2_jump_i,
+    input wire[`InstBus]         inst_i,
+    input wire[`InstAddrBus]     inst_addr_i,     
+    input wire [`RegBus]         reg1_rdata_i,
+    input wire [`RegBus]         reg2_rdata_i,
+    input wire                   reg_we_i,
+    input wire [`RegAddrBus]     reg_waddr_i,
+    input wire                   csr_we_i,
+    input wire [`RegBus]         csr_rdata_i,
+    input wire [`MemAddrBus]     csr_waddr_i,
     // from/to mem
     input wire[`MemBus]         mem_rdata_i,
     output reg [`MemBus]        mem_wdata_o,
@@ -30,7 +30,7 @@ module ex(
     output wire                 reg_we_o,
     output wire[`RegAddrBus]    reg_waddr_o,
     //to csr regs
-    output wire[`RegBus]        csr_wdata_o,
+    output reg [`RegBus]        csr_wdata_o,
     output wire                 csr_we_o,
     output wire[`MemAddrBus]    csr_waddr_o,
     //to ctrl
@@ -73,7 +73,7 @@ reg [`RegBus]       reg_wdata;
 /*----------------------------assign------------------------------------*/
 assign op1_add_op2_res      = op1_i + op2_i;
 assign op1_sub_op2_res      = op1_i - op2_i;
-assign op1_ge_op2_signed    = $signed(op1_i) >= signed(op2_i);
+assign op1_ge_op2_signed    = $signed(op1_i) >= $signed(op2_i);
 assign op1_ge_op2_unsigned  = op1_i >= op2_i;
 assign op1_or_op2_res       = op1_i | op2_i;
 assign op1_xor_op2_res      = op1_i ^ op2_i;
@@ -284,17 +284,17 @@ always @(*) begin
                     mem_req     = `RIB_REQ;
                     case (mem_r_mask)
                         2'b00:begin
-                            reg_wdata = {24{{mem_rdata_i[7]}},{mem_rdata_i[7:0]}};
+                            reg_wdata = {{24{mem_rdata_i[7]}},{mem_rdata_i[7:0]}};
                         end 
                         2'b01:begin
-                            reg_wdata = {24{{mem_rdata_i[15]}},{mem_rdata_i[15:8]}};
+                            reg_wdata = {{24{mem_rdata_i[15]}},{mem_rdata_i[15:8]}};
                         end 
                         2'b10:begin
-                            reg_wdata = {24{{mem_rdata_i[23]}},{mem_rdata_i[23:16]}};
+                            reg_wdata = {{24{mem_rdata_i[23]}},{mem_rdata_i[23:16]}};
                             
                         end 
                         default:begin
-                            reg_wdata = {24{{mem_rdata_i[31]}},{mem_rdata_i[31:24]}};
+                            reg_wdata = {{24{mem_rdata_i[31]}},{mem_rdata_i[31:24]}};
                         end 
                     endcase                    
                 end
@@ -310,10 +310,10 @@ always @(*) begin
                     mem_req     = `RIB_REQ;
                     case (mem_r_mask)
                         2'b00:begin
-                            reg_wdata = {12{{mem_rdata_i[15]}},{mem_rdata_i[15:0]}};
+                            reg_wdata = {{12{mem_rdata_i[15]}},{mem_rdata_i[15:0]}};
                         end 
                         default:begin
-                            reg_wdata = {12{{mem_rdata_i[31]}},{mem_rdata_i[31:16]}};
+                            reg_wdata = {{12{mem_rdata_i[31]}},{mem_rdata_i[31:16]}};
                         end 
                     endcase                        
                 end
@@ -341,17 +341,17 @@ always @(*) begin
                     mem_req     = `RIB_REQ;
                     case (mem_r_mask)
                         2'b00:begin
-                            reg_wdata = {24{1'b0},{mem_rdata_i[7:0]}};
+                            reg_wdata = {24'h0,{mem_rdata_i[7:0]}};
                         end 
                         2'b01:begin
-                            reg_wdata = {24{1'b0},{mem_rdata_i[15:8]}};
+                            reg_wdata = {24'h0,{mem_rdata_i[15:8]}};
                         end 
                         2'b10:begin
-                            reg_wdata = {24{1'b0},{mem_rdata_i[23:16]}};
+                            reg_wdata = {24'h0,{mem_rdata_i[23:16]}};
                             
                         end 
                         default:begin
-                            reg_wdata = {24{1'b0},{mem_rdata_i[31:24]}};
+                            reg_wdata = {24'h0,{mem_rdata_i[31:24]}};
                         end 
                     endcase      
                 end
@@ -367,10 +367,10 @@ always @(*) begin
                     mem_req     = `RIB_REQ;
                     case (mem_r_mask)
                         2'b00:begin
-                            reg_wdata = {12{1'b0},{mem_rdata_i[15:0]}};
+                            reg_wdata = {12'h0,{mem_rdata_i[15:0]}};
                         end 
                         default:begin
-                            reg_wdata = {12{1'b0},{mem_rdata_i[31:16]}};
+                            reg_wdata = {12'h0,{mem_rdata_i[31:16]}};
                         end 
                     endcase    
                 end
@@ -595,15 +595,15 @@ always @(*) begin
                 end
                 `INST_CSRRWI:begin
                     reg_wdata = csr_rdata_i;
-                    csr_wdata_o = {27'h0, rs1};
+                    csr_wdata_o = {27'h0, uimm};
                 end
                 `INST_CSRRSI:begin
                     reg_wdata = csr_rdata_i;
-                    csr_wdata_o = csr_rdata_i | {27'h0, rs1};
+                    csr_wdata_o = csr_rdata_i | {27'h0, uimm};
                 end
                 `INST_CSRRCI:begin
                     reg_wdata = csr_rdata_i;
-                    csr_wdata_o = csr_rdata_i & ~{27'h0, rs1};
+                    csr_wdata_o = csr_rdata_i & ~{27'h0, uimm};
                 end
                 default     :begin
                     reg_wdata = `ZeroWord;
