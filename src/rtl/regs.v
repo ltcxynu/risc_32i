@@ -1,3 +1,5 @@
+`include "bus_defines.v"
+`include "rv32i_defines.v"
 module regs(
     input wire clk,
     input wire rst,

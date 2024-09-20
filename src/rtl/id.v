@@ -70,14 +70,14 @@ always @(*) begin
                 `INST_ORI  ,
                 `INST_ANDI ,
                 `INST_SLLI ,
-                `INST_SRI  : 
+                `INST_SRLI  : 
                 begin
                     reg_we_o = `WriteEnable;
                     reg_waddr_o = rd;
                     reg1_raddr_o = rs1;
                     reg2_raddr_o = `ZeroReg;
                     op1_o = reg1_rdata_i;
-                    op2_o = {{20}{inst_i[31]},inst[31:20]};//拓展符号位！
+                    op2_o = {{20{inst_i[31]}},inst_i[31:20]};//拓展符号位！
                 end
                 default:
                 begin
@@ -162,7 +162,7 @@ always @(*) begin
                         reg1_raddr_o = rs1;
                         reg2_raddr_o = rs2;
                         op1_o = reg1_rdata_i;
-                        op2_o = reg2_rdata_i     
+                        op2_o = reg2_rdata_i;     
                     end
                     default:
                     begin

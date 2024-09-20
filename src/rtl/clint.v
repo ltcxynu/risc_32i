@@ -151,7 +151,7 @@ always@ (posedge clk) begin
             end
             S_CSR_MCAUSE:begin
             we_o    <= `WriteEnable;
-            waddr_o <= {20'h0, CSR_MCAUSE};
+            waddr_o <= {20'h0, `CSR_MCAUSE};
             data_o  <= cause;//记录中断类型
             end
             S_CSR_MSTATUS:begin

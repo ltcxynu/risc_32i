@@ -1,6 +1,6 @@
 `include "bus_defines.v"
 `include "rv32i_defines.v"
-
+`include "../utils/gen_dff.v"
 module if_id(
     input wire clk,
     input wire rst,
@@ -27,6 +27,6 @@ module if_id(
     assign inst_addr_o = inst_addr;
 
     wire [`INT_BUS] int_flag;
-    gen_pipe_dff #(32) int_dff(clk,rst,hold_en,int_flag_i,`INST_NOP,int_flag);
+    gen_pipe_dff #(8) int_dff(clk,rst,hold_en,int_flag_i,`INT_NONE,int_flag);
     assign int_flag_o = int_flag;
 endmodule
