@@ -1,6 +1,7 @@
 `timescale 1 ns / 1 ps
 
-`include "defines.v"
+`include "bus_defines.v"
+`include "rv32i_defines.v"
 
 // select one option only
 `define TEST_PROG  1

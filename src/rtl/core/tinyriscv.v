@@ -1,4 +1,5 @@
-`include "risc_pkg.v"
+`include "bus_defines.v"
+`include "rv32i_defines.v"
 
 // tinyriscv处理器核顶层模块
 module tinyriscv(
