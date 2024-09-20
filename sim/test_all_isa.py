@@ -27,6 +27,8 @@ def main():
         cmd = r'python sim_new_nowave.py' + ' ' + file + ' ' + 'inst.data'
         f = os.popen(cmd)
         r = f.read()
+        
+        f = os.popen('rm -rf inst.data')
         f.close()
         if (r.find('TEST_PASS') != -1):
             print(file + '    PASS')
