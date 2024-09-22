@@ -96,7 +96,7 @@ end
 
 always @(*) begin
     m0_data_o = `ZeroWord;
-    m1_data_o = `ZeroWord;
+    m1_data_o = `INST_NOP;
     m2_data_o = `ZeroWord;
     m3_data_o = `ZeroWord;
 

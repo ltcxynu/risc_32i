@@ -87,8 +87,8 @@ assign reg1_srli_imm_res    = (reg1_rdata_i[31] == 1'b1) ? (reg1_rdata_i >> inst
 assign reg1_srl_reg2_res    = (reg1_rdata_i[31] == 1'b1) ? (reg1_rdata_i >> reg2_rdata_i[4:0])|(~shift_mask) : reg1_rdata_i >> reg2_rdata_i[4:0];
 assign op1_eq_op2_res       = op1_i == op2_i;
 assign op1_jump_add_op2_jump_res = op1_jump_i+op2_jump_i;
-assign mem_w_mask           = op1_and_op2_res&2'b11;
-assign mem_r_mask           = op1_and_op2_res&2'b11;
+assign mem_w_mask           = (reg1_rdata_i + {{20{inst_i[31]}}, inst_i[31:25], inst_i[11:7]}) & 2'b11;
+assign mem_r_mask           = (reg1_rdata_i + {{20{inst_i[31]}}, inst_i[31:20]}) & 2'b11;
 
 /*----------------------------暂不处理输出中断等逻辑------------------------------------*/
 
@@ -329,10 +329,10 @@ always @(*) begin
                     mem_req     = `RIB_REQ;
                     case (mem_r_mask)
                         2'b00:begin
-                            reg_wdata = {{12{mem_rdata_i[15]}},{mem_rdata_i[15:0]}};
+                            reg_wdata = {{16{mem_rdata_i[15]}},{mem_rdata_i[15:0]}};
                         end 
                         default:begin
-                            reg_wdata = {{12{mem_rdata_i[31]}},{mem_rdata_i[31:16]}};
+                            reg_wdata = {{16{mem_rdata_i[31]}},{mem_rdata_i[31:16]}};
                         end 
                     endcase                        
                 end
@@ -386,10 +386,10 @@ always @(*) begin
                     mem_req     = `RIB_REQ;
                     case (mem_r_mask)
                         2'b00:begin
-                            reg_wdata = {12'h0,{mem_rdata_i[15:0]}};
+                            reg_wdata = {16'h0,{mem_rdata_i[15:0]}};
                         end 
                         default:begin
-                            reg_wdata = {12'h0,{mem_rdata_i[31:16]}};
+                            reg_wdata = {16'h0,{mem_rdata_i[31:16]}};
                         end 
                     endcase    
                 end
@@ -552,7 +552,7 @@ always @(*) begin
                     hold_flag = `HoldDisable;
                     jump_addr = `ZeroWord;
                     mem_waddr_o = op1_add_op2_res;
-                    mem_raddr_o = `ZeroWord;
+                    mem_raddr_o = op1_add_op2_res;
                     mem_we      = `WriteEnable;
                     reg_wdata   = `ZeroWord;     
                     mem_req     = `RIB_REQ;                   
@@ -561,7 +561,7 @@ always @(*) begin
                             mem_wdata_o = {mem_rdata_i[31:16],reg2_rdata_i[15:0]};
                         end
                         default:begin
-                            mem_wdata_o = {reg2_rdata_i[31:16],mem_rdata_i[15:0]};
+                            mem_wdata_o = {reg2_rdata_i[15:0],mem_rdata_i[15:0]};
                         end                                               
                     endcase                    
                 end

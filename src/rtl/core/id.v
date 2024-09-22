@@ -96,7 +96,7 @@ always @(*) begin
                 `INST_BLTU,
                 `INST_BGEU:
                 begin
-                    reg_we_o = `WriteEnable;
+                    reg_we_o = `WriteDisable;
                     reg_waddr_o = rd;
                     reg1_raddr_o = rs1;
                     reg2_raddr_o = rs2;
@@ -187,10 +187,10 @@ always @(*) begin
                     reg_we_o = `WriteDisable;
                     reg_waddr_o = `ZeroReg;
                     reg1_raddr_o = `ZeroReg;
-                    // reg1_raddr_o = rs1;//这里其实没读reg1吧？rs1+imm其实是拼起来的立即数值，那传这个干吗？
+                    reg1_raddr_o = rs1;//这里其实没读reg1吧？rs1+imm其实是拼起来的立即数值，那传这个干吗？
                     reg2_raddr_o = rs2;
                     op1_o = reg1_rdata_i;
-                    op2_o = {{20{inst_i[31]}},inst_i[31:25],inst_i[19:15]};//拓展符号位！ 
+                    op2_o = {{20{inst_i[31]}},inst_i[31:25],inst_i[11:7]};//拓展符号位！ 
                 end
             endcase
         end
