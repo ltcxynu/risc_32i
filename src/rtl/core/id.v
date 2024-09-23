@@ -151,7 +151,7 @@ always @(*) begin
                     `INST_SLT,
                     `INST_SLTU,
                     `INST_XOR,
-                    `INST_SLL,
+                    `INST_SRL,
                     `INST_OR,
                     `INST_AND:
                     begin

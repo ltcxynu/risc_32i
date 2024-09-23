@@ -9,10 +9,10 @@ def list_binfiles(path):
     list_dir = os.walk(path)
     for maindir, subdir, all_file in list_dir:
         for filename in all_file:
-            apath = os.path.join(maindir, filename)
-            if apath.endswith('.bin'):
-                files.append(apath)
-
+            if filename.startswith('rv32ui-p'):
+                apath = os.path.join(maindir, filename)
+                if apath.endswith('.bin'):
+                    files.append(apath)
     return files
 
 # 主函数
@@ -28,7 +28,7 @@ def main():
         f = os.popen(cmd)
         r = f.read()
         
-        f = os.popen('rm -rf inst.data')
+        # f = os.popen('rm -rf inst.data')
         f.close()
         if (r.find('TEST_PASS') != -1):
             print(file + '    PASS')

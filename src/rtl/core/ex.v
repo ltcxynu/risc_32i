@@ -54,9 +54,12 @@ wire [`RegBus]      op1_xor_op2_res;
 wire [`RegBus]      op1_and_op2_res;
 wire [`RegBus]      reg1_slli_imm_res;
 wire [`RegBus]      reg1_srli_imm_res;
+wire [`RegBus]      reg1_srai_imm_res;
 wire [`RegBus]      reg1_sll_reg2_res;
 wire [`RegBus]      reg1_srl_reg2_res;
+wire [`RegBus]      reg1_sra_reg2_res;
 wire [`RegBus]      shift_mask;
+wire [`RegBus]      shift_mask_reg2;
 wire                op1_eq_op2_res;
 wire [`RegBus]      op1_jump_add_op2_jump_res;
 wire [1:0]          mem_w_mask;
@@ -81,10 +84,16 @@ assign op1_xor_op2_res      = op1_i ^ op2_i;
 assign op1_and_op2_res      = op1_i & op2_i;
 assign reg1_slli_imm_res    = reg1_rdata_i << inst_i[24:20];
 assign reg1_sll_reg2_res    = reg1_rdata_i << reg2_rdata_i[4:0];
-assign shift_mask           = 32'hffff_ffff >> inst_i[24:20];
-assign shift_mask_reg2      = 32'hffff_ffff >> reg2_rdata_i[4:0];
-assign reg1_srli_imm_res    = (reg1_rdata_i[31] == 1'b1) ? (reg1_rdata_i >> inst_i[24:20])|(~shift_mask) : reg1_rdata_i >> inst_i[24:20];
-assign reg1_srl_reg2_res    = (reg1_rdata_i[31] == 1'b1) ? (reg1_rdata_i >> reg2_rdata_i[4:0])|(~shift_mask) : reg1_rdata_i >> reg2_rdata_i[4:0];
+assign shift_mask           = {32{reg1_rdata_i[31]}} >> inst_i[24:20];
+assign shift_mask_reg2      = {32{reg1_rdata_i[31]}} >> reg2_rdata_i[4:0];
+
+assign reg1_srli_imm_res    = reg1_rdata_i >> inst_i[24:20];
+assign reg1_srai_imm_res    = reg1_rdata_i[31]? (reg1_rdata_i >> inst_i[24:20])|(~shift_mask):(reg1_rdata_i >> inst_i[24:20]);
+
+assign reg1_srl_reg2_res    = reg1_rdata_i >> reg2_rdata_i[4:0];
+assign reg1_sra_reg2_res    = reg1_rdata_i[31]? (reg1_rdata_i >> reg2_rdata_i[4:0])|(~shift_mask_reg2):(reg1_rdata_i >> reg2_rdata_i[4:0]);
+
+// assign reg1_srl_reg2_res    = (reg1_rdata_i[31] == 1'b1) ? (reg1_rdata_i >> reg2_rdata_i[4:0])|(~shift_mask) : reg1_rdata_i >> reg2_rdata_i[4:0];
 assign op1_eq_op2_res       = op1_i == op2_i;
 assign op1_jump_add_op2_jump_res = op1_jump_i+op2_jump_i;
 assign mem_w_mask           = (reg1_rdata_i + {{20{inst_i[31]}}, inst_i[31:25], inst_i[11:7]}) & 2'b11;
@@ -199,7 +208,7 @@ always @(*) begin
                     mem_raddr_o = `ZeroWord;
                     mem_wdata_o = `ZeroWord;
                     mem_we      = `WriteDisable;
-                    reg_wdata   = reg1_srli_imm_res;
+                    reg_wdata   = (funct7==7'b0000_000) ? reg1_srli_imm_res : reg1_srai_imm_res;
                 end
                 default :begin
                     jump_flag = `JumpDisable;
@@ -480,7 +489,7 @@ always @(*) begin
                         mem_raddr_o = `ZeroWord;
                         mem_wdata_o = `ZeroWord;
                         mem_we      = `WriteDisable;
-                        reg_wdata   = reg1_srl_reg2_res;                        
+                        reg_wdata   = (funct7==7'b0000_000) ? reg1_srl_reg2_res : reg1_sra_reg2_res;                        
                     end
                     `INST_OR        :begin
                         jump_flag = `JumpDisable;
@@ -528,7 +537,7 @@ always @(*) begin
                     hold_flag = `HoldDisable;
                     jump_addr = `ZeroWord;
                     mem_waddr_o = op1_add_op2_res;
-                    mem_raddr_o = `ZeroWord;
+                    mem_raddr_o = op1_add_op2_res;
                     mem_we      = `WriteEnable;
                     reg_wdata   = `ZeroWord;     
                     mem_req     = `RIB_REQ;                   
@@ -537,13 +546,13 @@ always @(*) begin
                             mem_wdata_o = {mem_rdata_i[31:8],reg2_rdata_i[7:0]};
                         end
                         2'b01:begin
-                            mem_wdata_o = {mem_rdata_i[31:16],reg2_rdata_i[15:8],mem_rdata_i[7:0]};
+                            mem_wdata_o = {mem_rdata_i[31:16],reg2_rdata_i[7:0],mem_rdata_i[7:0]};
                         end
                         2'b10:begin
-                            mem_wdata_o = {mem_rdata_i[31:8],reg2_rdata_i[23:16],mem_rdata_i[15:0]};
+                            mem_wdata_o = {mem_rdata_i[31:24],reg2_rdata_i[7:0],mem_rdata_i[15:0]};
                         end
                         default:begin
-                            mem_wdata_o = {reg2_rdata_i[31:24],mem_rdata_i[23:0]};
+                            mem_wdata_o = {reg2_rdata_i[7:0],mem_rdata_i[23:0]};
                         end                                               
                     endcase
                 end

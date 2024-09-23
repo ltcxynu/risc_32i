@@ -31,7 +31,8 @@
 `define INST_SLT    3'b010
 `define INST_SLTU   3'b011
 `define INST_XOR    3'b100
-`define INST_SRL     3'b101  
+`define INST_SRL     3'b101 //funct7:0x00 
+//INST_SRA, 3'b101   funct7: 0x20
 `define INST_OR     3'b110
 `define INST_AND    3'b111
 // M type inst
