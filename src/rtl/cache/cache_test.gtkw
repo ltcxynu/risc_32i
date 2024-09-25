@@ -1,0 +1,70 @@
+[*]
+[*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
+[*] Wed Sep 25 12:18:55 2024
+[*]
+[dumpfile] "/home/host/git/risc_32i/src/rtl/cache/this.vcd"
+[dumpfile_mtime] "Wed Sep 25 12:08:49 2024"
+[dumpfile_size] 395670
+[savefile] "/home/host/git/risc_32i/src/rtl/cache/cache_test.gtkw"
+[timestart] 0
+[size] 1848 1016
+[pos] -39 -39
+*-16.000000 30000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb_cache.
+[treeopen] tb_cache.uut.
+[sst_width] 233
+[signals_width] 290
+[sst_expanded] 1
+[sst_vpaned_height] 289
+@28
+tb_cache.uut.rst
+@22
+[color] 2
+tb_cache.uut.i_p_addr[24:0]
+[color] 2
+tb_cache.uut.i_p_byte_en[3:0]
+[color] 2
+tb_cache.uut.i_p_writedata[31:0]
+@28
+[color] 2
+tb_cache.uut.i_p_read
+[color] 2
+tb_cache.uut.i_p_write
+@22
+[color] 2
+tb_cache.uut.o_p_readdata[31:0]
+@28
+[color] 2
+tb_cache.uut.o_p_readdata_valid
+[color] 2
+tb_cache.uut.o_p_waitrequest
+@22
+[color] 3
+tb_cache.uut.o_m_addr[25:0]
+[color] 3
+tb_cache.uut.o_m_byte_en[3:0]
+[color] 3
+tb_cache.uut.o_m_writedata[127:0]
+@28
+[color] 3
+tb_cache.uut.o_m_read
+[color] 3
+tb_cache.uut.o_m_write
+@22
+[color] 3
+tb_cache.uut.i_m_readdata[127:0]
+@28
+[color] 3
+tb_cache.uut.i_m_readdata_valid
+[color] 3
+tb_cache.uut.i_m_waitrequest
+@22
+tb_cache.uut.cnt_r[31:0]
+tb_cache.uut.cnt_w[31:0]
+tb_cache.uut.cnt_hit_r[31:0]
+tb_cache.uut.cnt_hit_w[31:0]
+tb_cache.uut.cnt_wb_r[31:0]
+@23
+tb_cache.uut.cnt_wb_w[31:0]
+[pattern_trace] 1
+[pattern_trace] 0

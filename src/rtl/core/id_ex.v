@@ -1,5 +1,6 @@
 `ifndef SIM
 `include "rv32i_defines.v"
+`include "../utils/gen_dff.v"
 `endif
 //第二级流水
 //pc -> | FF |     |  id  |    | FF |      
@@ -17,15 +18,15 @@ input wire [`RegBus]        reg1_rdata_i,
 input wire [`RegBus]        reg2_rdata_i,
 input wire [`RegBus]        csr_rdata_i,
 // to ex
-output reg [`RegBus]        op1_o,
-output reg [`RegBus]        op2_o,
-output reg [`RegBus]        op1_jump_o,
-output reg [`RegBus]        op2_jump_o,
-output reg [`InstBus]       inst_o,
-output reg [`InstAddrBus]   inst_addr_o,
-output reg [`RegBus]        reg1_rdata_o,
-output reg [`RegBus]        reg2_rdata_o,
-output reg [`RegBus]        csr_rdata_o,
+output wire [`RegBus]        op1_o,
+output wire [`RegBus]        op2_o,
+output wire [`RegBus]        op1_jump_o,
+output wire [`RegBus]        op2_jump_o,
+output wire [`InstBus]       inst_o,
+output wire [`InstAddrBus]   inst_addr_o,
+output wire [`RegBus]        reg1_rdata_o,
+output wire [`RegBus]        reg2_rdata_o,
+output wire [`RegBus]        csr_rdata_o,
 // halt
 input wire [`Hold_Flag_Bus] hold_flag_i
 );
@@ -118,7 +119,7 @@ gen_pipe_dff #(
     .rst    (rst),
     .hold_en(HoldEnable),
     .def_val(`ZeroWord),
-    .din    (reg1_raddr_i),
+    .din    (reg1_rdata_i),
     .qout   (reg1_rdata)
 );
 
@@ -131,7 +132,7 @@ gen_pipe_dff #(
     .rst    (rst),
     .hold_en(HoldEnable),
     .def_val(`ZeroWord),
-    .din    (reg2_raddr_i),
+    .din    (reg2_rdata_i),
     .qout   (reg2_rdata)
 );
 
