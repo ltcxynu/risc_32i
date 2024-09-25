@@ -1,4 +1,5 @@
 //仅帮助传递数据，提前取数，不帮助ex提前申请数据通路，ex自己申请
+//全组合逻辑，设计时虽然开了两op_o，但大部分时候不使用，不传递。因为读寄存器的数据已经传递了。
 module id(
 input wire rst,
 //from if_id
@@ -65,7 +66,7 @@ always@(*) begin
     inst_addr_o = inst_addr_i;
 end
 always@(*) begin
-    case(opcode) begin
+    case(opcode)
         `INST_TYPE_I    :begin
             case(I_funct3)
                 `INST_ADDI ,
@@ -284,14 +285,69 @@ always@(*) begin
                     reg1_rdata_o    = `ZeroWord;
                     reg2_rdata_o    = `ZeroWord;
                 end
+                default:begin
+                    //DO NOTHING
+                    reg1_raddr_o    = `ZeroReg;
+                    reg2_raddr_o    = `ZeroReg;
+                    //向ex传递,仅传递立即数类型，不传递寄存器，寄存器读出来过pp2会到ex里。不多此一举
+                    op1_o           = `ZeroWord;
+                    op2_o           = `ZeroWord;
+                    op1_jump_o      = `ZeroWord;
+                    op2_jump_o      = `ZeroWord;
+                    reg1_rdata_o    = `ZeroWord;
+                    reg2_rdata_o    = `ZeroWord;
+                end
             endcase
         end
-        `INST_LUI       :begin
-            
+        `INST_LUI,`INST_AUIPC :begin
+            reg1_raddr_o    = `ZeroReg;
+            reg2_raddr_o    = `ZeroReg;
+            //向ex传递,仅传递立即数类型，不传递寄存器，寄存器读出来过pp2会到ex里。不多此一举
+            op1_o           = {U_imm,12'd0}; //zimm
+            op2_o           = U_rd;
+            op1_jump_o      = `ZeroWord;
+            op2_jump_o      = `ZeroWord;
+            reg1_rdata_o    = `ZeroWord;
+            reg2_rdata_o    = `ZeroWord;
         end
-        `INST_AUIPC     :begin
-            
+        `INST_NOP_OP:
+        begin
+            //DO NOTHING
+            reg1_raddr_o    = `ZeroReg;
+            reg2_raddr_o    = `ZeroReg;
+            //向ex传递,仅传递立即数类型，不传递寄存器，寄存器读出来过pp2会到ex里。不多此一举
+            op1_o           = `ZeroWord;
+            op2_o           = `ZeroWord;
+            op1_jump_o      = `ZeroWord;
+            op2_jump_o      = `ZeroWord;
+            reg1_rdata_o    = `ZeroWord;
+            reg2_rdata_o    = `ZeroWord;
         end
-    end
+        `INST_FENCE:
+        begin
+            //DO NOTHING
+            reg1_raddr_o    = `ZeroReg;
+            reg2_raddr_o    = `ZeroReg;
+            //向ex传递,仅传递立即数类型，不传递寄存器，寄存器读出来过pp2会到ex里。不多此一举
+            op1_o           = `ZeroWord;
+            op2_o           = `ZeroWord;
+            op1_jump_o      = inst_addr_i;
+            op2_jump_o      = 32'h4;
+            reg1_rdata_o    = `ZeroWord;
+            reg2_rdata_o    = `ZeroWord;
+        end
+        default:begin
+            //DO NOTHING
+            reg1_raddr_o    = `ZeroReg;
+            reg2_raddr_o    = `ZeroReg;
+            //向ex传递,仅传递立即数类型，不传递寄存器，寄存器读出来过pp2会到ex里。不多此一举
+            op1_o           = `ZeroWord;
+            op2_o           = `ZeroWord;
+            op1_jump_o      = `ZeroWord;
+            op2_jump_o      = `ZeroWord;
+            reg1_rdata_o    = `ZeroWord;
+            reg2_rdata_o    = `ZeroWord;
+        end
+    endcase
 end
 endmodule
