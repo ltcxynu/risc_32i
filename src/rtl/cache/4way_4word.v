@@ -37,7 +37,7 @@
                cnt_wb_r,
                cnt_wb_w);
 
-    parameter cache_entry = 14;
+    parameter cache_index = 1;
     input wire         clk, rst;
     input wire [24:0]  i_p_addr;
     input wire [3:0]   i_p_byte_en;
@@ -100,19 +100,19 @@
     integer i;
     
     initial begin
-        for(i = 0; i <=(2**cache_entry-1); i=i+1) begin
+        for(i = 0; i <=(2**cache_index-1); i=i+1) begin
 	        ram_hot.mem[i] = 0;
         end
     end
 `endif
 
-    simple_ram #(.width(8), .widthad(cache_entry)) ram_hot(clk, addr[cache_entry-1:0], w_cm, w_cm_data, addr[cache_entry-1:0], r_cm_data);
+    simple_ram #(.width(8), .widthad(cache_index)) ram_hot(clk, addr[cache_index-1:0], w_cm, w_cm_data, addr[cache_index-1:0], r_cm_data);
 
-    set #(.cache_entry(cache_entry))
+    set #(.cache_index(cache_index))
     set0(.clk(clk),
          .rst(rst),
-         .entry(addr[cache_entry-1:0]),
-         .o_tag(addr[22:cache_entry]),
+         .index(addr[cache_index-1:0]),
+         .o_tag(addr[22:cache_index]),
          .writedata(writedata),
          .byte_en(byte_en),
          .write(write0),
@@ -125,11 +125,11 @@
          .valid(valid[0]),
          .read_miss(read_buf));
 
-    set #(.cache_entry(cache_entry))
+    set #(.cache_index(cache_index))
     set1(.clk(clk),
          .rst(rst),
-         .entry(addr[cache_entry-1:0]),
-         .o_tag(addr[22:cache_entry]),
+         .index(addr[cache_index-1:0]),
+         .o_tag(addr[22:cache_index]),
          .writedata(writedata),
          .byte_en(byte_en),
          .write(write1),
@@ -142,11 +142,11 @@
          .valid(valid[1]),
          .read_miss(read_buf));
 
-    set #(.cache_entry(cache_entry))
+    set #(.cache_index(cache_index))
     set2(.clk(clk),
          .rst(rst),
-         .entry(addr[cache_entry-1:0]),
-         .o_tag(addr[22:cache_entry]),
+         .index(addr[cache_index-1:0]),
+         .o_tag(addr[22:cache_index]),
          .writedata(writedata),
          .byte_en(byte_en),
          .write(write2),
@@ -159,11 +159,11 @@
          .valid(valid[2]),
          .read_miss(read_buf));
 
-    set #(.cache_entry(cache_entry))
+    set #(.cache_index(cache_index))
     set3(.clk(clk),
          .rst(rst),
-         .entry(addr[cache_entry-1:0]),
-         .o_tag(addr[22:cache_entry]),
+         .index(addr[cache_index-1:0]),
+         .o_tag(addr[22:cache_index]),
          .writedata(writedata),
          .byte_en(byte_en),
          .write(write3),
@@ -274,6 +274,7 @@
                                          (r_cm_data[5:4] == 2'b11) ? {r_cm_data[5:4], r_cm_data[7:6], r_cm_data[3:0]} : r_cm_data;
                             w_cm <= 1;
                         end else if(miss[r_cm_data[1:0]]) begin
+                            $display("miss! %0t",$time);
                             if(r_cm_data[1:0] == 2'b00) fetch_write <= 4'b0001;
                             else if(r_cm_data[1:0] == 2'b01) fetch_write <= 4'b0010;
                             else if(r_cm_data[1:0] == 2'b10) fetch_write <= 4'b0100;
@@ -356,7 +357,7 @@ endmodule // cache
 
 module set(clk,
            rst,
-           entry,
+           index,
            o_tag,
            writedata,
            byte_en,
@@ -371,11 +372,11 @@ module set(clk,
            valid,
            read_miss);
 
-    parameter cache_entry = 14;
+    parameter cache_index = 14;
 
     input wire                    clk, rst;
-    input wire [cache_entry-1:0]  entry;
-    input wire [22-cache_entry:0] o_tag;
+    input wire [cache_index-1:0]  index;
+    input wire [22-cache_index:0] o_tag;
     input wire [127:0] 		      writedata;
     input wire [3:0] 		      byte_en;
     input wire       	          write;
@@ -388,46 +389,46 @@ module set(clk,
 
 
 
-    wire [22-cache_entry:0] 	 i_tag;
+    wire [22-cache_index:0] 	 i_tag;
     wire 			             dirty;
-    wire [24-cache_entry:0] 	 write_tag_data;
+    wire [24-cache_index:0] 	 write_tag_data;
 
     assign hit = valid && (o_tag == i_tag);
     assign modify = valid && (o_tag != i_tag) && dirty;
     assign miss = !valid || ((o_tag != i_tag) && !dirty);
 
-    assign wb_addr = {i_tag, entry};
+    assign wb_addr = {i_tag, index};
 
     //write -> [3:0] write, writedata/readdata 32bit -> 128bit
-    simple_ram #(.width(8), .widthad(cache_entry)) ram11_3(clk, entry, write && word_en[3]  && byte_en[3], writedata[127:120], entry, readdata[127:120]);
-    simple_ram #(.width(8), .widthad(cache_entry)) ram11_2(clk, entry, write && word_en[3]  && byte_en[2], writedata[119:112], entry, readdata[119:112]);
-    simple_ram #(.width(8), .widthad(cache_entry)) ram11_1(clk, entry, write && word_en[3]  && byte_en[1], writedata[111:104], entry, readdata[111:104]);
-    simple_ram #(.width(8), .widthad(cache_entry)) ram11_0(clk, entry, write && word_en[3]  && byte_en[0], writedata[103:96], entry, readdata[103:96]);
+    simple_ram #(.width(8), .widthad(cache_index)) ram11_3(clk, index, write && word_en[3]  && byte_en[3], writedata[127:120], index, readdata[127:120]);
+    simple_ram #(.width(8), .widthad(cache_index)) ram11_2(clk, index, write && word_en[3]  && byte_en[2], writedata[119:112], index, readdata[119:112]);
+    simple_ram #(.width(8), .widthad(cache_index)) ram11_1(clk, index, write && word_en[3]  && byte_en[1], writedata[111:104], index, readdata[111:104]);
+    simple_ram #(.width(8), .widthad(cache_index)) ram11_0(clk, index, write && word_en[3]  && byte_en[0], writedata[103:96], index, readdata[103:96]);
 
-    simple_ram #(.width(8), .widthad(cache_entry)) ram10_3(clk, entry, write && word_en[2]  && byte_en[3], writedata[95:88], entry, readdata[95:88]);
-    simple_ram #(.width(8), .widthad(cache_entry)) ram10_2(clk, entry, write && word_en[2]  && byte_en[2], writedata[87:80], entry, readdata[87:80]);
-    simple_ram #(.width(8), .widthad(cache_entry)) ram10_1(clk, entry, write && word_en[2]  && byte_en[1], writedata[79:72], entry, readdata[79:72]);
-    simple_ram #(.width(8), .widthad(cache_entry)) ram10_0(clk, entry, write && word_en[2]  && byte_en[0], writedata[71:64], entry, readdata[71:64]);
+    simple_ram #(.width(8), .widthad(cache_index)) ram10_3(clk, index, write && word_en[2]  && byte_en[3], writedata[95:88], index, readdata[95:88]);
+    simple_ram #(.width(8), .widthad(cache_index)) ram10_2(clk, index, write && word_en[2]  && byte_en[2], writedata[87:80], index, readdata[87:80]);
+    simple_ram #(.width(8), .widthad(cache_index)) ram10_1(clk, index, write && word_en[2]  && byte_en[1], writedata[79:72], index, readdata[79:72]);
+    simple_ram #(.width(8), .widthad(cache_index)) ram10_0(clk, index, write && word_en[2]  && byte_en[0], writedata[71:64], index, readdata[71:64]);
 
-    simple_ram #(.width(8), .widthad(cache_entry)) ram01_3(clk, entry, write && word_en[1]  && byte_en[3], writedata[63:56], entry, readdata[63:56]);
-    simple_ram #(.width(8), .widthad(cache_entry)) ram01_2(clk, entry, write && word_en[1]  && byte_en[2], writedata[55:48], entry, readdata[55:48]);
-    simple_ram #(.width(8), .widthad(cache_entry)) ram01_1(clk, entry, write && word_en[1]  && byte_en[1], writedata[47:40], entry, readdata[47:40]);
-    simple_ram #(.width(8), .widthad(cache_entry)) ram01_0(clk, entry, write && word_en[1]  && byte_en[0], writedata[39:32], entry, readdata[39:32]);
+    simple_ram #(.width(8), .widthad(cache_index)) ram01_3(clk, index, write && word_en[1]  && byte_en[3], writedata[63:56], index, readdata[63:56]);
+    simple_ram #(.width(8), .widthad(cache_index)) ram01_2(clk, index, write && word_en[1]  && byte_en[2], writedata[55:48], index, readdata[55:48]);
+    simple_ram #(.width(8), .widthad(cache_index)) ram01_1(clk, index, write && word_en[1]  && byte_en[1], writedata[47:40], index, readdata[47:40]);
+    simple_ram #(.width(8), .widthad(cache_index)) ram01_0(clk, index, write && word_en[1]  && byte_en[0], writedata[39:32], index, readdata[39:32]);
 
-    simple_ram #(.width(8), .widthad(cache_entry)) ram00_3(clk, entry, write && word_en[0]  && byte_en[3], writedata[31:24], entry, readdata[31:24]);
-    simple_ram #(.width(8), .widthad(cache_entry)) ram00_2(clk, entry, write && word_en[0]  && byte_en[2], writedata[23:16], entry, readdata[23:16]);
-    simple_ram #(.width(8), .widthad(cache_entry)) ram00_1(clk, entry, write && word_en[0]  && byte_en[1], writedata[15: 8], entry, readdata[15:8]);
-    simple_ram #(.width(8), .widthad(cache_entry)) ram00_0(clk, entry, write && word_en[0]  && byte_en[0], writedata[ 7: 0], entry, readdata[ 7:0]);
+    simple_ram #(.width(8), .widthad(cache_index)) ram00_3(clk, index, write && word_en[0]  && byte_en[3], writedata[31:24], index, readdata[31:24]);
+    simple_ram #(.width(8), .widthad(cache_index)) ram00_2(clk, index, write && word_en[0]  && byte_en[2], writedata[23:16], index, readdata[23:16]);
+    simple_ram #(.width(8), .widthad(cache_index)) ram00_1(clk, index, write && word_en[0]  && byte_en[1], writedata[15: 8], index, readdata[15:8]);
+    simple_ram #(.width(8), .widthad(cache_index)) ram00_0(clk, index, write && word_en[0]  && byte_en[0], writedata[ 7: 0], index, readdata[ 7:0]);
 
 
     assign write_tag_data = (read_miss) ? {1'b0, 1'b1, o_tag} : (modify || miss ) ? {1'b1, 1'b1, o_tag} : {1'b1, 1'b1, i_tag};
-    simple_ram #(.width(25-cache_entry), .widthad(cache_entry)) ram_tag(clk, entry, write, write_tag_data, entry, {dirty, valid, i_tag});
+    simple_ram #(.width(25-cache_index), .widthad(cache_index)) ram_tag(clk, index, write, write_tag_data, index, {dirty, valid, i_tag});
 
 `ifdef SIM
     integer i;
 
     initial begin
-        for(i = 0; i <=(2**cache_entry-1); i=i+1) begin
+        for(i = 0; i <=(2**cache_index-1); i=i+1) begin
 	        ram_tag.mem[i] = 0;
         end
     end
