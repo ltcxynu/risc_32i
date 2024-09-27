@@ -3,15 +3,15 @@ module csr_reg(
     input wire rst,
     //from ex
     input wire we_i,
-    input wire [`RegAddrBus] raddr_i,
-    input wire [`RegAddrBus] waddr_i,
+    input wire [`MemAddrBus] raddr_i,
+    input wire [`MemAddrBus] waddr_i,
     input wire [`RegBus] data_i,
     //to ex
     output reg [`RegBus] data_o,
     //from clint
     input wire clint_we_i,
-    input wire [`RegAddrBus] clint_raddr_i,
-    input wire [`RegAddrBus] clint_waddr_i,
+    input wire [`MemAddrBus] clint_raddr_i,
+    input wire [`MemAddrBus] clint_waddr_i,
     input wire [`RegBus] clint_data_i,
     //to clint
     output reg [`RegBus] clint_data_o,
@@ -36,7 +36,7 @@ assign clint_csr_mepc = mepc;
 assign clint_csr_mtvec = mtvec;
 
 always@(posedge clk) begin
-    if(rst = `RstEnable) begin
+    if(rst == `RstEnable) begin
         cycle <= {`ZeroWord,`ZeroWord};
     end else begin
         cycle <= cycle + 1'b1;
@@ -54,22 +54,22 @@ always@(posedge clk) begin
         if(we_i == `WriteEnable) begin
             case(waddr_i[11:0])
                 `CSR_MTVEC:begin
-                    mtvec <= wdata_i;
+                    mtvec <= data_i;
                 end
                 `CSR_MCAUSE:begin
-                    mcause <= wdata_i;
+                    mcause <= data_i;
                 end
                 `CSR_MEPC:begin
-                    mepc <= wdata_i;
+                    mepc <= data_i;
                 end
                 `CSR_MIE:begin
-                    mie <= wdata_i;
+                    mie <= data_i;
                 end
                 `CSR_MSTATUS:begin
-                    mstatus <= wdata_i;
+                    mstatus <= data_i;
                 end      
                 `CSR_MSCRATCH:begin
-                    mscratch <= wdata_i;
+                    mscratch <= data_i;
                 end             
             endcase
         end else if(clint_we_i) begin

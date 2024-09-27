@@ -175,7 +175,33 @@ module tinyriscv_soc_top(
         .int_i(int_flag)
     );
 
-    // rom模块例化
+    cache inst_cache(
+        .clk                (clk),
+        .rst                (rst),
+        .i_p_addr           (),
+        .i_p_byte_en        (4'hf),
+        .i_p_writedata      (),
+        .i_p_read           (),
+        .i_p_write          (),
+        .o_p_readdata       (),
+        .o_p_readdata_valid (),
+        .o_p_waitrequest    (),
+        .o_m_addr           (),
+        .o_m_byte_en        (),
+        .o_m_writedata      (),
+        .o_m_read           (),
+        .o_m_write          (),
+        .i_m_readdata       (),
+        .i_m_readdata_valid (),
+        .i_m_waitrequest    (),
+        .cnt_r              (),
+        .cnt_w              (),
+        .cnt_hit_r          (),
+        .cnt_hit_w          (),
+        .cnt_wb_r           (),
+        .cnt_wb_w           ()
+        );
+    // rom模块例化 现在期望在这里和CPU之间插入一级的cache
     rom u_rom(
         .clk(clk),
         .rst(rst),
@@ -184,6 +210,8 @@ module tinyriscv_soc_top(
         .data_i(s0_data_o),
         .data_o(s0_data_i)
     );
+
+
 
     // ram模块例化
     ram u_ram(

@@ -10,20 +10,20 @@
 
 `default_nettype none
 
-  module cache(clk,
-               rst,
-               i_p_addr,
-               i_p_byte_en,
-               i_p_writedata,
-               i_p_read,
-               i_p_write,
-               o_p_readdata,
-               o_p_readdata_valid,
-               o_p_waitrequest,
+  module cache(clk,                     //时钟
+               rst,                     //高复位
+               i_p_addr,                //cpu->cache addr
+               i_p_byte_en,             //写稀疏掩码
+               i_p_writedata,           //写数据
+               i_p_read,                //读使能
+               i_p_write,               //写使能
+               o_p_readdata,            //读数据
+               o_p_readdata_valid,      //读数据有效
+               o_p_waitrequest,         //操作等待
 
-               o_m_addr,
-               o_m_byte_en,
-               o_m_writedata,
+               o_m_addr,                //mem addr
+               o_m_byte_en,             //mem 稀疏写
+               o_m_writedata,           //以下都和上面类似
                o_m_read,
                o_m_write,
                i_m_readdata,
@@ -274,7 +274,6 @@
                                          (r_cm_data[5:4] == 2'b11) ? {r_cm_data[5:4], r_cm_data[7:6], r_cm_data[3:0]} : r_cm_data;
                             w_cm <= 1;
                         end else if(miss[r_cm_data[1:0]]) begin
-                            $display("miss! %0t",$time);
                             if(r_cm_data[1:0] == 2'b00) fetch_write <= 4'b0001;
                             else if(r_cm_data[1:0] == 2'b01) fetch_write <= 4'b0010;
                             else if(r_cm_data[1:0] == 2'b10) fetch_write <= 4'b0100;

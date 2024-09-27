@@ -7,10 +7,10 @@ module regs(
     input wire [`RegAddrBus] waddr_i,
     //from jtag
     input wire jtag_we_i,
-    input wire [`RegBus] jtag_wdata_i,
+    input wire [`RegBus] jtag_data_i,
     input wire [`RegAddrBus] jtag_addr_i,
     //to jtag
-    output wire [`RegBus] jtag_rdata_o,
+    output reg [`RegBus] jtag_data_o,
     //to/from ID 
     output reg [`RegBus] rdata1_o,
     output reg [`RegBus] rdata2_o,
@@ -25,7 +25,7 @@ always@(posedge clk) begin
         if(we_i == `WriteEnable && waddr_i!= `ZeroReg) begin
             regs[waddr_i] <= wdata_i;
         end else if(jtag_we_i == `WriteEnable && jtag_addr_i != `ZeroReg) begin
-            regs[waddr_i] <= jtag_wdata_i;
+            regs[waddr_i] <= jtag_data_i;
         end
     end
 end
@@ -49,9 +49,9 @@ always@(*) begin
 end
 always@(*) begin
     if(jtag_addr_i == `ZeroReg) begin
-        jtag_rdata_o <= `ZeroWord;
+        jtag_data_o <= `ZeroWord;
     end else begin
-        jtag_rdata_o <= regs[jtag_addr_i];
+        jtag_data_o <= regs[jtag_addr_i];
     end
 end
 endmodule

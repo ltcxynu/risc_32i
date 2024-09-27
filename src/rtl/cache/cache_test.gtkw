@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
-[*] Thu Sep 26 10:47:49 2024
+[*] Fri Sep 27 06:41:30 2024
 [*]
-[dumpfile] "/home/host/git/risc_32i/src/rtl/cache/this.vcd"
-[dumpfile_mtime] "Thu Sep 26 10:40:01 2024"
+[dumpfile] "/home/host/risc_32i/src/rtl/cache/this.vcd"
+[dumpfile_mtime] "Fri Sep 27 06:38:46 2024"
 [dumpfile_size] 8551905
-[savefile] "/home/host/git/risc_32i/src/rtl/cache/cache_test.gtkw"
+[savefile] "/home/host/risc_32i/src/rtl/cache/cache_test.gtkw"
 [timestart] 0
 [size] 1646 862
 [pos] -1 -1
-*-8.000000 250 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-8.000000 275 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] tb_cache.
 [treeopen] tb_cache.uut.
 [sst_width] 233
@@ -61,9 +61,7 @@ tb_cache.uut.i_m_waitrequest
 @24
 tb_cache.uut.cnt_r[31:0]
 tb_cache.uut.cnt_w[31:0]
-@25
 tb_cache.uut.cnt_hit_r[31:0]
-@24
 tb_cache.uut.cnt_hit_w[31:0]
 tb_cache.uut.cnt_wb_r[31:0]
 tb_cache.uut.cnt_wb_w[31:0]
@@ -111,5 +109,47 @@ tb_cache.uut.set1.modify
 tb_cache.uut.set1.miss
 tb_cache.uut.set1.valid
 tb_cache.uut.set1.read_miss
+@200
+-set2
+@28
+tb_cache.uut.set2.index[1:0]
+@22
+tb_cache.uut.set2.o_tag[20:0]
+tb_cache.uut.set2.writedata[127:0]
+tb_cache.uut.set2.byte_en[3:0]
+@28
+tb_cache.uut.set2.write
+@22
+tb_cache.uut.set2.word_en[3:0]
+tb_cache.uut.set2.readdata[127:0]
+tb_cache.uut.set2.wb_addr[22:0]
+@28
+tb_cache.uut.set2.hit
+tb_cache.uut.set2.modify
+tb_cache.uut.set2.miss
+tb_cache.uut.set2.valid
+tb_cache.uut.set2.read_miss
+@200
+-set3
+@28
+tb_cache.uut.set3.index[1:0]
+@22
+tb_cache.uut.set3.o_tag[20:0]
+tb_cache.uut.set3.writedata[127:0]
+tb_cache.uut.set3.byte_en[3:0]
+@28
+tb_cache.uut.set3.write
+@22
+tb_cache.uut.set3.word_en[3:0]
+tb_cache.uut.set3.readdata[127:0]
+tb_cache.uut.set3.wb_addr[22:0]
+@28
+tb_cache.uut.set3.hit
+@29
+tb_cache.uut.set3.modify
+@28
+tb_cache.uut.set3.miss
+tb_cache.uut.set3.valid
+tb_cache.uut.set3.read_miss
 [pattern_trace] 1
 [pattern_trace] 0

@@ -28,7 +28,8 @@ SIMV = ./simv +UVM_VERBOSITY=$(UVM_VERBOSITY) \
 x:	comp run 
 
 comp:
-	$(VCS) +incdir+./+ ./testbench_44.sv -l ./cmp.log
+	$(VCS) +incdir+./+ ./tb_cache.sv -l ./cmp.log
+	# $(VCS) +incdir+./+ ./tb_sub.v -l ./cmp.log
 
 run:
 	$(SIMV)

@@ -1,4 +1,7 @@
 //inst_fetch to inst decode
+`ifndef SIM
+`include "../utils/gen_dff.v"
+`endif
 module if_id(
     input wire clk,
     input wire rst,
