@@ -151,3 +151,8 @@
 `define RegWidth 32
 `define RegNum 32        // reg num
 `define RegNumLog2 5
+
+//cache
+`define CacheAddrBus 24:0
+`define CacheDataBus 31:0 
+`define CacheByteBus 3:0

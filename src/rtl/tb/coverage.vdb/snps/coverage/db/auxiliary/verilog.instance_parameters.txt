@@ -1,0 +1,8 @@
+quick_sim_pc.uut_cache.COMP1
+quick_sim_pc.uut_cache.FETCH13
+quick_sim_pc.uut_cache.FETCH24
+quick_sim_pc.uut_cache.FETCH35
+quick_sim_pc.uut_cache.HIT2
+quick_sim_pc.uut_cache.IDLE0
+quick_sim_pc.uut_cache.WB16
+quick_sim_pc.uut_cache.WB27
