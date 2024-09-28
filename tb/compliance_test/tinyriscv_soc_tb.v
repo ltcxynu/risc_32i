@@ -1,6 +1,8 @@
 `timescale 1 ns / 1 ps
 
-`include "defines.v"
+// `include "./src/rtl/core/rv32i_defines.v"
+// `include "./src/rtl/core/bus_defines.v"
+// `include "./src/rtl/soc/tinyriscv_soc_top.v"
 
 
 `define TEST_PROG  1
@@ -87,7 +89,7 @@ module tinyriscv_soc_tb;
 
         wait(ex_end_flag == 32'h1);  // wait sim end
 
-        fd = $fopen(`OUTPUT);   // OUTPUT的值在命令行里定义
+        fd = $fopen("signature.output");   // OUTPUT的值在命令行里定义
         for (r = begin_signature; r < end_signature; r = r + 4) begin
             $fdisplay(fd, "%x", tinyriscv_soc_top_0.u_rom._rom[r[31:2]]);
         end
@@ -499,7 +501,7 @@ module tinyriscv_soc_tb;
 
     // read mem data
     initial begin
-        $readmemh ("inst.data", tinyriscv_soc_top_0.u_rom._rom);
+        $readmemh ("./sim/inst.data", tinyriscv_soc_top_0.u_rom._rom);
     end
 
     // generate wave file, used by gtkwave

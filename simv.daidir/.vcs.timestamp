@@ -1,0 +1,828 @@
+482      
+0 uvm_macros.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/uvm_macros.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/uvm_macros.svh
+0 macros/uvm_version_defines.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/macros/uvm_version_defines.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/macros/uvm_version_defines.svh
+0 macros/uvm_global_defines.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/macros/uvm_global_defines.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/macros/uvm_global_defines.svh
+0 macros/uvm_message_defines.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/macros/uvm_message_defines.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/macros/uvm_message_defines.svh
+0 macros/uvm_phase_defines.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/macros/uvm_phase_defines.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/macros/uvm_phase_defines.svh
+0 macros/uvm_object_defines.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/macros/uvm_object_defines.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/macros/uvm_object_defines.svh
+0 macros/uvm_printer_defines.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/macros/uvm_printer_defines.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/macros/uvm_printer_defines.svh
+0 macros/uvm_tlm_defines.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/macros/uvm_tlm_defines.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/macros/uvm_tlm_defines.svh
+0 tlm1/uvm_tlm_imps.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/tlm1/uvm_tlm_imps.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/tlm1/uvm_tlm_imps.svh
+0 macros/uvm_sequence_defines.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/macros/uvm_sequence_defines.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/macros/uvm_sequence_defines.svh
+0 macros/uvm_callback_defines.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/macros/uvm_callback_defines.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/macros/uvm_callback_defines.svh
+0 macros/uvm_reg_defines.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/macros/uvm_reg_defines.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/macros/uvm_reg_defines.svh
+0 macros/uvm_deprecated_defines.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/macros/uvm_deprecated_defines.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/macros/uvm_deprecated_defines.svh
+0 dpi/uvm_dpi.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/dpi/uvm_dpi.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/dpi/uvm_dpi.svh
+0 dpi/uvm_hdl.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/dpi/uvm_hdl.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/dpi/uvm_hdl.svh
+0 dpi/uvm_svcmd_dpi.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/dpi/uvm_svcmd_dpi.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/dpi/uvm_svcmd_dpi.svh
+0 dpi/uvm_regex.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/dpi/uvm_regex.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/dpi/uvm_regex.svh
+0 base/uvm_base.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_base.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_base.svh
+0 base/uvm_coreservice.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_coreservice.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_coreservice.svh
+0 base/uvm_version.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_version.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_version.svh
+0 base/uvm_object_globals.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_object_globals.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_object_globals.svh
+0 base/uvm_misc.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_misc.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_misc.svh
+0 base/uvm_object.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_object.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_object.svh
+0 base/uvm_pool.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_pool.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_pool.svh
+0 base/uvm_queue.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_queue.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_queue.svh
+0 base/uvm_factory.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_factory.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_factory.svh
+0 base/uvm_registry.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_registry.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_registry.svh
+0 base/uvm_spell_chkr.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_spell_chkr.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_spell_chkr.svh
+0 base/uvm_resource.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_resource.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_resource.svh
+0 base/uvm_resource_specializations.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_resource_specializations.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_resource_specializations.svh
+0 base/uvm_resource_db.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_resource_db.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_resource_db.svh
+0 base/uvm_config_db.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_config_db.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_config_db.svh
+0 base/uvm_printer.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_printer.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_printer.svh
+0 base/uvm_comparer.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_comparer.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_comparer.svh
+0 base/uvm_packer.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_packer.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_packer.svh
+0 base/uvm_links.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_links.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_links.svh
+0 base/uvm_tr_database.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_tr_database.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_tr_database.svh
+0 base/uvm_tr_stream.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_tr_stream.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_tr_stream.svh
+0 base/uvm_recorder.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_recorder.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_recorder.svh
+0 base/uvm_event_callback.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_event_callback.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_event_callback.svh
+0 base/uvm_event.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_event.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_event.svh
+0 base/uvm_barrier.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_barrier.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_barrier.svh
+0 base/uvm_callback.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_callback.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_callback.svh
+0 base/uvm_report_message.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_report_message.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_report_message.svh
+0 base/uvm_report_catcher.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_report_catcher.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_report_catcher.svh
+0 base/uvm_report_server.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_report_server.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_report_server.svh
+0 base/uvm_report_handler.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_report_handler.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_report_handler.svh
+0 base/uvm_report_object.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_report_object.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_report_object.svh
+0 base/uvm_transaction.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_transaction.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_transaction.svh
+0 base/uvm_phase.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_phase.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_phase.svh
+0 base/uvm_domain.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_domain.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_domain.svh
+0 base/uvm_bottomup_phase.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_bottomup_phase.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_bottomup_phase.svh
+0 base/uvm_topdown_phase.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_topdown_phase.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_topdown_phase.svh
+0 base/uvm_task_phase.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_task_phase.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_task_phase.svh
+0 base/uvm_common_phases.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_common_phases.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_common_phases.svh
+0 base/uvm_runtime_phases.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_runtime_phases.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_runtime_phases.svh
+0 base/uvm_component.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_component.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_component.svh
+0 base/uvm_root.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_root.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_root.svh
+0 base/uvm_objection.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_objection.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_objection.svh
+0 base/uvm_heartbeat.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_heartbeat.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_heartbeat.svh
+0 base/uvm_globals.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_globals.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_globals.svh
+0 base/uvm_cmdline_processor.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_cmdline_processor.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_cmdline_processor.svh
+0 base/uvm_traversal.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_traversal.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_traversal.svh
+0 dap/uvm_dap.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/dap/uvm_dap.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/dap/uvm_dap.svh
+0 dap/uvm_set_get_dap_base.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/dap/uvm_set_get_dap_base.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/dap/uvm_set_get_dap_base.svh
+0 dap/uvm_simple_lock_dap.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/dap/uvm_simple_lock_dap.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/dap/uvm_simple_lock_dap.svh
+0 dap/uvm_get_to_lock_dap.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/dap/uvm_get_to_lock_dap.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/dap/uvm_get_to_lock_dap.svh
+0 dap/uvm_set_before_get_dap.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/dap/uvm_set_before_get_dap.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/dap/uvm_set_before_get_dap.svh
+0 tlm1/uvm_tlm.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/tlm1/uvm_tlm.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/tlm1/uvm_tlm.svh
+0 tlm1/uvm_tlm_ifs.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/tlm1/uvm_tlm_ifs.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/tlm1/uvm_tlm_ifs.svh
+0 tlm1/uvm_sqr_ifs.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/tlm1/uvm_sqr_ifs.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/tlm1/uvm_sqr_ifs.svh
+0 base/uvm_port_base.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/base/uvm_port_base.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/base/uvm_port_base.svh
+0 tlm1/uvm_imps.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/tlm1/uvm_imps.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/tlm1/uvm_imps.svh
+0 tlm1/uvm_ports.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/tlm1/uvm_ports.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/tlm1/uvm_ports.svh
+0 tlm1/uvm_exports.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/tlm1/uvm_exports.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/tlm1/uvm_exports.svh
+0 tlm1/uvm_analysis_port.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/tlm1/uvm_analysis_port.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/tlm1/uvm_analysis_port.svh
+0 tlm1/uvm_tlm_fifo_base.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/tlm1/uvm_tlm_fifo_base.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/tlm1/uvm_tlm_fifo_base.svh
+0 tlm1/uvm_tlm_fifos.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/tlm1/uvm_tlm_fifos.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/tlm1/uvm_tlm_fifos.svh
+0 tlm1/uvm_tlm_req_rsp.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/tlm1/uvm_tlm_req_rsp.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/tlm1/uvm_tlm_req_rsp.svh
+0 tlm1/uvm_sqr_connections.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/tlm1/uvm_sqr_connections.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/tlm1/uvm_sqr_connections.svh
+0 comps/uvm_comps.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/comps/uvm_comps.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/comps/uvm_comps.svh
+0 comps/uvm_pair.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/comps/uvm_pair.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/comps/uvm_pair.svh
+0 comps/uvm_policies.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/comps/uvm_policies.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/comps/uvm_policies.svh
+0 comps/uvm_in_order_comparator.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/comps/uvm_in_order_comparator.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/comps/uvm_in_order_comparator.svh
+0 comps/uvm_algorithmic_comparator.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/comps/uvm_algorithmic_comparator.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/comps/uvm_algorithmic_comparator.svh
+0 comps/uvm_random_stimulus.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/comps/uvm_random_stimulus.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/comps/uvm_random_stimulus.svh
+0 comps/uvm_subscriber.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/comps/uvm_subscriber.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/comps/uvm_subscriber.svh
+0 comps/uvm_monitor.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/comps/uvm_monitor.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/comps/uvm_monitor.svh
+0 comps/uvm_driver.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/comps/uvm_driver.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/comps/uvm_driver.svh
+0 comps/uvm_push_driver.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/comps/uvm_push_driver.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/comps/uvm_push_driver.svh
+0 comps/uvm_scoreboard.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/comps/uvm_scoreboard.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/comps/uvm_scoreboard.svh
+0 comps/uvm_agent.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/comps/uvm_agent.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/comps/uvm_agent.svh
+0 comps/uvm_env.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/comps/uvm_env.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/comps/uvm_env.svh
+0 comps/uvm_test.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/comps/uvm_test.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/comps/uvm_test.svh
+0 seq/uvm_seq.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/seq/uvm_seq.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/seq/uvm_seq.svh
+0 seq/uvm_sequence_item.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/seq/uvm_sequence_item.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/seq/uvm_sequence_item.svh
+0 seq/uvm_sequencer_base.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/seq/uvm_sequencer_base.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/seq/uvm_sequencer_base.svh
+0 seq/uvm_sequencer_analysis_fifo.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/seq/uvm_sequencer_analysis_fifo.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/seq/uvm_sequencer_analysis_fifo.svh
+0 seq/uvm_sequencer_param_base.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/seq/uvm_sequencer_param_base.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/seq/uvm_sequencer_param_base.svh
+0 seq/uvm_sequencer.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/seq/uvm_sequencer.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/seq/uvm_sequencer.svh
+0 seq/uvm_push_sequencer.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/seq/uvm_push_sequencer.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/seq/uvm_push_sequencer.svh
+0 seq/uvm_sequence_base.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/seq/uvm_sequence_base.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/seq/uvm_sequence_base.svh
+0 seq/uvm_sequence.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/seq/uvm_sequence.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/seq/uvm_sequence.svh
+0 seq/uvm_sequence_library.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/seq/uvm_sequence_library.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/seq/uvm_sequence_library.svh
+0 seq/uvm_sequence_builtin.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/seq/uvm_sequence_builtin.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/seq/uvm_sequence_builtin.svh
+0 tlm2/uvm_tlm2.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/tlm2/uvm_tlm2.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/tlm2/uvm_tlm2.svh
+0 tlm2/uvm_tlm2_defines.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/tlm2/uvm_tlm2_defines.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/tlm2/uvm_tlm2_defines.svh
+0 tlm2/uvm_tlm2_time.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/tlm2/uvm_tlm2_time.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/tlm2/uvm_tlm2_time.svh
+0 tlm2/uvm_tlm2_generic_payload.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/tlm2/uvm_tlm2_generic_payload.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/tlm2/uvm_tlm2_generic_payload.svh
+0 tlm2/uvm_tlm2_ifs.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/tlm2/uvm_tlm2_ifs.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/tlm2/uvm_tlm2_ifs.svh
+0 tlm2/uvm_tlm2_imps.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/tlm2/uvm_tlm2_imps.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/tlm2/uvm_tlm2_imps.svh
+0 tlm2/uvm_tlm2_ports.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/tlm2/uvm_tlm2_ports.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/tlm2/uvm_tlm2_ports.svh
+0 tlm2/uvm_tlm2_exports.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/tlm2/uvm_tlm2_exports.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/tlm2/uvm_tlm2_exports.svh
+0 tlm2/uvm_tlm2_sockets_base.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/tlm2/uvm_tlm2_sockets_base.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/tlm2/uvm_tlm2_sockets_base.svh
+0 tlm2/uvm_tlm2_sockets.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/tlm2/uvm_tlm2_sockets.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/tlm2/uvm_tlm2_sockets.svh
+0 reg/uvm_reg_model.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/reg/uvm_reg_model.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/reg/uvm_reg_model.svh
+0 reg/uvm_reg_item.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/reg/uvm_reg_item.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/reg/uvm_reg_item.svh
+0 reg/uvm_reg_adapter.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/reg/uvm_reg_adapter.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/reg/uvm_reg_adapter.svh
+0 reg/uvm_reg_predictor.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/reg/uvm_reg_predictor.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/reg/uvm_reg_predictor.svh
+0 reg/uvm_reg_sequence.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/reg/uvm_reg_sequence.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/reg/uvm_reg_sequence.svh
+0 reg/uvm_reg_cbs.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/reg/uvm_reg_cbs.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/reg/uvm_reg_cbs.svh
+0 reg/uvm_reg_backdoor.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/reg/uvm_reg_backdoor.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/reg/uvm_reg_backdoor.svh
+0 reg/uvm_reg_field.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/reg/uvm_reg_field.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/reg/uvm_reg_field.svh
+0 reg/uvm_vreg_field.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/reg/uvm_vreg_field.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/reg/uvm_vreg_field.svh
+0 reg/uvm_reg.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/reg/uvm_reg.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/reg/uvm_reg.svh
+0 reg/uvm_reg_indirect.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/reg/uvm_reg_indirect.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/reg/uvm_reg_indirect.svh
+0 reg/uvm_reg_fifo.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/reg/uvm_reg_fifo.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/reg/uvm_reg_fifo.svh
+0 reg/uvm_reg_file.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/reg/uvm_reg_file.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/reg/uvm_reg_file.svh
+0 reg/uvm_mem_mam.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/reg/uvm_mem_mam.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/reg/uvm_mem_mam.svh
+0 reg/uvm_vreg.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/reg/uvm_vreg.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/reg/uvm_vreg.svh
+0 reg/uvm_mem.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/reg/uvm_mem.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/reg/uvm_mem.svh
+0 reg/uvm_reg_map.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/reg/uvm_reg_map.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/reg/uvm_reg_map.svh
+0 reg/uvm_reg_block.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/reg/uvm_reg_block.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/reg/uvm_reg_block.svh
+0 reg/sequences/uvm_reg_hw_reset_seq.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/reg/sequences/uvm_reg_hw_reset_seq.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/reg/sequences/uvm_reg_hw_reset_seq.svh
+0 reg/sequences/uvm_reg_bit_bash_seq.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/reg/sequences/uvm_reg_bit_bash_seq.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/reg/sequences/uvm_reg_bit_bash_seq.svh
+0 reg/sequences/uvm_mem_walk_seq.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/reg/sequences/uvm_mem_walk_seq.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/reg/sequences/uvm_mem_walk_seq.svh
+0 reg/sequences/uvm_mem_access_seq.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/reg/sequences/uvm_mem_access_seq.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/reg/sequences/uvm_mem_access_seq.svh
+0 reg/sequences/uvm_reg_access_seq.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/reg/sequences/uvm_reg_access_seq.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/reg/sequences/uvm_reg_access_seq.svh
+0 reg/sequences/uvm_reg_mem_shared_access_seq.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/reg/sequences/uvm_reg_mem_shared_access_seq.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/reg/sequences/uvm_reg_mem_shared_access_seq.svh
+0 reg/sequences/uvm_reg_mem_built_in_seq.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/reg/sequences/uvm_reg_mem_built_in_seq.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/reg/sequences/uvm_reg_mem_built_in_seq.svh
+0 reg/sequences/uvm_reg_mem_hdl_paths_seq.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/reg/sequences/uvm_reg_mem_hdl_paths_seq.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/reg/sequences/uvm_reg_mem_hdl_paths_seq.svh
+0 reg/snps_uvm_reg_bank.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/reg/snps_uvm_reg_bank.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/reg/snps_uvm_reg_bank.svh
+0 msglog.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/msglog.svh
+0 uvm_msglog_report_server.sv
+0 /opt/synopsys/vcs201809/etc/systemverilog/uvm_msglog_report_server.sv
+0 uvm_vcs_recorder.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/uvm_vcs_recorder.svh
+0 uvm_vcs_tr_database.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/uvm_vcs_tr_database.svh
+0 uvm_vcs_tr_stream.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/uvm_vcs_tr_stream.svh
+0 uvm_vcs_record_interface.sv
+0 /opt/synopsys/vcs201809/etc/systemverilog/uvm_vcs_record_interface.sv
+0 uvm_verdi_recorder.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/uvm_verdi_recorder.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/uvm_verdi_recorder.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/uvm_verdi_recorder.svh
+0 uvm_verdi_pli_base.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/uvm_verdi_pli_base.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/uvm_verdi_pli_base.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/uvm_verdi_pli_base.svh
+0 uvm_verdi_tr_database.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/uvm_verdi_tr_database.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/uvm_verdi_tr_database.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/uvm_verdi_tr_database.svh
+0 uvm_verdi_tr_stream.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/uvm_verdi_tr_stream.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/uvm_verdi_tr_stream.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/uvm_verdi_tr_stream.svh
+0 uvm_verdi_reg_map_recording.sv
+0 /opt/synopsys/vcs201809/etc/systemverilog/uvm_verdi_reg_map_recording.sv
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/uvm_verdi_reg_map_recording.sv
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/uvm_verdi_reg_map_recording.sv
+0 uvm_verdi_message_catcher.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/uvm_verdi_message_catcher.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/uvm_verdi_message_catcher.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/uvm_verdi_message_catcher.svh
+0 uvm_verdi_factory.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/uvm_verdi_factory.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/uvm_verdi_factory.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/uvm_verdi_factory.svh
+0 ./dpi/uvm_verdi_dpi.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/./dpi/uvm_verdi_dpi.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/./dpi/uvm_verdi_dpi.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/./dpi/uvm_verdi_dpi.svh
+0 uvm_verdi_reg_recording.sv
+0 /opt/synopsys/vcs201809/etc/systemverilog/uvm_verdi_reg_recording.sv
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/uvm_verdi_reg_recording.sv
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/uvm_verdi_reg_recording.sv
+0 verdi_trans_recorder_dpi.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/verdi_trans_recorder_dpi.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/verdi_trans_recorder_dpi.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/verdi_trans_recorder_dpi.svh
+0 uvm_verdi_pli.svh
+0 /opt/synopsys/vcs201809/etc/systemverilog/uvm_verdi_pli.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/uvm_verdi_pli.svh
+0 /opt/synopsys/vcs201809/etc/uvm-1.2/uvm_verdi_pli.svh
+53
++acc
++define+UVM_OBJECT_MUST_HAVE_CONSTRUCTOR
++define+UVM_VCS_RECORD
++incdir+/opt/synopsys/vcs201809/etc/uvm-1.2/
++incdir+/opt/synopsys/vcs201809/etc/uvm-1.2/vcs
++itf+/opt/synopsys/vcs201809/linux64/lib/vcsdp.tab
++memcbk
++vcsd
++vpi
++vpi
+-Mamsrun=
+-Masflags=
+-Mcc=gcc
+-Mcfl= -pipe -DVCSMX -DUVM_DPI_DO_TYPE_CHECK -fPIC -DVCS -O -I/opt/synopsys/vcs201809/include
+-Mcplusplus=g++
+-Mcrt0=
+-Mcrtn=
+-Mcsrc=/opt/synopsys/vcs201809/etc/uvm-1.2/dpi/uvm_dpi.cc
+-Mexternalobj=
+-Mldflags= -Wl,--no-as-needed -rdynamic
+-Mobjects= /opt/synopsys/vcs201809/linux64/lib/libvirsim.so /opt/synopsys/vcs201809/linux64/lib/liberrorinf.so /opt/synopsys/vcs201809/linux64/lib/libsnpsmalloc.so /opt/synopsys/vcs201809/linux64/lib/libvfs.so
+-Mout=simv
+-Msaverestoreobj=/opt/synopsys/vcs201809/linux64/lib/vcs_save_restore_new.o
+-Msyslibs=/opt/synopsys/verdi201809/share/PLI/VCS/LINUX64/pli.a -ldl
+-Mupdate
+-Mvcsaceobjs=
+-Mxcflags= -pipe -DVCSMX -DUVM_DPI_DO_TYPE_CHECK -fPIC -I/opt/synopsys/vcs201809/include
+-P
+-cm
+-cm_dir
+-debug_acc+fsdb
+-debug_access+all+bc
+-debug_access+all+bc
+-debug_region+cell
+-debug_region+cell
+-f filelist.f
+-fsdb
+-full64
+-gen_obj
+-l
+-ntb_opts
+-picarchive
+-sverilog
+-timescale=1ns/1ns
+./cmp.log
+./coverage.vdb
+./tb/compliance_test/tinyriscv_soc_tb.v
+/opt/synopsys/vcs201809/etc/uvm-1.2/uvm_pkg.sv
+/opt/synopsys/vcs201809/etc/uvm-1.2/vcs/uvm_custom_install_vcs_recorder.sv
+/opt/synopsys/vcs201809/linux64/bin/vcs1
+/opt/synopsys/verdi201809/share/PLI/VCS/LINUX64/verdi.tab
+line+cond+fsm+branch+tgl
+uvm-1.2
+84
+sysc_uni_pwd=/home/host/risc_32i
+novas_args=-P /opt/synopsys/verdi201809/share/PLI/VCS/LINUX64/novas.tab   /opt/synopsys/verdi201809/share/PLI/VCS/LINUX64/pli.a 
+XMODIFIERS=@im=ibus
+XDG_SESSION_TYPE=x11
+XDG_SESSION_DESKTOP=ubuntu
+XDG_SESSION_CLASS=user
+XDG_RUNTIME_DIR=/run/user/1000
+XDG_MENU_PREFIX=gnome-
+XDG_DATA_DIRS=/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+XDG_CURRENT_DESKTOP=Unity
+XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg
+XAUTHORITY=/run/user/1000/gdm/Xauthority
+WINDOWPATH=2
+VSCODE_GIT_IPC_HANDLE=/run/user/1000/vscode-git-c38a863c79.sock
+VSCODE_GIT_ASKPASS_NODE=/usr/share/code/code
+VSCODE_GIT_ASKPASS_MAIN=/usr/share/code/resources/app/extensions/git/dist/askpass-main.js
+VSCODE_GIT_ASKPASS_EXTRA_ARGS=
+VMR_MODE_FLAG=64
+VERDI_HOME=/opt/synopsys/verdi201809
+VCS_UVM_HOME=/opt/synopsys/vcs201809/etc/uvm-1.2
+VCS_TARGET_ARCH=amd64
+VCS_MX_HOME_INTERNAL=1
+VCS_MODE_FLAG=64
+VCS_LOG_FILE=./cmp.log
+VCS_HOME=/opt/synopsys/vcs201809
+VCS_DEPTH=0
+VCS_ARG_ADDED_FOR_TMP=1
+VCS_ARCH_OVERRIDE=linux
+VCS_ARCH=linux64
+USERNAME=host
+UNAME=/bin/uname
+TOOL_HOME=/opt/synopsys/vcs201809/linux64
+TERM_PROGRAM_VERSION=1.92.2
+TERM_PROGRAM=vscode
+SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+SSH_AGENT_PID=1968
+SNPS_VCS_INTERNAL_UBUNTU_PRE_LDFLAGS= -no-pie 
+SNPSYS_HOME=/opt/synopsys
+SESSION_MANAGER=local/host-virtual-machine:@/tmp/.ICE-unix/2070,unix/host-virtual-machine:/tmp/.ICE-unix/2070
+SCRNAME=vcs
+SCRIPT_NAME=vcs
+QT_IM_MODULE=ibus
+QT_ACCESSIBILITY=1
+OVA_UUM=0
+ORIGINAL_XDG_CURRENT_DESKTOP=ubuntu:GNOME
+NOVAS_PLI=/opt/synopsys/verdi201809/share/PLI/VCS/LINUX64
+NOVAS_HOME=/opt/synopsys/verdi201809
+NOVAS=/opt/synopsys/verdi201809/share/PLI/VCS/LINUX64
+MFLAGS=
+MANAGERPID=1800
+MAKE_TERMOUT=/dev/pts/3
+MAKE_TERMERR=/dev/pts/3
+MAKELEVEL=1
+MAKEFLAGS=
+LESSOPEN=| /usr/bin/lesspipe %s
+LESSCLOSE=/usr/bin/lesspipe %s %s
+LC_TIME=zh_CN.UTF-8
+LC_TELEPHONE=zh_CN.UTF-8
+LC_PAPER=zh_CN.UTF-8
+LC_NUMERIC=zh_CN.UTF-8
+LC_NAME=zh_CN.UTF-8
+LC_MONETARY=zh_CN.UTF-8
+LC_MEASUREMENT=zh_CN.UTF-8
+LC_IDENTIFICATION=zh_CN.UTF-8
+LC_ALL=C
+LC_ADDRESS=zh_CN.UTF-8
+JOURNAL_STREAM=8:64893
+INVOCATION_ID=dc043d6a2750445d9ebba85cc15b7cfd
+GTK_MODULES=gail:atk-bridge
+GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1
+GNOME_SHELL_SESSION_MODE=ubuntu
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+GJS_DEBUG_TOPICS=JS ERROR;JS LOG
+GJS_DEBUG_OUTPUT=stderr
+GIT_ASKPASS=/usr/share/code/resources/app/extensions/git/dist/askpass.sh
+GIO_LAUNCHED_DESKTOP_FILE_PID=5938
+GIO_LAUNCHED_DESKTOP_FILE=/usr/share/applications/code.desktop
+GDMSESSION=ubuntu
+GDK_BACKEND=x11
+DVE_HOME=/opt/synopsys/vcs201809/gui/dve
+DESKTOP_SESSION=ubuntu
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+COLORTERM=truecolor
+CHROME_DESKTOP=code-url-handler.desktop
+0
+195
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/verdi/uvm_verdi_pli.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/verdi/verdi_trans_recorder_dpi.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/verdi/uvm_verdi_reg_recording.sv
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/verdi/./dpi/uvm_verdi_dpi.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/verdi/uvm_verdi_factory.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/verdi/uvm_verdi_message_catcher.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/verdi/uvm_verdi_reg_map_recording.sv
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/verdi/uvm_verdi_tr_stream.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/verdi/uvm_verdi_tr_database.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/verdi/uvm_verdi_pli_base.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/verdi/uvm_verdi_recorder.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/uvm_vcs_record_interface.sv
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/uvm_vcs_tr_stream.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/uvm_vcs_tr_database.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/uvm_vcs_recorder.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/uvm_msglog_report_server.sv
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/msglog.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/reg/snps_uvm_reg_bank.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/reg/sequences/uvm_reg_mem_hdl_paths_seq.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/reg/sequences/uvm_reg_mem_built_in_seq.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/reg/sequences/uvm_reg_mem_shared_access_seq.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/reg/sequences/uvm_reg_access_seq.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/reg/sequences/uvm_mem_access_seq.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/reg/sequences/uvm_mem_walk_seq.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/reg/sequences/uvm_reg_bit_bash_seq.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/reg/sequences/uvm_reg_hw_reset_seq.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/reg/uvm_reg_block.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/reg/uvm_reg_map.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/reg/uvm_mem.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/reg/uvm_vreg.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/reg/uvm_mem_mam.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/reg/uvm_reg_file.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/reg/uvm_reg_fifo.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/reg/uvm_reg_indirect.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/reg/uvm_reg.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/reg/uvm_vreg_field.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/reg/uvm_reg_field.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/reg/uvm_reg_backdoor.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/reg/uvm_reg_cbs.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/reg/uvm_reg_sequence.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/reg/uvm_reg_predictor.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/reg/uvm_reg_adapter.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/reg/uvm_reg_item.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/reg/uvm_reg_model.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/tlm2/uvm_tlm2_sockets.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/tlm2/uvm_tlm2_sockets_base.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/tlm2/uvm_tlm2_exports.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/tlm2/uvm_tlm2_ports.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/tlm2/uvm_tlm2_imps.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/tlm2/uvm_tlm2_ifs.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/tlm2/uvm_tlm2_generic_payload.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/tlm2/uvm_tlm2_time.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/tlm2/uvm_tlm2_defines.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/tlm2/uvm_tlm2.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/seq/uvm_sequence_builtin.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/seq/uvm_sequence_library.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/seq/uvm_sequence.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/seq/uvm_sequence_base.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/seq/uvm_push_sequencer.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/seq/uvm_sequencer.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/seq/uvm_sequencer_param_base.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/seq/uvm_sequencer_analysis_fifo.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/seq/uvm_sequencer_base.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/seq/uvm_sequence_item.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/seq/uvm_seq.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/comps/uvm_test.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/comps/uvm_env.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/comps/uvm_agent.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/comps/uvm_scoreboard.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/comps/uvm_push_driver.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/comps/uvm_driver.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/comps/uvm_monitor.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/comps/uvm_subscriber.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/comps/uvm_random_stimulus.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/comps/uvm_algorithmic_comparator.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/comps/uvm_in_order_comparator.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/comps/uvm_policies.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/comps/uvm_pair.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/comps/uvm_comps.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/tlm1/uvm_sqr_connections.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/tlm1/uvm_tlm_req_rsp.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/tlm1/uvm_tlm_fifos.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/tlm1/uvm_tlm_fifo_base.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/tlm1/uvm_analysis_port.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/tlm1/uvm_exports.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/tlm1/uvm_ports.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/tlm1/uvm_imps.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_port_base.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/tlm1/uvm_sqr_ifs.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/tlm1/uvm_tlm_ifs.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/tlm1/uvm_tlm.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/dap/uvm_set_before_get_dap.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/dap/uvm_get_to_lock_dap.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/dap/uvm_simple_lock_dap.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/dap/uvm_set_get_dap_base.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/dap/uvm_dap.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_traversal.svh
+1551426028 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_cmdline_processor.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_globals.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_heartbeat.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_objection.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_root.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_component.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_runtime_phases.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_common_phases.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_task_phase.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_topdown_phase.svh
+1551426028 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_bottomup_phase.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_domain.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_phase.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_transaction.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_report_object.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_report_handler.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_report_server.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_report_catcher.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_report_message.svh
+1551426028 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_callback.svh
+1551426028 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_barrier.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_event.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_event_callback.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_recorder.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_tr_stream.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_tr_database.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_links.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_packer.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_comparer.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_printer.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_config_db.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_resource_db.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_resource_specializations.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_resource.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_spell_chkr.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_registry.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_factory.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_queue.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_pool.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_object.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_misc.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_object_globals.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_version.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_coreservice.svh
+1551426028 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_base.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/dpi/uvm_regex.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/dpi/uvm_svcmd_dpi.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/dpi/uvm_hdl.svh
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/dpi/uvm_dpi.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/macros/uvm_deprecated_defines.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/macros/uvm_reg_defines.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/macros/uvm_callback_defines.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/macros/uvm_sequence_defines.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/tlm1/uvm_tlm_imps.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/macros/uvm_tlm_defines.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/macros/uvm_printer_defines.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/macros/uvm_object_defines.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/macros/uvm_phase_defines.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/macros/uvm_message_defines.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/macros/uvm_global_defines.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/macros/uvm_version_defines.svh
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/uvm_macros.svh
+1727539122 ./tb/compliance_test/tinyriscv_soc_tb.v
+1727084245 ./src/rtl/utils/gen_dff.v
+1727084245 ./src/rtl/utils/gen_buf.v
+1727537990 ./src/rtl/utils/full_handshake_tx.v
+1727538021 ./src/rtl/utils/full_handshake_rx.v
+1727536957 ./src/rtl/soc/tinyriscv_soc_top.v
+1727084245 ./src/rtl/perips/uart.v
+1727537731 ./src/rtl/perips/timer.v
+1727084245 ./src/rtl/perips/spi.v
+1727537713 ./src/rtl/perips/rom.v
+1727537700 ./src/rtl/perips/ram.v
+1727084245 ./src/rtl/perips/gpio.v
+1727084245 ./src/rtl/debug/uart_debug.v
+1727537690 ./src/rtl/debug/jtag_top.v
+1727084245 ./src/rtl/debug/jtag_driver.v
+1727084245 ./src/rtl/debug/jtag_dm.v
+1727537681 ./src/rtl/core/tinyriscv.v
+1727534894 ./src/rtl/core/rib.v
+1727534894 ./src/rtl/core/regs.v
+1727534894 ./src/rtl/core/pc_reg.v
+1727534894 ./src/rtl/core/if_id.v
+1727534894 ./src/rtl/core/id.v
+1727534894 ./src/rtl/core/id_ex.v
+1727534894 ./src/rtl/core/ex.v
+1727534894 ./src/rtl/core/ctrl.v
+1727534894 ./src/rtl/core/csr_reg.v
+1727534894 ./src/rtl/core/clint.v
+1727534894 ./src/rtl/core/bus_defines.v
+1727534894 ./src/rtl/core/rv32i_defines.v
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/verdi/uvm_custom_install_verdi_recorder.sv
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/uvm_custom_install_vcs_recorder.sv
+1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/uvm_pkg.sv
+1551421444 /opt/synopsys/vcs201809/include/cm_vcsd.tab
+1727539140 filelist.f
+1550753332 /opt/synopsys/verdi201809/share/PLI/VCS/LINUX64/verdi.tab
+1551421246 /opt/synopsys/vcs201809/linux64/lib/vcsdp.tab
+6
+1551426029 /opt/synopsys/vcs201809/etc/uvm-1.2/dpi/uvm_dpi.cc
+0 
+1551422344 /opt/synopsys/vcs201809/linux64/lib/libvirsim.so
+1551421792 /opt/synopsys/vcs201809/linux64/lib/liberrorinf.so
+1551421768 /opt/synopsys/vcs201809/linux64/lib/libsnpsmalloc.so
+1551421789 /opt/synopsys/vcs201809/linux64/lib/libvfs.so
+1727539146 simv.daidir
+-1 partitionlib

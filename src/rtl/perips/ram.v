@@ -14,8 +14,8 @@
  limitations under the License.                                          
  */
 
-`include "bus_defines.v"
-`include "rv32i_defines.v"
+// `include "bus_defines.v"
+// `include "rv32i_defines.v"
 
 // ram module
 module ram(

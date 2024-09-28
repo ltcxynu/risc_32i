@@ -1,6 +1,7 @@
-`include "bus_defines.v"
-`include "rv32i_defines.v"
-
+// ifndef SIM
+// `include "bus_defines.v"
+// `include "rv32i_defines.v"
+// `endif
 // tinyriscv处理器核顶层模块
 module tinyriscv(
 

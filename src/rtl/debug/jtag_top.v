@@ -14,8 +14,10 @@
  limitations under the License.                                          
  */
 
-`include "bus_defines.v"
-`include "rv32i_defines.v"
+// ifndef SIM
+// `include "bus_defines.v"
+// `include "rv32i_defines.v"
+// `endif
 
 // JTAG顶层模块
 module jtag_top #(

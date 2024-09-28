@@ -41,7 +41,12 @@ module full_handshake_rx #(
 
     localparam STATE_IDLE     = 2'b01;
     localparam STATE_DEASSERT = 2'b10;
+    reg[DW-1:0] recv_data;
+    reg recv_rdy;
+    reg ack;
 
+    reg req_d;
+    reg req;
     reg[1:0] state;
     reg[1:0] state_next;
 
@@ -77,8 +82,7 @@ module full_handshake_rx #(
         endcase
     end
 
-    reg req_d;
-    reg req;
+
 
     // 将请求信号打两拍进行同步
     always @ (posedge clk or negedge rst_n) begin
@@ -90,10 +94,6 @@ module full_handshake_rx #(
             req <= req_d;
         end
     end
-
-    reg[DW-1:0] recv_data;
-    reg recv_rdy;
-    reg ack;
 
     always @ (posedge clk or negedge rst_n) begin
         if (!rst_n) begin
