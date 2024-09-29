@@ -27,36 +27,36 @@ module pc(
 );
 reg [`InstAddrBus] pc,pc_n;
 reg read_cache;
-reg [1:0] jmp_wait;
+reg jmp_under_reslove;
 //关闭写通道
 assign o_p_write = `WriteDisable;
 assign o_p_byte_en = 4'h0;
 assign o_p_writedata = `ZeroWord;
 //读
-assign pc_n = ~(o_p_read || (hold_flag_i>`Hold_If) ) ? pc : pc + i_p_readdata_valid;
-assign o_p_read  = (rst|jtag_reset_flag_i) ? `ReadDisable : ~i_p_waitrequest;
-assign o_p_addr  = {2'b00,pc_n[22:0]};
-// assign o_p_addr  = {pc[22:0],2'b00};
-always@(posedge clk) begin
-    if(rst|jtag_reset_flag_i) begin
-        jmp_wait <= 2'b00;
-    end else begin
-        jmp_wait <= {jmp_wait[0],jump_flag_i};
+always@(*) begin
+    if((~o_p_read && (hold_flag_i < `Hold_Pc))) begin
+        //如果没读，而且没hold。
+        pc_n = pc;
+    end else if(jump_flag_i) begin
+        pc_n = jump_addr_i;
+    end else if(i_p_waitrequest | jmp_under_reslove) begin
+        pc_n = pc;
+    end else if(i_p_readdata_valid)begin
+        pc_n = pc + 32'd1;
     end
 end
+assign o_p_read  = (rst|jtag_reset_flag_i) ? `ReadDisable : ~i_p_waitrequest;
+assign o_p_addr  = {2'b00,pc_n[22:0]};
+
 always@(posedge clk) begin
     if(rst|jtag_reset_flag_i) begin
         pc          <= `ZeroWord;
-        read_cache  <= `ReadEnable;
-    end else if(|{jmp_wait,jump_flag_i}) begin
+    end else if(jump_flag_i) begin
         pc          <= jump_addr_i;
-        read_cache  <= jmp_wait[1]?`ReadEnable:`ReadDisable;
-    end else if((hold_flag_i > `Hold_Pc)  || (i_p_waitrequest) ) begin
+    end else if((hold_flag_i >= `Hold_Pc)  || (i_p_waitrequest) ) begin
         pc <= pc;
-        read_cache  <= `ReadDisable;
     end else if( i_p_readdata_valid )begin // 
         pc <= pc_n;
-        read_cache  <= `ReadEnable;
     end
 end
 //访问icahce
@@ -65,14 +65,27 @@ always@(posedge clk) begin
         inst_addr_o <= `ZeroReg;
         inst_o  <= `ZeroWord;
         inst_valid <= 0;
-    end else if(|{jmp_wait,jump_flag_i}) begin
+        jmp_under_reslove <= 0;
+    end else if(jump_flag_i) begin
         inst_addr_o <= `ZeroReg;
         inst_o  <= `ZeroWord;
         inst_valid <= 0;
+        if(i_p_waitrequest) begin
+            jmp_under_reslove <= 1;
+        end else begin
+            jmp_under_reslove <= 0;
+        end
     end else if(i_p_readdata_valid) begin
-        inst_o <= i_p_readdata;
-        inst_addr_o <= pc;
-        inst_valid <= 1;
+        if(~jmp_under_reslove) begin
+            inst_o <= i_p_readdata;
+            inst_addr_o <= pc;
+            inst_valid <= 1;
+        end else begin
+            inst_addr_o <= `ZeroReg;
+            inst_o  <= `ZeroWord;
+            inst_valid <= 0;
+            jmp_under_reslove <= 0;
+        end
     end else begin
         inst_addr_o <= `ZeroReg;
         inst_o  <= `ZeroWord;

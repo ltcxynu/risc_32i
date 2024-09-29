@@ -29,7 +29,7 @@ x:	comp run
 
 comp:
 	# $(VCS) +incdir+./+ ./tb_cache.sv -l ./cmp.log
-	$(VCS) +incdir+./+ ./quick_sim_pc.sv -l ./cmp.log
+	$(VCS) -f+filelist.f ./quick_sim_pc.sv -l ./cmp.log
 
 run:
 	$(SIMV)

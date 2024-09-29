@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
-[*] Sat Sep 28 13:41:05 2024
+[*] Sun Sep 29 09:35:43 2024
 [*]
 [dumpfile] "/home/host/risc_32i/src/rtl/tb/this.vcd"
-[dumpfile_mtime] "Sat Sep 28 13:32:32 2024"
-[dumpfile_size] 100842
+[dumpfile_mtime] "Sun Sep 29 09:34:40 2024"
+[dumpfile_size] 299489
 [savefile] "/home/host/risc_32i/src/rtl/tb/pc.gtkw"
-[timestart] 0
+[timestart] 40
 [size] 2280 1292
 [pos] -1 -1
-*-5.000000 131 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-5.000000 189 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] quick_sim_pc.
 [treeopen] quick_sim_pc.uut_cache.
 [sst_width] 233
@@ -30,14 +30,15 @@ quick_sim_pc.uut.i_p_readdata_valid
 @22
 quick_sim_pc.uut.inst_addr_o[31:0]
 quick_sim_pc.uut.inst_o[31:0]
-@29
-quick_sim_pc.uut.inst_valid
 @28
-quick_sim_pc.uut.jtag_reset_flag_i
+quick_sim_pc.uut.inst_valid
 @22
 quick_sim_pc.uut.jump_addr_i[31:0]
-@28
+@29
 quick_sim_pc.uut.jump_flag_i
+@28
+quick_sim_pc.uut.jmp_under_reslove
+quick_sim_pc.uut.jtag_reset_flag_i
 @22
 quick_sim_pc.uut.o_p_byte_en[3:0]
 @28

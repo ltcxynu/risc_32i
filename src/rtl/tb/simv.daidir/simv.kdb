@@ -7,7 +7,7 @@ UUM=FALSE
 KDB=FALSE
 USE_NOVAS_HOME=FALSE
 COSIM=FALSE
-TOP=uvm_custom_install_recording uvm_custom_install_verdi_recording quick_sim_pc 
+TOP=uvm_custom_install_recording uvm_custom_install_verdi_recording gen_rst_0_dff gen_rst_1_dff gen_rst_def_dff gen_en_dff quick_sim_pc 
 OPTION=-ssz -ssz -ssz -ssv -ssy 
 ELAB_OPTION=-ssz -ssz -ssz -ssv -ssy 
 

@@ -1,30 +1,28 @@
 //仅帮助传递数据，提前取数，不帮助ex提前申请数据通路，ex自己申请
 //全组合逻辑，设计时虽然开了两op_o，但大部分时候不使用，不传递。因为读寄存器的数据已经传递了。
-`ifndef SIM
-`include "rv32i_defines.v"
-`endif
+
 module id(
-input wire rst,
+input wire                  rst,
 //from if_id
-input wire[`InstBus] inst_i,
-input wire[`InstAddrBus] inst_addr_i,
+input wire[`InstBus]        inst_i,
+input wire[`InstAddrBus]    inst_addr_i,
 //from regs
-input wire[`RegBus] reg1_rdata_i,
-input wire[`RegBus] reg2_rdata_i,
+input wire[`RegBus]         reg1_rdata_i,
+input wire[`RegBus]         reg2_rdata_i,
 //from csr_reg
-input wire[`RegBus] csr_rdata_i,
+input wire[`RegBus]         csr_rdata_i,
 //from ex
-input wire ex_jump_flag_i,
+input wire                  ex_jump_flag_i,
 //read regs
-output reg[`RegAddrBus] reg1_raddr_o,
-output reg[`RegAddrBus] reg2_raddr_o,
+output reg[`RegAddrBus]     reg1_raddr_o,
+output reg[`RegAddrBus]     reg2_raddr_o,
 //read csr reg
-output reg [`MemAddrBus] csr_raddr_o,
+output reg [`MemAddrBus]    csr_raddr_o,
 //to ex
-output reg [`RegBus]    op1_o,
-output reg [`RegBus]    op2_o,
-output reg [`RegBus]    op1_jump_o,
-output reg [`RegBus]    op2_jump_o,
+output reg [`RegBus]        op1_o,
+output reg [`RegBus]        op2_o,
+output reg [`RegBus]        op1_jump_o,
+output reg [`RegBus]        op2_jump_o,
 output reg [`InstBus]       inst_o,
 output reg [`InstAddrBus]   inst_addr_o,
 output reg [`RegBus]        reg1_rdata_o,

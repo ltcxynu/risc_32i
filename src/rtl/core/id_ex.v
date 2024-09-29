@@ -30,7 +30,7 @@ output wire [`RegBus]        csr_rdata_o,
 // halt
 input wire [`Hold_Flag_Bus] hold_flag_i
 );
-wire hold_en = (hold_flag_i <= `Hold_Id);
+wire hold_en = (hold_flag_i >= `Hold_Id);
 
 wire [`InstBus] op1;
 assign op1_o = op1;

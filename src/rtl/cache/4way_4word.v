@@ -4,9 +4,7 @@
 // _p_  means data exchange with processor //
 // _m_  means data exchange with memory    //
 // Replacement policy is LRU (8bit)        //
-`ifndef SIM
-`include "simple_ram.v"
-`endif
+
 
 `default_nettype none
 

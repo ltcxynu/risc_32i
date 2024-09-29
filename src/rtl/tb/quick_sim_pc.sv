@@ -2,6 +2,7 @@
 `define SIM 1
 `include "../core/rv32i_defines.v"
 `include "../core/pc.v"
+`include "../core/if_id.v"
 `include "../cache/simple_ram.v"
 `include "../cache/4way_4word.v"
 
@@ -24,7 +25,8 @@ logic i_p_readdata_valid;
 logic i_p_waitrequest   ;
 logic [`InstAddrBus] inst_addr_o;
 logic [`InstBus] inst_o;
-
+logic [`InstAddrBus] if_id_inst_addr_o;
+logic [`InstBus] if_id_inst_o;
 logic [25:0] o_m_addr;  
 logic [3:0] o_m_byte_en;  
 logic [127:0] o_m_writedata;  
@@ -41,8 +43,19 @@ logic [31:0] cnt_hit_w;
 logic [31:0] cnt_wb_r;  
 logic [31:0] cnt_wb_w;  
 logic [24:0] addr_in;
-
-
+logic inst_valid;
+if_id uut_ifid(
+    .clk            (clk   ),
+    .rst            (rst   ),
+    .inst_i         (inst_o    ),
+    .inst_addr_i    (inst_addr_o   ),
+    .inst_valid_i   (inst_valid  ),
+    .hold_flag_i    (hold_flag_i   ),
+    .int_flag_i     (    ),
+    .int_flag_o     (    ),
+    .inst_o         (if_id_inst_o    ),
+    .inst_addr_o    (if_id_inst_addr_o   ) 
+);
 pc uut(
     .clk                (clk),
     .rst                (rst),
@@ -51,6 +64,7 @@ pc uut(
     .hold_flag_i        (hold_flag_i),
     .inst_addr_o        (inst_addr_o),
     .inst_o             (inst_o)     ,
+    .inst_valid         (inst_valid),
     .jtag_reset_flag_i  (jtag_reset_flag_i),
     .o_p_addr           (o_p_addr),                //cpu->cache addr
     .o_p_byte_en        (o_p_byte_en),             //写稀疏掩码
@@ -99,16 +113,17 @@ hold_flag_i <= `Hold_None;
 #10 {rst,jtag_reset_flag_i} <= 2'b10;
 #10 {rst,jtag_reset_flag_i} <= 2'b01;
 #10 {rst,jtag_reset_flag_i} <= 2'b00;
-#100
+#130
+    @(posedge clk);
     @(posedge clk);
     jump_flag_i <= 1;
     jump_addr_i <= JMPADDR;
+    hold_flag_i <= `Hold_Id;
     @(posedge clk);
     jump_flag_i <= 0;
-#1000
-    hold_flag_i <= `Hold_Id;
-#200
     hold_flag_i <= `Hold_None;
+#1000
+#200
 #1000
 $finish;    
 end
@@ -126,11 +141,9 @@ initial begin
 end
 //VIP
 integer i;
-logic [127:0] mem [0:127];
+logic [127:0] mem [`RomNum];
 initial begin
-    for(i=0;i<64;i++)begin
-        mem[i] = {i,i+32'd1,32'hf0f0_0505,32'hffff_eeee};
-    end
+    $readmemh ("inst128.data", mem);
     forever begin
     @(posedge clk);
     if(o_m_write) begin

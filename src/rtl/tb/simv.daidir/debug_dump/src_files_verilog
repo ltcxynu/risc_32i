@@ -1,8 +1,10 @@
 /home/host/risc_32i/src/rtl/cache/4way_4word.v
 /home/host/risc_32i/src/rtl/cache/simple_ram.v
+/home/host/risc_32i/src/rtl/core/if_id.v
 /home/host/risc_32i/src/rtl/core/pc.v
 /home/host/risc_32i/src/rtl/core/rv32i_defines.v
 /home/host/risc_32i/src/rtl/tb/quick_sim_pc.sv
+/home/host/risc_32i/src/rtl/utils/gen_dff.v
 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_barrier.svh
 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_base.svh
 /opt/synopsys/vcs201809/etc/uvm-1.2/base/uvm_bottomup_phase.svh

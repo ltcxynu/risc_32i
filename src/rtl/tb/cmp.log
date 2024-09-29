@@ -1,9 +1,14 @@
+
+Warning-[UNKWN_OPTVSIM] Unknown option passed
+  Ignoring unknown option '-f+filelist.f' passed to 'vcs' and continuing 
+  compilation.
+
 Command: vcs -full64 -sverilog -timescale=1ns/1ns +acc +vpi -debug_all -LDFLAGS -Wl,--no-as-needed \
 +define+UVM_OBJECT_MUST_HAVE_CONSTRUCTOR -cm line+cond+fsm+branch+tgl -cm_dir ./coverage.vdb \
--ntb_opts uvm-1.2 -CFLAGS -DVCS -debug_all -fsdb +incdir+./+ ./quick_sim_pc.sv -l \
-./cmp.log
+-ntb_opts uvm-1.2 -CFLAGS -DVCS -debug_all -fsdb -f+filelist.f ./quick_sim_pc.sv \
+-l ./cmp.log
                          Chronologic VCS (TM)
-       Version O-2018.09-SP2_Full64 -- Sat Sep 28 22:45:10 2024
+       Version O-2018.09-SP2_Full64 -- Sun Sep 29 17:44:00 2024
                Copyright (c) 1991-2018 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -357,6 +362,10 @@ Parsing included file '../core/rv32i_defines.v'.
 Back to file './quick_sim_pc.sv'.
 Parsing included file '../core/pc.v'.
 Back to file './quick_sim_pc.sv'.
+Parsing included file '../core/if_id.v'.
+Parsing included file '../utils/gen_dff.v'.
+Back to file '../core/if_id.v'.
+Back to file './quick_sim_pc.sv'.
 Parsing included file '../cache/simple_ram.v'.
 Back to file './quick_sim_pc.sv'.
 Parsing included file '../cache/4way_4word.v'.
@@ -364,12 +373,16 @@ Back to file './quick_sim_pc.sv'.
 Top Level Modules:
        uvm_custom_install_recording
        uvm_custom_install_verdi_recording
+       gen_rst_0_dff
+       gen_rst_1_dff
+       gen_rst_def_dff
+       gen_en_dff
        quick_sim_pc
 TimeScale is 1 ns / 1 ns
 
 Warning-[TFIPC] Too few instance port connections
-./quick_sim_pc.sv, 46
-quick_sim_pc, "pc uut( .clk (clk),  .rst (rst),  .jump_flag_i (jump_flag_i),  .jump_addr_i (jump_addr_i),  .hold_flag_i (hold_flag_i),  .inst_addr_o (inst_addr_o),  .inst_o (inst_o),  .jtag_reset_flag_i (jtag_reset_flag_i),  .o_p_addr (o_p_addr),  .o_p_byte_en (o_p_byte_en),  .o_p_writedata (o_p_writedata),  .o_p_read (o_p_read),  .o_p_write (o_p_write),  .i_p_readdata (i_p_readdata),  .i_p_readdata_valid (i_p_readdata_valid),  .i_p_waitrequest (i_p_waitrequest));"
+./quick_sim_pc.sv, 47
+quick_sim_pc, "if_id uut_ifid( .clk (clk),  .rst (rst),  .inst_i (inst_o),  .inst_addr_i (inst_addr_o),  .inst_valid_i (inst_valid),  .hold_flag_i (hold_flag_i),  .inst_o (if_id_inst_o),  .inst_addr_o (if_id_inst_addr_o));"
   The above instance has fewer port connections than the module definition.
   Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
   ports.
@@ -377,11 +390,9 @@ quick_sim_pc, "pc uut( .clk (clk),  .rst (rst),  .jump_flag_i (jump_flag_i),  .j
 VCS Coverage Metrics Release O-2018.09-SP2_Full64 Copyright (c) 1991-2018 by Synopsys Inc.
 Notice: Ports coerced to inout, use -notice for details
 Starting vcs inline pass...
-8 modules and 0 UDP read.
-recompiling module uvm_custom_install_verdi_recording
+12 modules and 0 UDP read.
 recompiling module quick_sim_pc
-Both modules done.
-	However, due to incremental compilation, only 2 modules need to be compiled. 
+	However, due to incremental compilation, only 1 module needs to be compiled. 
 make[1]: Entering directory '/home/host/risc_32i/src/rtl/tb/csrc'
 rm -f _csrc*.so pre_vcsobj_*.so share_vcsobj_*.so
 ld -shared  -Bsymbolic  -o .//../simv.daidir//_csrc0.so objs/amcQw_d.o 
@@ -389,7 +400,7 @@ rm -f _csrc0.so
 if [ -x ../simv ]; then chmod -x ../simv; fi
 g++  -o ../simv -no-pie    -Wl,-rpath-link=./ -Wl,-rpath='$ORIGIN'/simv.daidir/ -Wl,-rpath=./simv.daidir/ \
 -Wl,-rpath='$ORIGIN'/simv.daidir//scsim.db.dir  -Wl,--no-as-needed -rdynamic  -Wl,-rpath=/opt/synopsys/vcs201809/linux64/lib \
--L/opt/synopsys/vcs201809/linux64/lib  uvm_dpi.o uvm_verdi_dpi.o     _60994_archive_1.so \
+-L/opt/synopsys/vcs201809/linux64/lib  uvm_dpi.o uvm_verdi_dpi.o     _26674_archive_1.so \
 _prev_archive_1.so _csrc0.so  SIM_l.o  _csrc0.so    rmapats_mop.o rmapats.o rmar.o \
 rmar_nd.o  rmar_llvm_0_1.o rmar_llvm_0_0.o          -lzerosoft_rt_stubs -lvirsim \
 -lerrorinf -lsnpsmalloc -lvfs    -lvcsnew -lsimprofile -lreader_common /opt/synopsys/vcs201809/linux64/lib/libBA.a \
@@ -399,4 +410,4 @@ rmar_nd.o  rmar_llvm_0_1.o rmar_llvm_0_0.o          -lzerosoft_rt_stubs -lvirsim
 
 ../simv up to date
 make[1]: Leaving directory '/home/host/risc_32i/src/rtl/tb/csrc'
-CPU time: 3.037 seconds to compile + .174 seconds to elab + .348 seconds to link
+CPU time: 2.574 seconds to compile + .177 seconds to elab + .329 seconds to link
