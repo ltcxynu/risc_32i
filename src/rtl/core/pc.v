@@ -1,6 +1,3 @@
-`ifndef SIM
-`include "rv32i_defines.v"
-`endif
 module pc(
     input   wire                    clk,
     input   wire                    rst,

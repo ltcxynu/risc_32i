@@ -36,14 +36,14 @@ assign clint_csr_mepc = mepc;
 assign clint_csr_mtvec = mtvec;
 
 always@(posedge clk) begin
-    if(rst == `RstEnable) begin
+    if(rst) begin
         cycle <= {`ZeroWord,`ZeroWord};
     end else begin
         cycle <= cycle + 1'b1;
     end
 end
 always@(posedge clk) begin
-    if(rst == `RstEnable) begin
+    if(rst) begin
         mtvec <= `ZeroWord;
         mcause <= `ZeroWord;
         mepc <= `ZeroWord;

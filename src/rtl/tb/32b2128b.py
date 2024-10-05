@@ -1,5 +1,5 @@
 # 打开输入文件和输出文件
-with open('src/rtl/tb/inst.data', 'r') as infile, open('src/rtl/tb/inst128.data', 'w') as outfile:
+with open('sim/inst.data', 'r') as infile, open('src/rtl/tb/inst128.data', 'w') as outfile:
     while True:
         # 从输入文件中读取四行数据
         lines = [infile.readline().strip() for _ in range(4)]

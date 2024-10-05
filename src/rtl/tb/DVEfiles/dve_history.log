@@ -1,0 +1,91 @@
+# Preference setting overrides
+gui_set_pref_value -category {Globals} -key {app_default_font} -value {Fixed [Sony],18,-1,5,50,0,0,0,0,0}
+gui_set_pref_value -category {Globals} -key {app_fixed_width_font} -value {Fixed [Sony],18,-1,5,50,0,0,0,0,0}
+gui_create_pref_key -category {Globals} -key {load_detail_for_funcov} -value_type {bool} -value {false}
+gui_set_pref_value -category {Schematics} -key {net_text_maxlen} -value {20}
+gui_create_pref_category -category {dlg_settings}
+gui_create_pref_key -category {dlg_settings} -key {tableWithImmediatePopup} -value_type {bool} -value {true}
+gui_create_pref_category -category {schem_obj_name}
+gui_create_pref_key -category {schem_obj_name} -key {show_cell_and_pin_with_symbol_name} -value_type {bool} -value {false}
+gui_create_pref_key -category {schem_pin_hc} -key {textExtFont} -value_type {string} -value {Helvetica,10,-1,5,50,0,0,0,0,0}
+gui_set_pref_value -category {schem_text} -key {sizeScheme} -value {Large}
+
+# State setting overrides
+gui_state_default_create -off -ini
+gui_set_state_value -category Layout -key child_console_size_x -value 2279
+gui_set_state_value -category Layout -key child_console_size_y -value 675
+gui_set_state_value -category Layout -key child_data_coltype -value 124
+gui_set_state_value -category Layout -key child_data_colvalue -value 52
+gui_set_state_value -category Layout -key child_data_colvariable -value 251
+gui_set_state_value -category Layout -key child_data_size_x -value 303
+gui_set_state_value -category Layout -key child_data_size_y -value 471
+gui_set_state_value -category Layout -key child_driver_size_x -value 1981
+gui_set_state_value -category Layout -key child_driver_size_y -value 675
+gui_set_state_value -category Layout -key child_hier_col3 -value {-1}
+gui_set_state_value -category Layout -key child_hier_colhier -value 242
+gui_set_state_value -category Layout -key child_hier_colpd -value 0
+gui_set_state_value -category Layout -key child_hier_coltype -value 107
+gui_set_state_value -category Layout -key child_hier_size_x -value 289
+gui_set_state_value -category Layout -key child_hier_size_y -value 471
+gui_set_state_value -category Layout -key child_hier_sort_column -value 1
+gui_set_state_value -category Layout -key child_schematic_pos_x -value {-2}
+gui_set_state_value -category Layout -key child_schematic_pos_y -value {-25}
+gui_set_state_value -category Layout -key child_schematic_size_x -value 1680
+gui_set_state_value -category Layout -key child_schematic_size_y -value 862
+gui_set_state_value -category Layout -key child_source_docknewline -value false
+gui_set_state_value -category Layout -key child_source_pos_x -value {-2}
+gui_set_state_value -category Layout -key child_source_pos_y -value {-25}
+gui_set_state_value -category Layout -key child_source_size_x -value 1690
+gui_set_state_value -category Layout -key child_source_size_y -value 468
+gui_set_state_value -category Layout -key child_watch_size_x -value 1981
+gui_set_state_value -category Layout -key child_watch_size_y -value 679
+gui_set_state_value -category Layout -key child_wave_colname -value 336
+gui_set_state_value -category Layout -key child_wave_colvalue -value 321
+gui_set_state_value -category Layout -key child_wave_left -value 661
+gui_set_state_value -category Layout -key child_wave_right -value 1613
+gui_set_state_value -category Layout -key main_pos_x -value 1
+gui_set_state_value -category Layout -key main_pos_y -value 38
+gui_set_state_value -category Layout -key main_size_x -value 2280
+gui_set_state_value -category Layout -key main_size_y -value 1329
+gui_set_state_value -category Layout -key stand_source_child_docknewline -value false
+gui_set_state_value -category Layout -key stand_source_child_pos_x -value {-2}
+gui_set_state_value -category Layout -key stand_source_child_pos_y -value {-25}
+gui_set_state_value -category Layout -key stand_source_child_size_x -value 1686
+gui_set_state_value -category Layout -key stand_source_child_size_y -value 466
+gui_set_state_value -category Layout -key stand_wave_child_docknewline -value false
+gui_set_state_value -category Layout -key stand_wave_child_pos_x -value {-2}
+gui_set_state_value -category Layout -key stand_wave_child_pos_y -value {-25}
+gui_set_state_value -category Layout -key stand_wave_child_size_x -value 2284
+gui_set_state_value -category Layout -key stand_wave_child_size_y -value 1143
+gui_set_state_value -category Layout -key stand_wave_top_pos_x -value 72
+gui_set_state_value -category Layout -key stand_wave_top_pos_y -value 80
+gui_set_state_value -category Layout -key stand_wave_top_size_x -value 2351
+gui_set_state_value -category Layout -key stand_wave_top_size_y -value 1371
+gui_create_state_key -category FindDialog -key m_pMatchCase -value_type bool -value false
+gui_create_state_key -category FindDialog -key m_pMatchWord -value_type bool -value false
+gui_create_state_key -category FindDialog -key m_pUseCombo -value_type string -value {}
+gui_create_state_key -category FindDialog -key m_pWrapAround -value_type bool -value true
+gui_state_default_create -off
+
+# Begin command logging
+gui_set_pref_value -category {Globals} -key {smart_resize} -value {false}
+gui_set_pref_value -category {Globals} -key {smart_resize} -value {true}
+gui_sim_run Ucli -exe ./simv -args {-ucligui  } -dir .
+gui_list_select -id Hier.1 -current_item_name quick_sim_pc -current_item_type Scope  -selected  { quick_sim_pc   }
+gui_list_expand -id Hier.1   quick_sim_pc
+gui_list_action -id  Hier.1 quick_sim_pc
+gui_list_select -id Hier.1 -current_item_name quick_sim_pc.ex_uut -current_item_type Scope  -selected  { quick_sim_pc.ex_uut   }
+gui_list_select -id Hier.1 -current_item_name quick_sim_pc.id_ex_uut -current_item_type Scope  -selected  { quick_sim_pc.id_ex_uut   }
+gui_list_select -id Hier.1 -current_item_name quick_sim_pc.regs_uut -current_item_type Scope  -selected  { quick_sim_pc.regs_uut   }
+gui_list_select -id Data.1 -selected  { quick_sim_pc.regs_uut.we_i   }
+gui_list_select_all -id Data.1
+gui_open_window Wave
+gui_list_add -id Wave.1 -from Data.1 { quick_sim_pc.regs_uut.clk quick_sim_pc.regs_uut.rst quick_sim_pc.regs_uut.we_i {quick_sim_pc.regs_uut.wdata_i[31:0]} {quick_sim_pc.regs_uut.waddr_i[4:0]} quick_sim_pc.regs_uut.jtag_we_i {quick_sim_pc.regs_uut.jtag_data_i[31:0]} {quick_sim_pc.regs_uut.jtag_addr_i[4:0]} {quick_sim_pc.regs_uut.jtag_data_o[31:0]} {quick_sim_pc.regs_uut.rdata1_o[31:0]} {quick_sim_pc.regs_uut.rdata2_o[31:0]} {quick_sim_pc.regs_uut.raddr1_i[4:0]} {quick_sim_pc.regs_uut.raddr2_i[4:0]} {quick_sim_pc.regs_uut.regs[0:31][31:0]} {quick_sim_pc.regs_uut.$unit} } -insertionbar
+gui_sim_continue  
+gui_wv_scroll_hslidermove -id  Wave.1 0
+gui_marker_move -id  Wave.1 C1 135
+gui_wv_scroll_hslidermove -id  Wave.1 0
+gui_zoom -window  Wave.1  -factor 0.5
+gui_wv_zoom_timerange -id  Wave.1 91 179
+gui_close_window -window TopLevel.2
+gui_close_window -window TopLevel.1

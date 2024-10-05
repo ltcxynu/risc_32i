@@ -167,9 +167,14 @@
       <fileinfo name="./quick_sim_pc.sv"  id="162"  />
       <fileinfo name="../core/rv32i_defines.v"  id="163"  />
       <fileinfo name="../core/pc.v"  id="164"  />
-      <fileinfo name="../core/if_id.v"  id="165"  />
-      <fileinfo name="../utils/gen_dff.v"  id="166"  />
-      <fileinfo name="../cache/simple_ram.v"  id="167"  />
-      <fileinfo name="../cache/4way_4word.v"  id="168"  />
-      <fileinfo name=""  id="169"  />
+      <fileinfo name="../core/id.v"  id="165"  />
+      <fileinfo name="../core/if_id.v"  id="166"  />
+      <fileinfo name="../utils/gen_dff.v"  id="167"  />
+      <fileinfo name="../core/id_ex.v"  id="168"  />
+      <fileinfo name="../core/regs.v"  id="169"  />
+      <fileinfo name="../core/csr_reg.v"  id="170"  />
+      <fileinfo name="../core/ex.v"  id="171"  />
+      <fileinfo name="../cache/simple_ram.v"  id="172"  />
+      <fileinfo name="../cache/4way_4word.v"  id="173"  />
+      <fileinfo name=""  id="174"  />
     </srcinfo>

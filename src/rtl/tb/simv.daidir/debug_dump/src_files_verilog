@@ -1,7 +1,12 @@
 /home/host/risc_32i/src/rtl/cache/4way_4word.v
 /home/host/risc_32i/src/rtl/cache/simple_ram.v
+/home/host/risc_32i/src/rtl/core/csr_reg.v
+/home/host/risc_32i/src/rtl/core/ex.v
+/home/host/risc_32i/src/rtl/core/id.v
+/home/host/risc_32i/src/rtl/core/id_ex.v
 /home/host/risc_32i/src/rtl/core/if_id.v
 /home/host/risc_32i/src/rtl/core/pc.v
+/home/host/risc_32i/src/rtl/core/regs.v
 /home/host/risc_32i/src/rtl/core/rv32i_defines.v
 /home/host/risc_32i/src/rtl/tb/quick_sim_pc.sv
 /home/host/risc_32i/src/rtl/utils/gen_dff.v

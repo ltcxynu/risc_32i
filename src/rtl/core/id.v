@@ -11,8 +11,7 @@ input wire[`RegBus]         reg1_rdata_i,
 input wire[`RegBus]         reg2_rdata_i,
 //from csr_reg
 input wire[`RegBus]         csr_rdata_i,
-//from ex
-input wire                  ex_jump_flag_i,
+
 //read regs
 output reg[`RegAddrBus]     reg1_raddr_o,
 output reg[`RegAddrBus]     reg2_raddr_o,
@@ -85,7 +84,7 @@ always@(*) begin
                     reg2_raddr_o    = `ZeroReg;
                     //向ex传递,仅传递立即数类型，不传递寄存器，寄存器读出来过pp2会到ex里。不多此一举
                     op1_o           = {{20{I_imm[11]}},I_imm};
-                    op2_o           = `ZeroWord;
+                    op2_o           = I_rd;
                     op1_jump_o      = `ZeroWord;
                     op2_jump_o      = `ZeroWord;
                     reg1_rdata_o    = reg1_rdata_i;
@@ -261,11 +260,11 @@ always@(*) begin
                     reg1_raddr_o    = I_rs1;
                     reg2_raddr_o    = `ZeroReg;
                     //csr
-                    csr_raddr_o     = I_imm;     
+                    csr_raddr_o     = {20'h0,I_imm}; 
                     csr_rdata_o     = csr_rdata_i;
                     //向ex传递,仅传递立即数类型，不传递寄存器，寄存器读出来过pp2会到ex里。不多此一举
-                    op1_o           = `ZeroWord;
-                    op2_o           = I_rd;
+                    op1_o           = I_rd;
+                    op2_o           = {20'h0,I_imm};
                     op1_jump_o      = `ZeroWord;
                     op2_jump_o      = `ZeroWord;
                     reg1_rdata_o    = reg1_rdata_i;
@@ -327,8 +326,8 @@ always@(*) begin
             reg1_raddr_o    = `ZeroReg;
             reg2_raddr_o    = `ZeroReg;
             //向ex传递,仅传递立即数类型，不传递寄存器，寄存器读出来过pp2会到ex里。不多此一举
-            op1_o           = {U_imm,12'd0}; //zimm
-            op2_o           = U_rd;
+            op1_o           =  U_rd;
+            op2_o           =  {U_imm,12'd0};//zimm
             op1_jump_o      = `ZeroWord;
             op2_jump_o      = `ZeroWord;
             reg1_rdata_o    = `ZeroWord;
