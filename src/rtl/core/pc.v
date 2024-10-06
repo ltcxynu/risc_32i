@@ -23,7 +23,6 @@ module pc(
     input   wire                    i_p_waitrequest          //操作等待
 );
 reg [`InstAddrBus] pc,pc_n;
-reg read_cache;
 reg jmp_under_reslove;
 //关闭写通道
 assign o_p_write = `WriteDisable;
@@ -61,12 +60,12 @@ always@(posedge clk) begin
     if(rst|jtag_reset_flag_i) begin
         inst_addr_o <= `ZeroReg;
         inst_o  <= `ZeroWord;
-        inst_valid <= 0;
+        inst_valid_o <= 0;
         jmp_under_reslove <= 0;
     end else if(jump_flag_i) begin
         inst_addr_o <= `ZeroReg;
         inst_o  <= `ZeroWord;
-        inst_valid <= 0;
+        inst_valid_o <= 0;
         if(i_p_waitrequest) begin
             jmp_under_reslove <= 1;
         end else begin
@@ -76,17 +75,17 @@ always@(posedge clk) begin
         if(~jmp_under_reslove) begin
             inst_o <= i_p_readdata;
             inst_addr_o <= pc;
-            inst_valid <= 1;
+            inst_valid_o <= 1;
         end else begin
             inst_addr_o <= `ZeroReg;
             inst_o  <= `ZeroWord;
-            inst_valid <= 0;
+            inst_valid_o <= 0;
             jmp_under_reslove <= 0;
         end
     end else begin
         inst_addr_o <= `ZeroReg;
         inst_o  <= `ZeroWord;
-        inst_valid <= 0;
+        inst_valid_o <= 0;
     end
 end
 endmodule

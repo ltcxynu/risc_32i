@@ -368,10 +368,10 @@ end
 always@(*) begin
     case(opcode)
         `INST_TYPE_L    :begin
-            hold_flag_o = `Hold_Enable;
+            hold_flag_o = `HoldEnable;
         end
         default: begin
-            hold_flag_o = `Hold_Disbale;
+            hold_flag_o = `HoldDisable;
         end
     endcase
 end
@@ -380,7 +380,7 @@ always@(*) begin
     case(opcode)
     `INST_TYPE_S    :begin
         reg_wait_wb = `ZeroReg;
-        case(funct3)
+        case(S_funct3)
             `INST_SB:begin
                 set_mem(mem_addr,writedata,mem_addr[0+:2],`ReadDisable,`WriteEnable);
             end
@@ -397,7 +397,7 @@ always@(*) begin
     end
     `INST_TYPE_L    :begin
         reg_wait_wb = I_rd;
-        case(funct3)
+        case(I_funct3)
             `INST_LB :begin
                 set_mem(mem_addr,25'd0,2'b00,`ReadEnable,`WriteDisable);
             end

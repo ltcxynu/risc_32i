@@ -1,5 +1,3 @@
-//inst_fetch to inst decode
-`include "../utils/gen_dff.v"
 module if_id(
     input wire                  clk,
     input wire                  rst,

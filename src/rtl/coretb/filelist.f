@@ -1,0 +1,15 @@
+../core/rv32i_defines.v
+../utils/gen_dff.v
+../core/pc.v
+../core/if_id.v
+../core/id.v
+../core/id_ex.v
+../core/ex.v
+../core/clint.v
+../core/wb.v
+../core/ctrl.v
+../core/regs.v
+../core/csr_reg.v
+../core/rv32i.v
+../cache/simple_ram.v
+../cache/4way_4word.v

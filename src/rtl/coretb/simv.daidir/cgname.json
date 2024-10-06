@@ -1,0 +1,128 @@
+{
+    "uvm_pkg": [
+        "uvm_pkg",
+        "zr7M1",
+        "module",
+        5
+    ],
+    "_vcs_DPI_package": [
+        "_vcs_DPI_package",
+        "uM9F1",
+        "module",
+        1
+    ],
+    "_vcs_unit__3877395951": [
+        "_vcs_unit__3877395951",
+        "wjxYA",
+        "module",
+        22
+    ],
+    "gen_rst_1_dff": [
+        "gen_rst_1_dff",
+        "WBbf5",
+        "module",
+        10
+    ],
+    "std": [
+        "std",
+        "reYIK",
+        "module",
+        4
+    ],
+    "vcs_paramclassrepository": [
+        "vcs_paramclassrepository",
+        "hEeZs",
+        "module",
+        2
+    ],
+    "...MASTER...": [
+        "SIM",
+        "amcQw",
+        "module",
+        21
+    ],
+    "_vcs_msglog": [
+        "_vcs_msglog",
+        "zQBzV",
+        "module",
+        6
+    ],
+    "uvm_custom_install_recording": [
+        "uvm_custom_install_recording",
+        "nhiwz",
+        "module",
+        7
+    ],
+    "uvm_custom_install_verdi_recording": [
+        "uvm_custom_install_verdi_recording",
+        "EbjT3",
+        "module",
+        8
+    ],
+    "gen_rst_0_dff": [
+        "gen_rst_0_dff",
+        "dsyLL",
+        "module",
+        9
+    ],
+    "clint": [
+        "clint",
+        "qW9kS",
+        "module",
+        14
+    ],
+    "ctrl": [
+        "ctrl",
+        "FzTxA",
+        "module",
+        16
+    ],
+    "gen_rst_def_dff": [
+        "gen_rst_def_dff",
+        "vehQv",
+        "module",
+        11
+    ],
+    "wb": [
+        "wb",
+        "DgZ94",
+        "module",
+        15
+    ],
+    "gen_en_dff": [
+        "gen_en_dff",
+        "DIPR0",
+        "module",
+        12
+    ],
+    "ex": [
+        "ex",
+        "r2dgF",
+        "module",
+        13
+    ],
+    "regs": [
+        "regs",
+        "h5PET",
+        "module",
+        17
+    ],
+    "cache": [
+        "cache",
+        "IPJ57",
+        "module",
+        18
+    ],
+    "set": [
+        "set",
+        "vGwT4",
+        "module",
+        19
+    ],
+    "quick_sim_core": [
+        "quick_sim_core",
+        "z2uiJ",
+        "module",
+        23
+    ]
+}

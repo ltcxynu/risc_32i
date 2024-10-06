@@ -1,50 +1,56 @@
 `ifndef SIM
-`include "rv32i_defines.v"
-`include "csr_reg.v"
-`include "regs.v"
-`include "pc.v"
-`include "id.v"
-`include "if_id.v"
+`include "../core/rv32i_defines.v"
+`include "../utils/gen_dff.v"
+`include "../core/pc.v"
+`include "../core/if_id.v"
+`include "../core/id.v"
+`include "../core/id_ex.v"
+`include "../core/ex.v"
+`include "../core/clint.v"
+`include "../core/wb.v"
+`include "../core/ctrl.v"
+`include "../core/regs.v"
+`include "../core/csr_reg.v"
+`include "../cache/simple_ram.v"
+`include "../cache/4way_4word.v"
 `endif
 module rv32i(
     input wire clk,
     input wire rst,
     //icache
-    output wire o_inst_addr,
-    output wire o_inst_byte_en,
-    output wire o_inst_writedata,
-    output wire o_inst_read,
-    output wire o_inst_write,
-    input  wire i_inst_readdata,
-    input  wire i_inst_readdata_valid,
-    input  wire i_inst_waitrequest,
+    output wire [`CacheMemAddrBus]  o_inst_addr,
+    output wire [`CacheMemByteBus]  o_inst_byte_en,
+    output wire [`CacheMemDataBus]  o_inst_writedata,
+    output wire                     o_inst_read,
+    output wire                     o_inst_write,
+    input  wire [`CacheMemDataBus]  i_inst_readdata,
+    input  wire                     i_inst_readdata_valid,
+    input  wire                     i_inst_waitrequest,
     //dcache
-    output wire o_data_addr,
-    output wire o_data_byte_en,
-    output wire o_data_writedata,
-    output wire o_data_read,
-    output wire o_data_write,
-    input  wire i_data_readdata,
-    input  wire i_data_readdata_valid,
-    input  wire i_data_waitrequest,
+    output wire  [`CacheMemAddrBus] o_data_addr,
+    output wire  [`CacheMemByteBus] o_data_byte_en,
+    output wire  [`CacheMemDataBus] o_data_writedata,
+    output wire                     o_data_read,
+    output wire                     o_data_write,
+    input  wire  [`CacheMemDataBus] i_data_readdata,
+    input  wire                     i_data_readdata_valid,
+    input  wire                     i_data_waitrequest,
     //jtag预留
-    input wire[`RegAddrBus] jtag_reg_addr_i,   // jtag模块读、写寄存器的地址
-    input wire[`RegBus] jtag_reg_data_i,       // jtag模块写寄存器数据
-    input wire jtag_reg_we_i,                  // jtag模块写寄存器标志
-    output wire[`RegBus] jtag_reg_data_o,      // jtag模块读取到的寄存器数据
-    input wire jtag_halt_flag_i,               // jtag暂停标志
-    input wire jtag_reset_flag_i,              // jtag复位PC标志
+    input  wire  [`RegAddrBus]      jtag_reg_addr_i,   // jtag模块读、写寄存器的地址
+    input  wire  [`RegBus]          jtag_reg_data_i,       // jtag模块写寄存器数据
+    input  wire                     jtag_reg_we_i,                  // jtag模块写寄存器标志
+    output wire  [`RegBus]          jtag_reg_data_o,      // jtag模块读取到的寄存器数据
+    input  wire                     jtag_halt_flag_i,               // jtag暂停标志
+    input  wire                     jtag_reset_flag_i,              // jtag复位PC标志
     //总线预留
-    input wire rib_hold_flag_i,                // 总线暂停标志
+    input  wire                     rib_hold_flag_i,                // 总线暂停标志
     //外部中断预留
-    input wire[`INT_BUS] int_i                 // 中断信号
+    input  wire  [`INT_BUS]         int_i                 // 中断信号
     );
 /************************val******************************/
 
 /************************var******************************/
     //pc
-    wire                    clk;
-    wire                    rst;
     wire                    pc_jump_flag_i;
     wire[`InstAddrBus]      pc_jump_addr_i;
     wire [`Hold_Flag_Bus]   pc_hold_flag_i;
@@ -111,11 +117,6 @@ module rv32i(
     wire [`InstBus]         ex_inst_o;
     wire [`InstAddrBus]     ex_inst_addr_o;
     wire                    ex_hold_flag_o;
-    wire [`CacheAddrBus]    o_p_addr;
-    wire [`CacheByteBus]    o_p_byte_en;
-    wire [`CacheDataBus]    o_p_writedata
-    wire                    o_p_read;
-    wire                    o_p_write;
     wire [`RegAddrBus]      ex_reg_wait_wb;
     //ex-> cache
     wire [`CacheAddrBus]    o_ex_addr;                //cpu->cache addr
@@ -135,6 +136,19 @@ module rv32i(
     wire [`Hold_Flag_Bus]   ctrl_hold_flag_o;
     wire                    ctrl_jump_flag_o;
     wire [`InstAddrBus]     ctrl_jump_addr_o;
+    //clint csr
+    wire [`RegBus]          clint_data_i;
+    wire [`RegBus]          clint_csr_mtvec;
+    wire [`RegBus]          clint_csr_mepc;
+    wire [`RegBus]          clint_csr_mstatus;
+    wire                    csr_global_int_en_i;
+    wire                    clint_hold_flag_o;
+    wire                    clint_we_o;
+    wire [`MemAddrBus]      clint_waddr_o;
+    wire [`MemAddrBus]      clint_raddr_o;
+    wire [`RegBus]          clint_data_o;
+    wire [`InstAddrBus]     clint_int_addr_o;
+    wire                    clint_int_assert_o;
 /**********************instance****************************/
 pc u_pc(
     .clk                (clk                  ),
@@ -145,7 +159,7 @@ pc u_pc(
     .hold_flag_i        (ctrl_hold_flag_o     ),
     .inst_addr_o        (pc_inst_addr_o       ),
     .inst_o             (pc_inst_o            ),
-    .inst_valid         (pc_inst_valid_o      ),
+    .inst_valid_o       (pc_inst_valid_o      ),
     //inter connect
     //jtag
     .jtag_reset_flag_i  (jtag_reset_flag_i    ),
@@ -195,8 +209,8 @@ if_id u_if_id(
     .inst_i             (pc_inst_o            ),
     .inst_addr_i        (pc_inst_addr_o       ),
     .inst_valid_i       (pc_inst_valid_o      ),
-    .hold_flag_i        (                     ),
-    .int_flag_i         (                     ),
+    .hold_flag_i        (ctrl_hold_flag_o     ),
+    .int_flag_i         (int_i                ),
     .int_flag_o         (if_id_int_flag_o     ),
     .inst_o             (if_id_inst_o         ),
     .inst_addr_o        (if_id_inst_addr_o    )
@@ -247,15 +261,15 @@ csr_reg u_csr_reg(
     .data_o             (csr_rdata_o          ),
     .waddr_i            (ex_csr_waddr_o       ),
     .data_i             (ex_csr_wdata_o       ),
-    .clint_we_i         (                     ),
-    .clint_raddr_i      (                     ),
-    .clint_waddr_i      (                     ),
-    .clint_data_i       (                     ),
-    .clint_data_o       (                     ),
-    .clint_csr_mtvec    (                     ),
-    .clint_csr_mepc     (                     ),
-    .clint_csr_mstatus  (                     ),
-    .global_int_en_o    (global_int_en_o      )
+    .clint_we_i         (clint_we_o           ),
+    .clint_raddr_i      (clint_raddr_o        ),
+    .clint_waddr_i      (clint_waddr_o        ),
+    .clint_data_i       (clint_data_o         ),
+    .clint_data_o       (clint_data_i         ),
+    .clint_csr_mtvec    (clint_csr_mtvec      ),
+    .clint_csr_mepc     (clint_csr_mepc       ),
+    .clint_csr_mstatus  (clint_csr_mstatus    ),
+    .global_int_en_o    (csr_global_int_en_i  )
 );
 id_ex u_id_ex(
     .clk                (clk                  ),
@@ -279,7 +293,7 @@ id_ex u_id_ex(
     .reg1_rdata_o       (id_ex_reg1_rdata_o   ),
     .reg2_rdata_o       (id_ex_reg2_rdata_o   ),
     .csr_rdata_o        (id_ex_csr_rdata_o    ),
-    .hold_flag_i        (                     )
+    .hold_flag_i        (ctrl_hold_flag_o     )
 );
 ex u_ex(
     .op1_i              (id_ex_op1_o          ),
@@ -321,30 +335,34 @@ wb u_wb(
     .wb_done            (wb_done              )
 );
 cache d_cache(
-    .clk                (clk                ),
-    .rst                (rst                ),
-    .i_p_addr           (o_ex_addr           ),
-    .i_p_byte_en        (o_ex_byte_en        ),
-    .i_p_writedata      (o_ex_writedata      ),
-    .i_p_read           (o_ex_read           ),
-    .i_p_write          (o_ex_write          ),
-    .o_p_readdata       (i_wb_readdata       ),
-    .o_p_readdata_valid (i_wb_readdata_valid ),
-    .o_p_waitrequest    (i_wb_waitrequest    ),
-    .o_m_addr           (o_data_addr           ),
-    .o_m_byte_en        (o_data_byte_en        ),
-    .o_m_writedata      (o_data_writedata      ),
-    .o_m_read           (o_data_read           ),
-    .o_m_write          (o_data_write          ),
-    .i_m_readdata       (i_data_readdata       ),
-    .i_m_readdata_valid (i_data_readdata_valid ),
-    .i_m_waitrequest    (i_data_waitrequest    ),
-    .cnt_r              (cnt_r              ),
-    .cnt_w              (cnt_w              ),
-    .cnt_hit_r          (cnt_hit_r          ),
-    .cnt_hit_w          (cnt_hit_w          ),
-    .cnt_wb_r           (cnt_wb_r           ),
-    .cnt_wb_w           (cnt_wb_w           )
+    .clk                (clk                  ),
+    .rst                (rst                  ),
+    //intra connect
+    .i_p_addr           (o_ex_addr            ),
+    .i_p_byte_en        (o_ex_byte_en         ),
+    .i_p_writedata      (o_ex_writedata       ),
+    .i_p_read           (o_ex_read            ),
+    .i_p_write          (o_ex_write           ),
+    .o_p_readdata       (i_wb_readdata        ),
+    .o_p_readdata_valid (i_wb_readdata_valid  ),
+    .o_p_waitrequest    (i_wb_waitrequest     ),
+    //inter connct
+    //mem
+    .o_m_addr           (o_data_addr          ),
+    .o_m_byte_en        (o_data_byte_en       ),
+    .o_m_writedata      (o_data_writedata     ),
+    .o_m_read           (o_data_read          ),
+    .o_m_write          (o_data_write         ),
+    .i_m_readdata       (i_data_readdata      ),
+    .i_m_readdata_valid (i_data_readdata_valid),
+    .i_m_waitrequest    (i_data_waitrequest   ),
+    //floating
+    .cnt_r              (                     ),
+    .cnt_w              (                     ),
+    .cnt_hit_r          (                     ),
+    .cnt_hit_w          (                     ),
+    .cnt_wb_r           (                     ),
+    .cnt_wb_w           (                     )
 );
 
 ctrl u_ctrl(
@@ -355,10 +373,32 @@ ctrl u_ctrl(
     .wb_done            (wb_done              ),
     .hold_flag_rib_i    (rib_hold_flag_i      ),
     .jtag_halt_flag_i   (jtag_halt_flag_i     ),
-    .hold_flag_clint_i  (    ),
+    .hold_flag_clint_i  (clint_hold_flag_o    ),
     .hold_flag_o        (ctrl_hold_flag_o     ),
     .jump_flag_o        (ctrl_jump_flag_o     ),
     .jump_addr_o        (ctrl_jump_addr_o     )
+);
+clint u_clint(
+    .clk                (clk                  ),
+    .rst                (rst                  ),
+    .int_flag_i         (if_id_int_flag_o     ),
+    .inst_i             (id_inst_o            ),
+    .inst_addr_i        (id_inst_addr_o       ),
+    .jump_flag_i        (ex_jump_flag_o       ),
+    .jump_addr_i        (ex_jump_addr_o       ),
+    .hold_flag_i        (ctrl_hold_flag_o     ),
+    .data_i             (clint_data_i         ),
+    .csr_mtvec          (clint_csr_mtvec      ),
+    .csr_mepc           (clint_csr_mepc       ),
+    .csr_mstatus        (clint_csr_mstatus    ),
+    .global_int_en_i    (csr_global_int_en_i  ),
+    .hold_flag_o        (clint_hold_flag_o    ),
+    .we_o               (clint_we_o           ),
+    .waddr_o            (clint_waddr_o        ),
+    .raddr_o            (clint_raddr_o        ),
+    .data_o             (clint_data_o         ),
+    .int_addr_o         (clint_int_addr_o     ),
+    .int_assert_o       (clint_int_assert_o   )
 );
 
 endmodule

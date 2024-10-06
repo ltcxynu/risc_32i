@@ -156,3 +156,6 @@
 `define CacheAddrBus 24:0
 `define CacheDataBus 31:0 
 `define CacheByteBus 3:0
+`define CacheMemAddrBus 25:0
+`define CacheMemDataBus 127:0
+`define CacheMemByteBus 3:0

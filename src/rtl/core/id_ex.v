@@ -1,7 +1,3 @@
-`ifndef SIM
-`include "rv32i_defines.v"
-`include "../utils/gen_dff.v"
-`endif
 //第二级流水
 //pc -> | FF |     |  id  |    | FF |      
 // |    | FF | ->  |  ram | -> | FF | 

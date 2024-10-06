@@ -1,4 +1,3 @@
-`include "../core/rv32i_defines.v"
 module regs(
     input wire clk,
     input wire rst,
