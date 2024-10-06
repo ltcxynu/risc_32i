@@ -58,7 +58,7 @@ logic [`InstBus]    inst_o,
                     if_id_inst_o,
                     id_inst_o,
                     id_ex_inst_o;
-logic inst_valid;
+logic inst_valid_o;
 logic [`RegBus]     reg1_rdata_i,
                     reg1_rdata_o,
                     reg2_rdata_i,
@@ -194,7 +194,7 @@ if_id uut_ifid(
     .rst            (rst   ),
     .inst_i         (inst_o    ),
     .inst_addr_i    (inst_addr_o   ),
-    .inst_valid_i   (inst_valid  ),
+    .inst_valid_i   (inst_valid_o  ),
     .hold_flag_i    (hold_flag_i   ),
     .int_flag_i     (    ),
     .int_flag_o     (    ),
@@ -209,7 +209,7 @@ pc uut(
     .hold_flag_i        (hold_flag_i),//这三个暂时用的虚拟的，后续要接入真实的
     .inst_addr_o        (inst_addr_o),
     .inst_o             (inst_o)     ,
-    .inst_valid         (inst_valid),
+    .inst_valid_o       (inst_valid_o),
     .jtag_reset_flag_i  (jtag_reset_flag_i),
     .o_p_addr           (o_p_addr),                //cpu->cache addr
     .o_p_byte_en        (o_p_byte_en),             //写稀疏掩码

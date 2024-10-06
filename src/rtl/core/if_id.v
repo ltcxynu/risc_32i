@@ -13,9 +13,8 @@ module if_id(
 
     output wire [`INT_BUS]      int_flag_o,
     output wire [`InstBus]      inst_o,
-    output wire [`InstAddrBus]  inst_addr_o,
-    output wire                 inst_valid_o
-);
+    output wire [`InstAddrBus]  inst_addr_o
+    );
 //第一级流水
 //pc -> | FF | 
 // |    | FF | -> 
@@ -34,7 +33,6 @@ gen_pipe_dff #(
     .qout   (inst)
 );
 wire  inst_valid;
-assign inst_valid_o = inst_valid;
 gen_pipe_dff #(
     .DW(1)
 )pipe_inst_valid(

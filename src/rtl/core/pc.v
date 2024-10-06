@@ -9,7 +9,7 @@ module pc(
     //to id, risc interconncet bus
     output  reg [`InstAddrBus]      inst_addr_o,
     output  reg [`InstBus]          inst_o,
-    output  reg                     inst_valid,
+    output  reg                     inst_valid_o,
     //from jtag
     input   wire                    jtag_reset_flag_i,
     // to mem

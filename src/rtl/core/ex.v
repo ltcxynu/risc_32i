@@ -23,8 +23,19 @@ module ex(
     output reg jump_flag_o,                // 是否跳转标志
     output reg[`InstAddrBus] jump_addr_o,  // 跳转目的地址
     output reg [`InstBus] inst_o,
-    output reg [`InstAddrBus] inst_addr_o
+    output reg [`InstAddrBus] inst_addr_o,
+
+    output reg hold_flag_o,
+    // to mem
+    output  reg  [`CacheAddrBus]    o_p_addr,                //cpu->cache addr
+    output  reg  [`CacheByteBus]    o_p_byte_en,             //写稀疏掩码
+    output  reg  [`CacheDataBus]    o_p_writedata,           //写数据
+    output  reg                     o_p_read,                //读使能
+    output  reg                     o_p_write,               //写使能
+   
+    output  reg  [`RegAddrBus]      reg_wait_wb 
 );
+/************************TASK***********************************/
 task set_reg(
     input [`RegAddrBus]reg_waddr ,
     input [`RegBus]reg_wdata ,
@@ -44,12 +55,20 @@ task set_reg(
     jump_flag_o = jump_flag;
     jump_addr_o = jump_addr;
 endtask
-//ex_1(reg)->ex_2(read mem)->ex_3(write back)
-//不跳过，顺序走，ex_2,ex_3可发起hold到ctrl模块。以暂停流水线。
-always@(*) begin
-    inst_o  =   inst_i;
-    inst_addr_o = inst_addr_i;
-end
+task set_mem(
+    input [`CacheAddrBus]mem_waddr ,
+    input [`CacheDataBus]mem_wdata ,
+    input [`CacheByteBus]mem_mask  ,
+    input                read_en   ,
+    input                write_en   
+);
+    o_p_addr      = mem_waddr;
+    o_p_byte_en   = mem_mask ;
+    o_p_writedata = mem_wdata;
+    o_p_read      = read_en  ;      
+    o_p_write     = write_en ;     
+endtask
+/**************************COMB LOGIC****************************************/
 wire [`RegBus] op1_add_reg1 = op1_i + reg1_rdata_i;
 wire [`RegBus] op1_xor_reg1 = op1_i ^ reg1_rdata_i;
 wire [`RegBus] op1_or_reg1  =  op1_i | reg1_rdata_i;
@@ -105,6 +124,19 @@ wire [19:0]U_imm = inst_i[31:12];
 wire [2:0]J_funct3 = inst_i[14:12];
 wire [4:0] J_rd = inst_i[11:7];
 wire [19:0]J_imm = {inst_i[31],inst_i[19:12],inst_i[20],inst_i[30:21]};
+
+wire [`MemAddrBus] mem_base   = reg1_rdata_i;
+wire [`MemAddrBus] mem_bias   = op1_i;
+wire [`MemBus]     mem_wdata  = reg2_rdata_i;
+wire [`MemAddrBus] addr       = mem_base + mem_bias;
+wire [`CacheAddrBus] mem_addr = {2'b00,addr[22:0]};
+wire [`CacheDataBus] writedata = mem_wdata;
+
+always@(*) begin
+    inst_o  =   inst_i;
+    inst_addr_o = inst_addr_i;
+end
+
 always@(*) begin
     case(opcode)
         `INST_TYPE_I    :begin
@@ -254,12 +286,6 @@ always@(*) begin
                 end
             endcase
         end
-        `INST_TYPE_S    :begin
-            
-        end
-        `INST_TYPE_L    :begin
-            
-        end
         `INST_TYPE_CSR   :begin //CSR寄存器这些我认为不应该属于常规六种 IRSJBU
             case(I_funct3)
                 `INST_CSRRW :begin
@@ -337,6 +363,65 @@ always@(*) begin
                     `ZeroReg,`ZeroWord,`WriteDisable,
                     `ZeroWord,`JumpDisable);
         end
+    endcase
+end
+always@(*) begin
+    case(opcode)
+        `INST_TYPE_L    :begin
+            hold_flag_o = `Hold_Enable;
+        end
+        default: begin
+            hold_flag_o = `Hold_Disbale;
+        end
+    endcase
+end
+
+always@(*) begin
+    case(opcode)
+    `INST_TYPE_S    :begin
+        reg_wait_wb = `ZeroReg;
+        case(funct3)
+            `INST_SB:begin
+                set_mem(mem_addr,writedata,mem_addr[0+:2],`ReadDisable,`WriteEnable);
+            end
+            `INST_SH:begin
+                set_mem(mem_addr,writedata,{mem_addr[1],1'b0},`ReadDisable,`WriteEnable);
+            end
+            `INST_SW:begin
+                set_mem(mem_addr,writedata,2'b11,`ReadDisable,`WriteEnable);
+            end
+            default:begin
+                set_mem(25'd0,`ZeroWord,2'b00,`ReadDisable,`WriteDisable);
+            end
+        endcase
+    end
+    `INST_TYPE_L    :begin
+        reg_wait_wb = I_rd;
+        case(funct3)
+            `INST_LB :begin
+                set_mem(mem_addr,25'd0,2'b00,`ReadEnable,`WriteDisable);
+            end
+            `INST_LH :begin
+                set_mem(mem_addr,25'd0,2'b00,`ReadEnable,`WriteDisable);
+            end
+            `INST_LW :begin
+                set_mem(mem_addr,25'd0,2'b00,`ReadEnable,`WriteDisable);
+            end
+            `INST_LBU:begin
+                set_mem(mem_addr,25'd0,2'b00,`ReadEnable,`WriteDisable);
+            end
+            `INST_LHU:begin
+                set_mem(mem_addr,25'd0,2'b00,`ReadEnable,`WriteDisable);
+            end
+            default:begin
+                set_mem(25'd0,`ZeroWord,2'b00,`ReadDisable,`WriteDisable);
+            end
+        endcase
+    end
+    default: begin
+        reg_wait_wb = `ZeroReg;
+        set_mem(25'd0,`ZeroWord,2'b00,`ReadDisable,`WriteDisable);
+    end
     endcase
 end
 
