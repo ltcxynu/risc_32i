@@ -16,7 +16,7 @@ risc-v 32i设计
 本设计只在 <指令译码> 时预读取寄存器。针对外部存储的访问，放在执行阶段，执行Load指令会暂停流水线，直到load完成，store指令则发起往cache的请求后不等待写完成。
 
 <div align=center>
-<img src= "https://github.com/ltcxynu/risc_32i/blob/pipe5/pic/riscv.png" width="180" height="105">
+<img src= "https://github.com/ltcxynu/risc_32i/blob/pipe5/pic/riscv.png">
 
 </div>
 解决GTKwave字体大小的方法
