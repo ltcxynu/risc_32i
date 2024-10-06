@@ -1,2 +1,0 @@
-解决GTKwave字体大小的方法
-gtkwave *.gtkw --rcvar 'fontname_signals Monospace 20' --rcvar 'fontname_waves Monospace 18'
