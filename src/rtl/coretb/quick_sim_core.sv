@@ -94,14 +94,12 @@ initial begin
     @(posedge clk);
     rst = 0;
     jtag_reset_flag_i = 0;
-    #50000
-    $finish;
 end
 //VIP
 integer i;
-logic [127:0] i_mem [`RomNum];
+logic [127:0] i_mem [0:`RomNum];
 initial begin
-    $readmemh ("../../../sim/inst128.data", i_mem);
+    $readmemh ("../sim/inst128.data", i_mem);
     forever begin
     @(posedge clk);
     if(o_inst_write) begin
@@ -121,5 +119,39 @@ end
 initial begin
     $dumpfile("this.vcd");
     $dumpvars(0, quick_sim_core);
+end
+
+wire[`RegBus] x3  = u_rv32i.u_regs.regs_mem[3];
+wire[`RegBus] x26 = u_rv32i.u_regs.regs_mem[26];
+wire[`RegBus] x27 = u_rv32i.u_regs.regs_mem[27];
+integer r;
+initial begin
+    wait(x26 == 32'b1)   // wait sim end, when x26 == 1
+        #100
+        if (x27 == 32'b1) begin
+            $display("~~~~~~~~~~~~~~~~~~~ TEST_PASS ~~~~~~~~~~~~~~~~~~~");
+            $display("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            $display("~~~~~~~~~ #####     ##     ####    #### ~~~~~~~~~");
+            $display("~~~~~~~~~ #    #   #  #   #       #     ~~~~~~~~~");
+            $display("~~~~~~~~~ #    #  #    #   ####    #### ~~~~~~~~~");
+            $display("~~~~~~~~~ #####   ######       #       #~~~~~~~~~");
+            $display("~~~~~~~~~ #       #    #  #    #  #    #~~~~~~~~~");
+            $display("~~~~~~~~~ #       #    #   ####    #### ~~~~~~~~~");
+            $display("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        end else begin
+            $display("~~~~~~~~~~~~~~~~~~~ TEST_FAIL ~~~~~~~~~~~~~~~~~~~~");
+            $display("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            $display("~~~~~~~~~~######    ##       #    #     ~~~~~~~~~~");
+            $display("~~~~~~~~~~#        #  #      #    #     ~~~~~~~~~~");
+            $display("~~~~~~~~~~#####   #    #     #    #     ~~~~~~~~~~");
+            $display("~~~~~~~~~~#       ######     #    #     ~~~~~~~~~~");
+            $display("~~~~~~~~~~#       #    #     #    #     ~~~~~~~~~~");
+            $display("~~~~~~~~~~#       #    #     #    ######~~~~~~~~~~");
+            $display("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            $display("fail testnum = %2d", x3);
+            for (r = 0; r < 32; r = r + 1)
+                $display("x%2d = 0x%x", r, u_rv32i.u_regs.regs_mem[r]);
+        end
+    $finish;
 end
 endmodule

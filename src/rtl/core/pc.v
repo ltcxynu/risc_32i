@@ -38,11 +38,11 @@ always@(*) begin
     end else if(i_p_waitrequest | jmp_under_reslove) begin
         pc_n = pc;
     end else if(i_p_readdata_valid)begin
-        pc_n = pc + 32'd1;
+        pc_n = pc + 32'd4;
     end
 end
 assign o_p_read  = (rst|jtag_reset_flag_i) ? `ReadDisable : ~i_p_waitrequest;
-assign o_p_addr  = {2'b00,pc_n[22:0]};
+assign o_p_addr  = {4'b00,pc_n[22:2]};
 
 always@(posedge clk) begin
     if(rst|jtag_reset_flag_i) begin

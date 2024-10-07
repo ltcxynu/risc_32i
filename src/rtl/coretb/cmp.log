@@ -8,7 +8,7 @@ Command: vcs -full64 -sverilog -timescale=1ns/1ns +acc +vpi -debug_all -LDFLAGS 
 -ntb_opts uvm-1.2 -CFLAGS -DVCS -debug_all -fsdb -f+filelist.f ../coretb/quick_sim_core.sv \
 -l ./cmp.log
                          Chronologic VCS (TM)
-       Version O-2018.09-SP2_Full64 -- Sun Oct  6 17:11:27 2024
+       Version O-2018.09-SP2_Full64 -- Mon Oct  7 14:45:54 2024
                Copyright (c) 1991-2018 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -410,9 +410,10 @@ Notice: Ports coerced to inout, use -notice for details
 Starting vcs inline pass...
 18 modules and 0 UDP read.
 recompiling module uvm_custom_install_verdi_recording
+recompiling module regs
 recompiling module quick_sim_core
-Both modules done.
-	However, due to incremental compilation, only 2 modules need to be compiled. 
+3 of 18 modules done
+	However, due to incremental compilation, only 3 modules need to be compiled. 
 make[1]: Entering directory '/home/host/risc_32i/src/rtl/coretb/csrc'
 rm -f _csrc*.so pre_vcsobj_*.so share_vcsobj_*.so
 ld -shared  -Bsymbolic  -o .//../simv.daidir//_csrc0.so objs/amcQw_d.o 
@@ -420,7 +421,7 @@ rm -f _csrc0.so
 if [ -x ../simv ]; then chmod -x ../simv; fi
 g++  -o ../simv -no-pie    -Wl,-rpath-link=./ -Wl,-rpath='$ORIGIN'/simv.daidir/ -Wl,-rpath=./simv.daidir/ \
 -Wl,-rpath='$ORIGIN'/simv.daidir//scsim.db.dir  -Wl,--no-as-needed -rdynamic  -Wl,-rpath=/opt/synopsys/vcs201809/linux64/lib \
--L/opt/synopsys/vcs201809/linux64/lib  uvm_dpi.o uvm_verdi_dpi.o     _38613_archive_1.so \
+-L/opt/synopsys/vcs201809/linux64/lib  uvm_dpi.o uvm_verdi_dpi.o     _10436_archive_1.so \
 _prev_archive_1.so _csrc0.so  SIM_l.o  _csrc0.so    rmapats_mop.o rmapats.o rmar.o \
 rmar_nd.o  rmar_llvm_0_1.o rmar_llvm_0_0.o          -lzerosoft_rt_stubs -lvirsim \
 -lerrorinf -lsnpsmalloc -lvfs    -lvcsnew -lsimprofile -lreader_common /opt/synopsys/vcs201809/linux64/lib/libBA.a \
@@ -430,4 +431,4 @@ rmar_nd.o  rmar_llvm_0_1.o rmar_llvm_0_0.o          -lzerosoft_rt_stubs -lvirsim
 
 ../simv up to date
 make[1]: Leaving directory '/home/host/risc_32i/src/rtl/coretb/csrc'
-CPU time: 3.153 seconds to compile + .186 seconds to elab + .360 seconds to link
+CPU time: 3.501 seconds to compile + .199 seconds to elab + .351 seconds to link

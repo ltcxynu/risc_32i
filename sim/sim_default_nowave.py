@@ -22,7 +22,10 @@ def main():
         process.wait(timeout=100)
     except subprocess.TimeoutExpired:
         print('!!!Fail, vvp exec timeout!!!')
-
+        
+    cmd = r'gtkwave *.vcd --rcvar \'fontname_signals Monospace 20\' --rcvar \'fontname_waves Monospace 18\''
+    f = os.popen(cmd)
+    r = f.read()
 
 if __name__ == '__main__':
     sys.exit(main())

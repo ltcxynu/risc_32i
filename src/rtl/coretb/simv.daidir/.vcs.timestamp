@@ -569,10 +569,10 @@ TOOL_HOME=/opt/synopsys/vcs201809/linux64
 TERM_PROGRAM_VERSION=1.92.2
 TERM_PROGRAM=vscode
 SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
-SSH_AGENT_PID=1993
+SSH_AGENT_PID=1977
 SNPS_VCS_INTERNAL_UBUNTU_PRE_LDFLAGS= -no-pie 
 SNPSYS_HOME=/opt/synopsys
-SESSION_MANAGER=local/host-virtual-machine:@/tmp/.ICE-unix/2098,unix/host-virtual-machine:/tmp/.ICE-unix/2098
+SESSION_MANAGER=local/host-virtual-machine:@/tmp/.ICE-unix/2079,unix/host-virtual-machine:/tmp/.ICE-unix/2079
 SCRNAME=vcs
 SCRIPT_NAME=vcs
 QT_IM_MODULE=ibus
@@ -583,7 +583,7 @@ NOVAS_PLI=/opt/synopsys/verdi201809/share/PLI/VCS/LINUX64
 NOVAS_HOME=/opt/synopsys/verdi201809
 NOVAS=/opt/synopsys/verdi201809/share/PLI/VCS/LINUX64
 MFLAGS=
-MANAGERPID=1824
+MANAGERPID=1809
 MAKE_TERMOUT=/dev/pts/1
 MAKE_TERMERR=/dev/pts/1
 MAKELEVEL=1
@@ -600,8 +600,8 @@ LC_MEASUREMENT=zh_CN.UTF-8
 LC_IDENTIFICATION=zh_CN.UTF-8
 LC_ALL=C
 LC_ADDRESS=zh_CN.UTF-8
-JOURNAL_STREAM=8:68071
-INVOCATION_ID=c3fd833c75d848af8ba71abb03bfda15
+JOURNAL_STREAM=8:60692
+INVOCATION_ID=1ffd542b93de40c2920152549ed9e365
 GTK_MODULES=gail:atk-bridge
 GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1
 GNOME_SHELL_SESSION_MODE=ubuntu
@@ -609,7 +609,7 @@ GNOME_DESKTOP_SESSION_ID=this-is-deprecated
 GJS_DEBUG_TOPICS=JS ERROR;JS LOG
 GJS_DEBUG_OUTPUT=stderr
 GIT_ASKPASS=/usr/share/code/resources/app/extensions/git/dist/askpass.sh
-GIO_LAUNCHED_DESKTOP_FILE_PID=3798
+GIO_LAUNCHED_DESKTOP_FILE_PID=3512
 GIO_LAUNCHED_DESKTOP_FILE=/usr/share/applications/code.desktop
 GDMSESSION=ubuntu
 GDK_BACKEND=x11
@@ -620,21 +620,21 @@ COLORTERM=truecolor
 CHROME_DESKTOP=code-url-handler.desktop
 0
 181
-1728198669 ../cache/4way_4word.v
-1728198669 ../cache/simple_ram.v
-1728204978 ../core/rv32i.v
-1728198669 ../core/csr_reg.v
-1728199784 ../core/regs.v
-1728198669 ../core/ctrl.v
-1728198669 ../core/wb.v
-1728199157 ../core/clint.v
-1728204140 ../core/ex.v
-1728199773 ../core/id_ex.v
-1728205885 ../core/id.v
-1728199779 ../core/if_id.v
-1728205159 ../core/pc.v
+1728231446 ../cache/4way_4word.v
+1728231446 ../cache/simple_ram.v
+1728231446 ../core/rv32i.v
+1728231446 ../core/csr_reg.v
+1728231446 ../core/regs.v
+1728231446 ../core/ctrl.v
+1728231446 ../core/wb.v
+1728231446 ../core/clint.v
+1728231446 ../core/ex.v
+1728231446 ../core/id_ex.v
+1728231446 ../core/id.v
+1728231446 ../core/if_id.v
+1728283265 ../core/pc.v
 1727592493 ../utils/gen_dff.v
-1728204953 ../core/rv32i_defines.v
+1728231446 ../core/rv32i_defines.v
 1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/verdi/uvm_verdi_pli.svh
 1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/verdi/verdi_trans_recorder_dpi.svh
 1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/verdi/uvm_verdi_reg_recording.sv
@@ -794,7 +794,7 @@ CHROME_DESKTOP=code-url-handler.desktop
 1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/macros/uvm_global_defines.svh
 1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/macros/uvm_version_defines.svh
 1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/uvm_macros.svh
-1728205069 ../coretb/quick_sim_core.sv
+1728283552 ../coretb/quick_sim_core.sv
 1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/verdi/uvm_custom_install_verdi_recorder.sv
 1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/vcs/uvm_custom_install_vcs_recorder.sv
 1551426030 /opt/synopsys/vcs201809/etc/uvm-1.2/uvm_pkg.sv
@@ -808,5 +808,5 @@ CHROME_DESKTOP=code-url-handler.desktop
 1551421792 /opt/synopsys/vcs201809/linux64/lib/liberrorinf.so
 1551421768 /opt/synopsys/vcs201809/linux64/lib/libsnpsmalloc.so
 1551421789 /opt/synopsys/vcs201809/linux64/lib/libvfs.so
-1728205891 simv.daidir
+1728283558 simv.daidir
 -1 partitionlib

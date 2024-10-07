@@ -7,13 +7,16 @@ import os
 
 # 主函数
 def main():
-    #print(sys.argv[0] + ' ' + sys.argv[1] + ' ' + sys.argv[2])
 
     # 1.将bin文件转成mem文件
     cmd = r'python ../tools/BinToMem_CLI.py' + ' ' + sys.argv[1] + ' ' + sys.argv[2]
+    # cmd = r'python ../tools/BinToMem_CLI.py' + ' ' + '../tests/isa/generated/rv32ui-p-xori.bin' + ' ' + 'inst.data'
     f = os.popen(cmd)
     f.close()
-
+    # 转为128bit的mem文件
+    cmd = r'python ../sim/32b2128b.py'
+    f = os.popen(cmd)
+    f.close()
     # 2.编译rtl文件
     cmd = r'python compile_rtl.py' + r' ..'
     f = os.popen(cmd)

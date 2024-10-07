@@ -73,10 +73,10 @@ wire [`RegBus] op1_add_reg1 = op1_i + reg1_rdata_i;
 wire [`RegBus] op1_xor_reg1 = op1_i ^ reg1_rdata_i;
 wire [`RegBus] op1_or_reg1  =  op1_i | reg1_rdata_i;
 wire [`RegBus] op1_and_reg1 =  op1_i & reg1_rdata_i;
-wire [`RegBus] op1_ge_reg1  = (op1_i >= reg1_rdata_i) ? 32'd1:32'd0;
-wire [`RegBus] op1_geu_reg1 = ($signed(op1_i) >= $signed(reg1_rdata_i)) ? 32'd1:32'd0;
-wire [`RegBus] op1_lt_reg1  = (op1_i < reg1_rdata_i) ? 32'd1:32'd0;
-wire [`RegBus] op1_ltu_reg1 = ($signed(op1_i) < $signed(reg1_rdata_i)) ? 32'd1:32'd0;
+wire [`RegBus] op1_geu_reg1 = (op1_i >= reg1_rdata_i) ? 32'd1:32'd0;
+wire [`RegBus] op1_ge_reg1  = ($signed(op1_i) >= $signed(reg1_rdata_i)) ? 32'd1:32'd0;
+wire [`RegBus] op1_ltu_reg1 = (op1_i < reg1_rdata_i) ? 32'd1:32'd0;
+wire [`RegBus] op1_lt_reg1  = ($signed(op1_i) < $signed(reg1_rdata_i)) ? 32'd1:32'd0;
 
 wire [`RegBus] reg1_sll_op1 = reg1_rdata_i << op1_i[4:0];
 wire [`RegBus] reg1_srl_op1 = reg1_rdata_i >> op1_i[4:0];
@@ -88,10 +88,10 @@ wire [`RegBus] reg1_sll_reg2= reg1_rdata_i << reg2_rdata_i[24:20];
 wire [`RegBus] reg1_srl_reg2= reg1_rdata_i >> reg2_rdata_i[24:20];
 
 wire [`RegBus] jump1_add_jump2 = op1_jump_i + op2_jump_i;
-wire reg1_eq_reg2 = reg1_rdata_i == reg2_rdata_i;
-wire reg1_ge_reg2 = reg1_rdata_i >= reg2_rdata_i;
-wire reg1_geu_reg2 = ($signed(reg1_rdata_i) >= $signed(reg2_rdata_i));
-wire [4:0] uimm = inst_i[19:15];
+wire reg1_eq_reg2  = reg1_rdata_i == reg2_rdata_i;
+wire reg1_geu_reg2 = reg1_rdata_i >= reg2_rdata_i;
+wire reg1_ge_reg2  = ($signed(reg1_rdata_i) >= $signed(reg2_rdata_i));
+wire [4:0] uimm    = inst_i[19:15];
 //按照不同指令类型划分 IRSBUJ
 wire [7:0]opcode = inst_i[6:0];
 //注释： d:direction

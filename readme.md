@@ -21,3 +21,4 @@ risc-v 32i设计
 </div>
 解决GTKwave字体大小的方法
 gtkwave *.vcd --rcvar 'fontname_signals Monospace 20' --rcvar 'fontname_waves Monospace 18'
+快速构建filelist.f ： ‵find ./ -name “.v" -or -name ".sv” >> filelist.f`
