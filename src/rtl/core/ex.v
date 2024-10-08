@@ -129,9 +129,9 @@ wire [`MemAddrBus] mem_base   = reg1_rdata_i;
 wire [`MemAddrBus] mem_bias   = op1_i;
 wire [`MemBus]     mem_wdata  = reg2_rdata_i;
 wire [`MemAddrBus] addr       = mem_base + mem_bias;
-wire [`CacheAddrBus] mem_addr = {2'b00,addr[22:0]};
+wire [`CacheAddrBus] mem_addr = {4'b0000,addr[22:2]};
 wire [`CacheDataBus] writedata = mem_wdata;
-
+reg [3:0] byte_mask,half_mask;
 always@(*) begin
     inst_o  =   inst_i;
     inst_addr_o = inst_addr_i;
@@ -375,23 +375,42 @@ always@(*) begin
         end
     endcase
 end
-
+always@(*) begin
+    case(addr[1:0])
+    2'b00:begin 
+        byte_mask = 4'b0001; 
+        half_mask = 4'b0011;
+    end
+    2'b01:begin 
+        byte_mask = 4'b0010; 
+        half_mask = 4'b1100;
+    end
+    2'b10:begin 
+        byte_mask = 4'b0100; 
+        half_mask = 4'b1100;
+    end
+    2'b11:begin 
+        byte_mask = 4'b1000; 
+        half_mask = 4'b1100;
+    end
+    endcase
+end
 always@(*) begin
     case(opcode)
     `INST_TYPE_S    :begin
         reg_wait_wb = `ZeroReg;
         case(S_funct3)
             `INST_SB:begin
-                set_mem(mem_addr,writedata,mem_addr[0+:2],`ReadDisable,`WriteEnable);
+                set_mem(mem_addr,writedata,byte_mask,`ReadDisable,`WriteEnable);
             end
             `INST_SH:begin
-                set_mem(mem_addr,writedata,{mem_addr[1],1'b0},`ReadDisable,`WriteEnable);
+                set_mem(mem_addr,writedata,half_mask,`ReadDisable,`WriteEnable);
             end
             `INST_SW:begin
-                set_mem(mem_addr,writedata,2'b11,`ReadDisable,`WriteEnable);
+                set_mem(mem_addr,writedata,4'b1111,`ReadDisable,`WriteEnable);
             end
             default:begin
-                set_mem(25'd0,`ZeroWord,2'b00,`ReadDisable,`WriteDisable);
+                set_mem(25'd0,`ZeroWord,4'b00,`ReadDisable,`WriteDisable);
             end
         endcase
     end

@@ -325,6 +325,8 @@ ex u_ex(
     .reg_wait_wb        (ex_reg_wait_wb       )
 );
 wb u_wb(
+    .clk                (clk                  ),
+    .rst                (rst                  ),
     .i_p_readdata       (i_wb_readdata        ),
     .i_p_readdata_valid (i_wb_readdata_valid  ),
     .i_p_waitrequest    (i_wb_waitrequest     ),
@@ -332,7 +334,8 @@ wb u_wb(
     .reg_waddr_o        (wb_reg_waddr_o       ),
     .reg_wdata_o        (wb_reg_wdata_o       ),
     .reg_we_o           (wb_reg_we_o          ),
-    .wb_done            (wb_done              )
+    .wb_done            (wb_done              ),
+    .ex_read_mem        (o_ex_read            )
 );
 cache d_cache(
     .clk                (clk                  ),

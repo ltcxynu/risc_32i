@@ -22,6 +22,7 @@ module pc(
     input   wire                    i_p_readdata_valid,      //读数据有效
     input   wire                    i_p_waitrequest          //操作等待
 );
+wire hold_en = hold_flag_i >= `Hold_Pc;
 reg [`InstAddrBus] pc,pc_n;
 reg jmp_under_reslove;
 //关闭写通道
@@ -37,6 +38,8 @@ always@(*) begin
         pc_n = jump_addr_i;
     end else if(i_p_waitrequest | jmp_under_reslove) begin
         pc_n = pc;
+    end else if(hold_en) begin
+        pc_n = pc;    
     end else if(i_p_readdata_valid)begin
         pc_n = pc + 32'd4;
     end
@@ -49,7 +52,9 @@ always@(posedge clk) begin
         pc          <= `ZeroWord;
     end else if(jump_flag_i) begin
         pc          <= jump_addr_i;
-    end else if((hold_flag_i >= `Hold_Pc)  || (i_p_waitrequest) ) begin
+    end else if(hold_en) begin
+        pc <= pc;
+    end else if(i_p_waitrequest|inst_valid_o)  begin
         pc <= pc;
     end else if( i_p_readdata_valid )begin // 
         pc <= pc_n;
@@ -71,6 +76,10 @@ always@(posedge clk) begin
         end else begin
             jmp_under_reslove <= 0;
         end
+    end else if(hold_en) begin
+        inst_addr_o <= inst_addr_o;
+        inst_o  <= inst_o;
+        inst_valid_o <= 1;
     end else if(i_p_readdata_valid) begin
         if(~jmp_under_reslove) begin
             inst_o <= i_p_readdata;

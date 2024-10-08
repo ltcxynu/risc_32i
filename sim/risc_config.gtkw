@@ -1,65 +1,47 @@
 [*]
 [*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
-[*] Mon Sep 23 08:32:13 2024
+[*] Tue Oct  8 08:19:06 2024
 [*]
-[dumpfile] "/home/host/risc_32i/sim/tinyriscv_soc_tb.vcd"
-[dumpfile_mtime] "Mon Sep 23 07:39:53 2024"
-[dumpfile_size] 108359
+[dumpfile] "/home/host/risc_32i/sim/this.vcd"
+[dumpfile_mtime] "Tue Oct  8 08:19:06 2024"
+[dumpfile_size] 1846252983
 [savefile] "/home/host/risc_32i/sim/risc_config.gtkw"
-[timestart] 500200
-[size] 2286 1296
-[pos] -1 -1
-*-15.000000 597300 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
-[treeopen] tinyriscv_soc_tb.
-[treeopen] tinyriscv_soc_tb.tinyriscv_soc_top_0.
-[treeopen] tinyriscv_soc_tb.tinyriscv_soc_top_0.u_tinyriscv.
+[timestart] 186
+[size] 1000 476
+[pos] 287 224
+*-5.000000 216 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] quick_sim_core.
+[treeopen] quick_sim_core.u_rv32i.
 [sst_width] 233
-[signals_width] 318
+[signals_width] 174
 [sst_expanded] 1
-[sst_vpaned_height] 386
+[sst_vpaned_height] 101
 @28
-tinyriscv_soc_tb.tinyriscv_soc_top_0.u_tinyriscv.u_pc_reg.clk
-tinyriscv_soc_tb.tinyriscv_soc_top_0.u_tinyriscv.u_pc_reg.rst
-tinyriscv_soc_tb.tinyriscv_soc_top_0.u_tinyriscv.u_pc_reg.hold_flag_i[2:0]
-tinyriscv_soc_tb.tinyriscv_soc_top_0.u_tinyriscv.u_pc_reg.jtag_reset_flag_i
-tinyriscv_soc_tb.tinyriscv_soc_top_0.u_tinyriscv.u_pc_reg.jump_flag_i
+quick_sim_core.u_rv32i.u_regs.clk
+quick_sim_core.u_rv32i.u_regs.rst
 @22
-tinyriscv_soc_tb.tinyriscv_soc_top_0.u_tinyriscv.u_pc_reg.jump_addr_i[31:0]
-tinyriscv_soc_tb.tinyriscv_soc_top_0.u_tinyriscv.u_pc_reg.pc_o[31:0]
-@20000
--
-@22
-tinyriscv_soc_tb.tinyriscv_soc_top_0.u_tinyriscv.u_ex.inst_i[31:0]
-tinyriscv_soc_tb.tinyriscv_soc_top_0.u_tinyriscv.u_ex.inst_addr_i[31:0]
-tinyriscv_soc_tb.tinyriscv_soc_top_0.u_tinyriscv.u_ex.op1_i[31:0]
-tinyriscv_soc_tb.tinyriscv_soc_top_0.u_tinyriscv.u_ex.op2_i[31:0]
-tinyriscv_soc_tb.tinyriscv_soc_top_0.u_tinyriscv.u_ex.op1_jump_i[31:0]
-tinyriscv_soc_tb.tinyriscv_soc_top_0.u_tinyriscv.u_ex.op2_jump_i[31:0]
-[color] 4
-tinyriscv_soc_tb.tinyriscv_soc_top_0.u_tinyriscv.u_ex.reg_waddr_o[4:0]
-[color] 1
-tinyriscv_soc_tb.tinyriscv_soc_top_0.u_tinyriscv.u_ex.reg_wdata_o[31:0]
-[color] 1
-tinyriscv_soc_tb.tinyriscv_soc_top_0.u_tinyriscv.u_ex.reg1_rdata_i[31:0]
-[color] 1
-tinyriscv_soc_tb.tinyriscv_soc_top_0.u_tinyriscv.u_ex.reg2_rdata_i[31:0]
+quick_sim_core.u_rv32i.u_ex.inst_o[31:0]
+quick_sim_core.u_rv32i.u_ex.inst_addr_o[31:0]
+quick_sim_core.u_rv32i.u_regs.raddr1_i[4:0]
+quick_sim_core.u_rv32i.u_regs.raddr2_i[4:0]
+quick_sim_core.u_rv32i.u_regs.rdata1_o[31:0]
+quick_sim_core.u_rv32i.u_regs.rdata2_o[31:0]
+quick_sim_core.u_rv32i.u_regs.waddr_i[4:0]
+quick_sim_core.u_rv32i.u_regs.wdata_i[31:0]
 @28
-[color] 1
-tinyriscv_soc_tb.tinyriscv_soc_top_0.u_tinyriscv.u_ex.reg_we_o
-@20000
--
+quick_sim_core.u_rv32i.u_regs.we_i
 @22
-tinyriscv_soc_tb.tinyriscv_soc_top_0.u_tinyriscv.u_ex.mem_raddr_o[31:0]
-tinyriscv_soc_tb.tinyriscv_soc_top_0.u_tinyriscv.u_ex.mem_rdata_i[31:0]
+quick_sim_core.u_rv32i.u_wb.i_p_readdata[31:0]
 @28
-tinyriscv_soc_tb.tinyriscv_soc_top_0.u_tinyriscv.u_ex.mem_req_o
-@22
-tinyriscv_soc_tb.tinyriscv_soc_top_0.u_tinyriscv.u_ex.mem_waddr_o[31:0]
-tinyriscv_soc_tb.tinyriscv_soc_top_0.u_tinyriscv.u_ex.mem_wdata_o[31:0]
-@28
-tinyriscv_soc_tb.tinyriscv_soc_top_0.u_tinyriscv.u_ex.mem_we_o
-tinyriscv_soc_tb.tinyriscv_soc_top_0.u_tinyriscv.u_ex.mem_r_mask[1:0]
+quick_sim_core.u_rv32i.u_wb.i_p_readdata_valid
 @29
-tinyriscv_soc_tb.tinyriscv_soc_top_0.u_tinyriscv.u_ex.mem_w_mask[1:0]
+quick_sim_core.u_rv32i.u_wb.i_p_waitrequest
+@22
+quick_sim_core.u_rv32i.u_wb.reg_waddr_o[4:0]
+quick_sim_core.u_rv32i.u_wb.reg_wait_wb[4:0]
+quick_sim_core.u_rv32i.u_wb.reg_wdata_o[31:0]
+quick_sim_core.u_rv32i.u_wb.reg_we_o[4:0]
+@28
+quick_sim_core.u_rv32i.u_wb.wb_done
 [pattern_trace] 1
 [pattern_trace] 0

@@ -25,31 +25,31 @@ logic rst;
 logic [`CacheMemAddrBus]     o_inst_addr;
 logic [`CacheMemByteBus]     o_inst_byte_en;
 logic [`CacheMemDataBus]     o_inst_writedata;
-logic                     o_inst_read;
-logic                     o_inst_write;
+logic                        o_inst_read;
+logic                        o_inst_write;
 logic [`CacheMemDataBus]     i_inst_readdata;
-logic                     i_inst_readdata_valid;
-logic                     i_inst_waitrequest;
+logic                        i_inst_readdata_valid;
+logic                        i_inst_waitrequest;
 //dcache
 logic  [`CacheMemAddrBus]    o_data_addr;
 logic  [`CacheMemByteBus]    o_data_byte_en;
 logic  [`CacheMemDataBus]    o_data_writedata;
-logic                     o_data_read;
-logic                     o_data_write;
+logic                        o_data_read;
+logic                        o_data_write;
 logic  [`CacheMemDataBus]    i_data_readdata;
-logic                     i_data_readdata_valid;
-logic                     i_data_waitrequest;
+logic                        i_data_readdata_valid;
+logic                        i_data_waitrequest;
 //jtag预留
-logic  [`RegAddrBus]      jtag_reg_addr_i;   // jtag模块读、写寄存器的地址
-logic  [`RegBus]          jtag_reg_data_i;       // jtag模块写寄存器数据
-logic                     jtag_reg_we_i;                  // jtag模块写寄存器标志
-logic  [`RegBus]          jtag_reg_data_o;      // jtag模块读取到的寄存器数据
-logic                     jtag_halt_flag_i;               // jtag暂停标志
-logic                     jtag_reset_flag_i;              // jtag复位PC标志
+logic  [`RegAddrBus]         jtag_reg_addr_i;   // jtag模块读、写寄存器的地址
+logic  [`RegBus]             jtag_reg_data_i;       // jtag模块写寄存器数据
+logic                        jtag_reg_we_i;                  // jtag模块写寄存器标志
+logic  [`RegBus]             jtag_reg_data_o;      // jtag模块读取到的寄存器数据
+logic                        jtag_halt_flag_i;               // jtag暂停标志
+logic                        jtag_reset_flag_i;              // jtag复位PC标志
 //总线预留
-logic                     rib_hold_flag_i;                // 总线暂停标志
+logic                        rib_hold_flag_i;                // 总线暂停标志
 //外部中断预留
-logic  [`INT_BUS]         int_i;                // 中断信号
+logic  [`INT_BUS]            int_i;                // 中断信号
 
 rv32i u_rv32i(
     .clk                   (clk                   ),
@@ -98,24 +98,44 @@ end
 //VIP
 integer i;
 logic [127:0] i_mem [0:`RomNum];
+//i 通道
 initial begin
     $readmemh ("../sim/inst128.data", i_mem);
-    forever begin
-    @(posedge clk);
-    if(o_inst_write) begin
-        i_mem[o_inst_addr[8:2]] <= o_inst_writedata;
-        i_inst_waitrequest <= 0;
-    end
-    if(o_inst_read) begin
-        i_inst_readdata <= i_mem[o_inst_addr[9:3]];
-        i_inst_readdata_valid <= 1;
-        i_inst_waitrequest <= 0;
-    end else begin
-        i_inst_waitrequest <= 0;
-        i_inst_readdata_valid <= 0;
-    end
-    end
+    fork 
+        forever begin
+            @(posedge clk);
+            if(o_inst_write) begin
+                i_mem[o_inst_addr[$clog2(`RomNum):2]] <= o_inst_writedata;
+                i_inst_waitrequest <= 0;
+            end
+            if(o_inst_read) begin
+                i_inst_readdata <= i_mem[o_inst_addr[$clog2(`RomNum):3]];
+                i_inst_readdata_valid <= 1;
+                i_inst_waitrequest <= 0;
+            end else begin
+                i_inst_waitrequest <= 0;
+                i_inst_readdata_valid <= 0;
+            end
+        end
+
+        forever begin
+            @(posedge clk);
+            if(o_data_write) begin
+                i_mem[o_data_addr[$clog2(`RomNum):2]] <= o_data_writedata;
+                i_data_waitrequest <= 0;
+            end
+            if(o_data_read) begin
+                i_data_readdata <= i_mem[o_data_addr[$clog2(`RomNum):3]];
+                i_data_readdata_valid <= 1;
+                i_data_waitrequest <= 0;
+            end else begin
+                i_data_waitrequest <= 0;
+                i_data_readdata_valid <= 0;
+            end
+        end
+    join
 end
+
 initial begin
     $dumpfile("this.vcd");
     $dumpvars(0, quick_sim_core);
