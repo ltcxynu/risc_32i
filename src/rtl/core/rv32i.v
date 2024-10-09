@@ -13,6 +13,12 @@
 `include "../core/csr_reg.v"
 `include "../cache/simple_ram.v"
 `include "../cache/4way_4word.v"
+`include "../core/rv32i_defines.v"
+
+`include "../core/pc_.v"
+`include "../core/fifo_.v"
+`include "../core/fetch_cache.v"
+`include "../core/pc_cache_core.v"
 `endif
 module rv32i(
     input wire clk,
@@ -57,16 +63,6 @@ module rv32i(
     wire [`InstAddrBus]     pc_inst_addr_o;
     wire [`InstBus]         pc_inst_o;
     wire                    pc_inst_valid_o;
-
-    //pc->cache
-    wire [`CacheAddrBus]    o_pc_addr;                //cpu->cache addr
-    wire [`CacheByteBus]    o_pc_byte_en;             //写稀疏掩码
-    wire [`CacheDataBus]    o_pc_writedata;           //写数据
-    wire                    o_pc_read;                //读使能
-    wire                    o_pc_write;               //写使能
-    wire [`CacheDataBus]    i_pc_readdata;            //读数据
-    wire                    i_pc_readdata_valid;      //读数据有效
-    wire                    i_pc_waitrequest;         //操作等待
 
     //if_id
     wire [`INT_BUS]         if_id_int_flag_o;
@@ -118,6 +114,8 @@ module rv32i(
     wire [`InstAddrBus]     ex_inst_addr_o;
     wire                    ex_hold_flag_o;
     wire [`RegAddrBus]      ex_reg_wait_wb;
+    wire [1:0]              ex_mask_wait_wb;
+    wire [2:0]              ex_ifunct3_wait_wb;
     //ex-> cache
     wire [`CacheAddrBus]    o_ex_addr;                //cpu->cache addr
     wire [`CacheByteBus]    o_ex_byte_en;             //写稀疏掩码
@@ -150,65 +148,31 @@ module rv32i(
     wire [`InstAddrBus]     clint_int_addr_o;
     wire                    clint_int_assert_o;
 /**********************instance****************************/
-pc u_pc(
-    .clk                (clk                  ),
-    .rst                (rst                  ),
-    //intra connect  
-    .jump_flag_i        (ctrl_jump_flag_o     ),
-    .jump_addr_i        (ctrl_jump_addr_o     ),
-    .hold_flag_i        (ctrl_hold_flag_o     ),
-    .inst_addr_o        (pc_inst_addr_o       ),
-    .inst_o             (pc_inst_o            ),
-    .inst_valid_o       (pc_inst_valid_o      ),
-    //inter connect
-    //jtag
-    .jtag_reset_flag_i  (jtag_reset_flag_i    ),
-    //cache  
-    .o_p_addr           (o_pc_addr            ),
-    .o_p_byte_en        (o_pc_byte_en         ),
-    .o_p_writedata      (o_pc_writedata       ),
-    .o_p_read           (o_pc_read            ),
-    .o_p_write          (o_pc_write           ),
-    .i_p_readdata       (i_pc_readdata        ),
-    .i_p_readdata_valid (i_pc_readdata_valid  ),
-    .i_p_waitrequest    (i_pc_waitrequest     )
+pc_cache_core u_pc_cache_core(
+    .clk                   (clk                   ),
+    .rst                   (rst                   ),
+    .jtag_reset_flag_i     (jtag_reset_flag_i     ),
+    .jump_flag_i           (ctrl_jump_flag_o      ),
+    .jump_addr_i           (ctrl_jump_addr_o      ),
+    .hold_flag_i           (ctrl_hold_flag_o      ),
+    .inst_addr_o           (pc_inst_addr_o        ),
+    .inst_o                (pc_inst_o             ),
+    .o_inst_addr           (o_inst_addr           ),
+    .o_inst_byte_en        (o_inst_byte_en        ),
+    .o_inst_writedata      (o_inst_writedata      ),
+    .o_inst_read           (o_inst_read           ),
+    .o_inst_write          (o_inst_write          ),
+    .i_inst_readdata       (i_inst_readdata       ),
+    .i_inst_readdata_valid (i_inst_readdata_valid ),
+    .i_inst_waitrequest    (i_inst_waitrequest    )
 );
-cache u_icache(
-    .clk                (clk                  ),
-    .rst                (rst                  ),
-    //intra connect  
-    .i_p_addr           (o_pc_addr            ),
-    .i_p_byte_en        (o_pc_byte_en         ),
-    .i_p_writedata      (o_pc_writedata       ),
-    .i_p_read           (o_pc_read            ),
-    .i_p_write          (o_pc_write           ),
-    .o_p_readdata       (i_pc_readdata        ),
-    .o_p_readdata_valid (i_pc_readdata_valid  ),
-    .o_p_waitrequest    (i_pc_waitrequest     ),
-    //inter connect
-    //mem
-    .o_m_addr           (o_inst_addr          ),
-    .o_m_byte_en        (o_inst_byte_en       ),
-    .o_m_writedata      (o_inst_writedata     ),
-    .o_m_read           (o_inst_read          ),
-    .o_m_write          (o_inst_write         ),
-    .i_m_readdata       (i_inst_readdata      ),
-    .i_m_readdata_valid (i_inst_readdata_valid),
-    .i_m_waitrequest    (i_inst_waitrequest   ),
-    //floating
-    .cnt_r              (                     ),
-    .cnt_w              (                     ),
-    .cnt_hit_r          (                     ),
-    .cnt_hit_w          (                     ),
-    .cnt_wb_r           (                     ),
-    .cnt_wb_w           (                     )
-);
+
 if_id u_if_id(
     .clk                (clk                  ),
     .rst                (rst                  ),
     .inst_i             (pc_inst_o            ),
     .inst_addr_i        (pc_inst_addr_o       ),
-    .inst_valid_i       (pc_inst_valid_o      ),
+    .inst_valid_i       (1'b1                 ),
     .hold_flag_i        (ctrl_hold_flag_o     ),
     .int_flag_i         (int_i                ),
     .int_flag_o         (if_id_int_flag_o     ),
@@ -322,7 +286,9 @@ ex u_ex(
     .o_p_writedata      (o_ex_writedata       ),
     .o_p_read           (o_ex_read            ),
     .o_p_write          (o_ex_write           ),
-    .reg_wait_wb        (ex_reg_wait_wb       )
+    .reg_wait_wb        (ex_reg_wait_wb       ),
+    .mask_wait_wb       (ex_mask_wait_wb      ),
+    .ifunct3_wait_wb    (ex_ifunct3_wait_wb   )
 );
 wb u_wb(
     .clk                (clk                  ),
@@ -331,6 +297,8 @@ wb u_wb(
     .i_p_readdata_valid (i_wb_readdata_valid  ),
     .i_p_waitrequest    (i_wb_waitrequest     ),
     .reg_wait_wb        (ex_reg_wait_wb       ),
+    .mask_wait_wb       (ex_mask_wait_wb      ),
+    .ifunct3_wait_wb    (ex_ifunct3_wait_wb   ),
     .reg_waddr_o        (wb_reg_waddr_o       ),
     .reg_wdata_o        (wb_reg_wdata_o       ),
     .reg_we_o           (wb_reg_we_o          ),

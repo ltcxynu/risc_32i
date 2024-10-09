@@ -5,10 +5,10 @@ Warning-[UNKWN_OPTVSIM] Unknown option passed
 
 Command: vcs -full64 -sverilog -timescale=1ns/1ns +acc +vpi -debug_all -LDFLAGS -Wl,--no-as-needed \
 +define+UVM_OBJECT_MUST_HAVE_CONSTRUCTOR -cm line+cond+fsm+branch+tgl -cm_dir ./coverage.vdb \
--ntb_opts uvm-1.2 -CFLAGS -DVCS -debug_all -fsdb -f+filelist.f ../coretb/quick_sim_core.sv \
+-ntb_opts uvm-1.2 -CFLAGS -DVCS -debug_all -fsdb -f+filelist.f ./quick_sim_if.sv \
 -l ./cmp.log
                          Chronologic VCS (TM)
-       Version O-2018.09-SP2_Full64 -- Wed Oct  9 15:39:26 2024
+       Version O-2018.09-SP2_Full64 -- Wed Oct  9 14:39:37 2024
                Copyright (c) 1991-2018 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -357,54 +357,37 @@ Parsing included file '/opt/synopsys/vcs201809/etc/uvm-1.2/verdi/verdi_trans_rec
 Back to file '/opt/synopsys/vcs201809/etc/uvm-1.2/verdi/uvm_custom_install_verdi_recorder.sv'.
 Parsing included file '/opt/synopsys/vcs201809/etc/uvm-1.2/verdi/uvm_verdi_pli.svh'.
 Back to file '/opt/synopsys/vcs201809/etc/uvm-1.2/verdi/uvm_custom_install_verdi_recorder.sv'.
-Parsing design file '../coretb/quick_sim_core.sv'
+Parsing design file './quick_sim_if.sv'
 Parsing included file '../core/rv32i_defines.v'.
-Back to file '../coretb/quick_sim_core.sv'.
-Parsing included file '../utils/gen_dff.v'.
-Back to file '../coretb/quick_sim_core.sv'.
-Parsing included file '../core/pc.v'.
-Back to file '../coretb/quick_sim_core.sv'.
-Parsing included file '../core/if_id.v'.
-Back to file '../coretb/quick_sim_core.sv'.
-Parsing included file '../core/id.v'.
-Back to file '../coretb/quick_sim_core.sv'.
-Parsing included file '../core/id_ex.v'.
-Back to file '../coretb/quick_sim_core.sv'.
-Parsing included file '../core/ex.v'.
-Back to file '../coretb/quick_sim_core.sv'.
-Parsing included file '../core/clint.v'.
-Back to file '../coretb/quick_sim_core.sv'.
-Parsing included file '../core/wb.v'.
-Back to file '../coretb/quick_sim_core.sv'.
-Parsing included file '../core/ctrl.v'.
-Back to file '../coretb/quick_sim_core.sv'.
-Parsing included file '../core/regs.v'.
-Back to file '../coretb/quick_sim_core.sv'.
-Parsing included file '../core/csr_reg.v'.
-Back to file '../coretb/quick_sim_core.sv'.
-Parsing included file '../core/rv32i.v'.
-Back to file '../coretb/quick_sim_core.sv'.
-Parsing included file '../cache/simple_ram.v'.
-Back to file '../coretb/quick_sim_core.sv'.
-Parsing included file '../cache/4way_4word.v'.
-Back to file '../coretb/quick_sim_core.sv'.
+Back to file './quick_sim_if.sv'.
 Parsing included file '../core/pc_.v'.
-Back to file '../coretb/quick_sim_core.sv'.
+Back to file './quick_sim_if.sv'.
 Parsing included file '../core/fifo_.v'.
-Back to file '../coretb/quick_sim_core.sv'.
+Back to file './quick_sim_if.sv'.
 Parsing included file '../core/fetch_cache.v'.
-Back to file '../coretb/quick_sim_core.sv'.
+Back to file './quick_sim_if.sv'.
 Parsing included file '../core/pc_cache_core.v'.
-Back to file '../coretb/quick_sim_core.sv'.
+Back to file './quick_sim_if.sv'.
+Parsing included file '../cache/simple_ram.v'.
+Back to file './quick_sim_if.sv'.
+Parsing included file '../cache/4way_4word.v'.
+Back to file './quick_sim_if.sv'.
+
+Warning-[NZIR] Incorrect size number
+./quick_sim_if.sv, 131
+  The specified width is '0'. Nonzero unsigned decimal number is required as 
+  the size constant. This '0' width will be ignored.
+
+
+Warning-[NZIR] Incorrect size number
+./quick_sim_if.sv, 141
+  The specified width is '0'. Nonzero unsigned decimal number is required as 
+  the size constant. This '0' width will be ignored.
+
 Top Level Modules:
        uvm_custom_install_recording
        uvm_custom_install_verdi_recording
-       gen_rst_0_dff
-       gen_rst_1_dff
-       gen_rst_def_dff
-       gen_en_dff
-       pc
-       quick_sim_core
+       quick_sim_if
 TimeScale is 1 ns / 1 ns
 
 Warning-[TFIPC] Too few instance port connections
@@ -414,32 +397,29 @@ pc_cache_core, "cache inst_cache( .clk (clk),  .rst (rst),  .i_p_addr (o_fetch_a
   Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
   ports.
 
-
-Warning-[TFIPC] Too few instance port connections
-../core/rv32i.v, 180
-rv32i, "id u_id( .rst (rst),  .inst_i (if_id_inst_o),  .inst_addr_i (if_id_inst_addr_o),  .reg1_rdata_i (regs_rdata1_o),  .reg2_rdata_i (regs_rdata2_o),  .reg1_raddr_o (id_reg1_raddr_o),  .reg2_raddr_o (id_reg2_raddr_o),  .csr_raddr_o (id_csr_raddr_o),  .op1_o (id_op1_o),  .op2_o (id_op2_o),  .op1_jump_o (id_op1_jump_o),  .op2_jump_o (id_op2_jump_o),  .inst_o (id_inst_o),  .inst_addr_o (id_inst_addr_o),  .reg1_rdata_o (id_reg1_rdata_o),  .reg2_rdata_o (id_reg2_rdata_o),  .csr_rdata_o (id_csr_rdata_o));"
-  The above instance has fewer port connections than the module definition.
-  Please use '+lint=TFIPC-L' to print out detailed information of unconnected 
-  ports.
-
-
-Warning-[PCWM-W] Port connection width mismatch
-../core/rv32i.v, 168
-"if_id u_if_id( .clk (clk),  .rst (rst),  .inst_i (pc_inst_o),  .inst_addr_i (pc_inst_addr_o),  .inst_valid_i (1),  .hold_flag_i (ctrl_hold_flag_o),  .int_flag_i (int_i),  .int_flag_o (if_id_int_flag_o),  .inst_o (if_id_inst_o),  .inst_addr_o (if_id_inst_addr_o));"
-  The following 32-bit expression is connected to 1-bit port "inst_valid_i" of
-  module "if_id", instance "u_if_id".
-  Expression: 1
-  	use +lint=PCWM for more details
-
 VCS Coverage Metrics Release O-2018.09-SP2_Full64 Copyright (c) 1991-2018 by Synopsys Inc.
 Notice: Ports coerced to inout, use -notice for details
 Starting vcs inline pass...
-19 modules and 0 UDP read.
+9 modules and 0 UDP read.
+recompiling module uvm_custom_install_verdi_recording
+recompiling module quick_sim_if
+Both modules done.
+	However, due to incremental compilation, only 2 modules need to be compiled. 
+make[1]: Entering directory '/home/host/risc_32i/src/rtl/tb_fetch/csrc'
+rm -f _csrc*.so pre_vcsobj_*.so share_vcsobj_*.so
+ld -shared  -Bsymbolic  -o .//../simv.daidir//_csrc0.so objs/amcQw_d.o 
+rm -f _csrc0.so
+if [ -x ../simv ]; then chmod -x ../simv; fi
+g++  -o ../simv -no-pie    -Wl,-rpath-link=./ -Wl,-rpath='$ORIGIN'/simv.daidir/ -Wl,-rpath=./simv.daidir/ \
+-Wl,-rpath='$ORIGIN'/simv.daidir//scsim.db.dir  -Wl,--no-as-needed -rdynamic  -Wl,-rpath=/opt/synopsys/vcs201809/linux64/lib \
+-L/opt/synopsys/vcs201809/linux64/lib  uvm_dpi.o uvm_verdi_dpi.o     _13581_archive_1.so \
+_prev_archive_1.so _csrc0.so  SIM_l.o  _csrc0.so    rmapats_mop.o rmapats.o rmar.o \
+rmar_nd.o  rmar_llvm_0_1.o rmar_llvm_0_0.o          -lzerosoft_rt_stubs -lvirsim \
+-lerrorinf -lsnpsmalloc -lvfs    -lvcsnew -lsimprofile -lreader_common /opt/synopsys/vcs201809/linux64/lib/libBA.a \
+-luclinative /opt/synopsys/vcs201809/linux64/lib/vcs_tls.o   -Wl,-whole-archive -lvcsucli \
+-Wl,-no-whole-archive       ./../simv.daidir/vc_hdrs.o  _vcs_pli_stub_.o   /opt/synopsys/vcs201809/linux64/lib/vcs_save_restore_new.o \
+/opt/synopsys/verdi201809/share/PLI/VCS/LINUX64/pli.a -ldl  -lc -lm -lpthread -ldl \
 
-Error-[VFS_SDB_ERROR] VCS database file access error
-  VCS fails to access database file 
-  '/home/host/risc_32i/src/rtl/coretb/csrc/hsim/hsim.sdb' due to 'it is 
-  corrupted'.
-  Please remove the file and re-analyze the design.
-
-CPU time: 8.639 seconds to compile
+../simv up to date
+make[1]: Leaving directory '/home/host/risc_32i/src/rtl/tb_fetch/csrc'
+CPU time: 3.822 seconds to compile + .188 seconds to elab + .367 seconds to link

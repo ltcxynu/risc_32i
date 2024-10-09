@@ -1,0 +1,37 @@
+[*]
+[*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
+[*] Wed Oct  9 06:00:34 2024
+[*]
+[dumpfile] "/home/host/risc_32i/src/rtl/tb_fetch/quick_sim_if.vcd"
+[dumpfile_mtime] "Wed Oct  9 05:51:53 2024"
+[dumpfile_size] 373767
+[savefile] "/home/host/risc_32i/src/rtl/tb_fetch/pc.gtkw"
+[timestart] 999
+[size] 2284 1296
+[pos] -1 -1
+*-4.000000 1041 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] quick_sim_if.
+[treeopen] quick_sim_if.u_pc_cache_core.
+[sst_width] 233
+[signals_width] 302
+[sst_expanded] 1
+[sst_vpaned_height] 386
+@28
+quick_sim_if.u_pc_cache_core.u_pc_.clk
+quick_sim_if.u_pc_cache_core.u_pc_.rst
+quick_sim_if.u_pc_cache_core.u_pc_.hold_flag_i[2:0]
+@22
+quick_sim_if.u_pc_cache_core.u_pc_.jump_addr_i[31:0]
+@28
+quick_sim_if.u_pc_cache_core.u_pc_.jump_flag_i
+quick_sim_if.u_pc_cache_core.u_pc_.jump_negedge
+quick_sim_if.u_pc_cache_core.u_pc_.jump_posedge
+@22
+quick_sim_if.u_pc_cache_core.u_pc_.inst_o[31:0]
+quick_sim_if.u_pc_cache_core.u_pc_.inst_addr_o[31:0]
+@28
+quick_sim_if.u_pc_cache_core.u_pc_.ren
+@23
+quick_sim_if.u_pc_cache_core.u_pc_.inst_i[31:0]
+[pattern_trace] 1
+[pattern_trace] 0

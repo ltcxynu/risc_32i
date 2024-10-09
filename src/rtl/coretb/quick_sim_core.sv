@@ -15,6 +15,10 @@
 `include "../core/rv32i.v"
 `include "../cache/simple_ram.v"
 `include "../cache/4way_4word.v"
+`include "../core/pc_.v"
+`include "../core/fifo_.v"
+`include "../core/fetch_cache.v"
+`include "../core/pc_cache_core.v"
 `endif
 `timescale 1ns/1ns
 module quick_sim_core;
@@ -172,6 +176,10 @@ initial begin
             for (r = 0; r < 32; r = r + 1)
                 $display("x%2d = 0x%x", r, u_rv32i.u_regs.regs_mem[r]);
         end
+    $finish;
+end
+initial begin
+    #50000
     $finish;
 end
 endmodule

@@ -27,13 +27,15 @@ module ex(
 
     output reg hold_flag_o,
     // to mem
-    output  reg  [`CacheAddrBus]    o_p_addr,                //cpu->cache addr
+    output  reg  [`CacheAddrBus]    o_p_addr,                //cpu->cache waddr
     output  reg  [`CacheByteBus]    o_p_byte_en,             //写稀疏掩码
     output  reg  [`CacheDataBus]    o_p_writedata,           //写数据
     output  reg                     o_p_read,                //读使能
     output  reg                     o_p_write,               //写使能
    
-    output  reg  [`RegAddrBus]      reg_wait_wb 
+    output  reg  [`RegAddrBus]      reg_wait_wb,
+    output  reg  [1:0]              mask_wait_wb,
+    output  reg  [2:0]              ifunct3_wait_wb
 );
 /************************TASK***********************************/
 task set_reg(
@@ -128,9 +130,9 @@ wire [19:0]J_imm = {inst_i[31],inst_i[19:12],inst_i[20],inst_i[30:21]};
 wire [`MemAddrBus] mem_base   = reg1_rdata_i;
 wire [`MemAddrBus] mem_bias   = op1_i;
 wire [`MemBus]     mem_wdata  = reg2_rdata_i;
-wire [`MemAddrBus] addr       = mem_base + mem_bias;
-wire [`CacheAddrBus] mem_addr = {4'b0000,addr[22:2]};
-wire [`CacheDataBus] writedata = mem_wdata;
+wire [`MemAddrBus] waddr       = mem_base + mem_bias;
+wire [`CacheAddrBus] mem_addr = {4'b0000,waddr[22:2]};
+reg  [`CacheDataBus] byte_data,half_data;
 reg [3:0] byte_mask,half_mask;
 always@(*) begin
     inst_o  =   inst_i;
@@ -376,38 +378,48 @@ always@(*) begin
     endcase
 end
 always@(*) begin
-    case(addr[1:0])
+    case(waddr[1:0])
     2'b00:begin 
         byte_mask = 4'b0001; 
         half_mask = 4'b0011;
+        byte_data = {24'b0,mem_wdata[7:0]};
+        half_data = {12'b0,mem_wdata[15:0]};
     end
     2'b01:begin 
         byte_mask = 4'b0010; 
         half_mask = 4'b1100;
+        byte_data = {16'b0,mem_wdata[7:0],8'b0};
+        half_data = {mem_wdata[15:0],16'b0};
     end
     2'b10:begin 
         byte_mask = 4'b0100; 
         half_mask = 4'b1100;
+        byte_data = {8'b0,mem_wdata[7:0],16'b0};
+        half_data = {mem_wdata[15:0],16'b0};
     end
     2'b11:begin 
         byte_mask = 4'b1000; 
         half_mask = 4'b1100;
+        byte_data = {mem_wdata[7:0],24'b0};
+        half_data = {mem_wdata[15:0],16'b0};
     end
     endcase
 end
 always@(*) begin
     case(opcode)
     `INST_TYPE_S    :begin
-        reg_wait_wb = `ZeroReg;
+        reg_wait_wb     = `ZeroReg;
+        mask_wait_wb    = 2'b00;
+        ifunct3_wait_wb = 3'b000;
         case(S_funct3)
             `INST_SB:begin
-                set_mem(mem_addr,writedata,byte_mask,`ReadDisable,`WriteEnable);
+                set_mem(mem_addr,byte_data,byte_mask,`ReadDisable,`WriteEnable);
             end
             `INST_SH:begin
-                set_mem(mem_addr,writedata,half_mask,`ReadDisable,`WriteEnable);
+                set_mem(mem_addr,half_data,half_mask,`ReadDisable,`WriteEnable);
             end
             `INST_SW:begin
-                set_mem(mem_addr,writedata,4'b1111,`ReadDisable,`WriteEnable);
+                set_mem(mem_addr,mem_wdata,4'b1111,`ReadDisable,`WriteEnable);
             end
             default:begin
                 set_mem(25'd0,`ZeroWord,4'b00,`ReadDisable,`WriteDisable);
@@ -416,26 +428,9 @@ always@(*) begin
     end
     `INST_TYPE_L    :begin
         reg_wait_wb = I_rd;
-        case(I_funct3)
-            `INST_LB :begin
-                set_mem(mem_addr,25'd0,2'b00,`ReadEnable,`WriteDisable);
-            end
-            `INST_LH :begin
-                set_mem(mem_addr,25'd0,2'b00,`ReadEnable,`WriteDisable);
-            end
-            `INST_LW :begin
-                set_mem(mem_addr,25'd0,2'b00,`ReadEnable,`WriteDisable);
-            end
-            `INST_LBU:begin
-                set_mem(mem_addr,25'd0,2'b00,`ReadEnable,`WriteDisable);
-            end
-            `INST_LHU:begin
-                set_mem(mem_addr,25'd0,2'b00,`ReadEnable,`WriteDisable);
-            end
-            default:begin
-                set_mem(25'd0,`ZeroWord,2'b00,`ReadDisable,`WriteDisable);
-            end
-        endcase
+        mask_wait_wb    = waddr[1:0];
+        ifunct3_wait_wb = I_funct3;
+        set_mem(mem_addr,`ZeroWord,4'b00,`ReadEnable,`WriteDisable);
     end
     default: begin
         reg_wait_wb = `ZeroReg;

@@ -1,0 +1,65 @@
+[*]
+[*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
+[*] Wed Oct  9 16:39:04 2024
+[*]
+[dumpfile] "/home/host/risc_32i/sim/this.vcd"
+[dumpfile_mtime] "Wed Oct  9 16:38:05 2024"
+[dumpfile_size] 282618
+[savefile] "/home/host/risc_32i/sim/sim.gtkw"
+[timestart] 751
+[size] 2284 1296
+[pos] -89 -89
+*-4.000000 796 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] quick_sim_core.
+[treeopen] quick_sim_core.u_rv32i.
+[treeopen] quick_sim_core.u_rv32i.u_pc_cache_core.
+[sst_width] 233
+[signals_width] 334
+[sst_expanded] 1
+[sst_vpaned_height] 817
+@22
+quick_sim_core.u_rv32i.u_ex.inst_i[31:0]
+quick_sim_core.u_rv32i.u_ex.inst_addr_i[31:0]
+quick_sim_core.u_rv32i.u_ex.jump_addr_o[31:0]
+@28
+quick_sim_core.u_rv32i.u_ex.jump_flag_o
+quick_sim_core.u_rv32i.u_ex.hold_flag_o
+@22
+quick_sim_core.u_rv32i.u_wb.i_p_readdata[31:0]
+@28
+quick_sim_core.u_rv32i.u_wb.i_p_readdata_valid
+quick_sim_core.u_rv32i.u_wb.i_p_waitrequest
+@22
+quick_sim_core.u_rv32i.u_ex.o_p_addr[24:0]
+quick_sim_core.u_rv32i.u_ex.o_p_byte_en[3:0]
+@28
+quick_sim_core.u_rv32i.u_ex.o_p_read
+quick_sim_core.u_rv32i.u_ex.o_p_write
+@22
+quick_sim_core.u_rv32i.u_ex.o_p_writedata[31:0]
+quick_sim_core.u_rv32i.u_regs.raddr1_i[4:0]
+quick_sim_core.u_rv32i.u_regs.raddr2_i[4:0]
+quick_sim_core.u_rv32i.u_regs.rdata1_o[31:0]
+quick_sim_core.u_rv32i.u_regs.rdata2_o[31:0]
+quick_sim_core.u_rv32i.u_regs.waddr_i[4:0]
+quick_sim_core.u_rv32i.u_regs.wdata_i[31:0]
+@28
+quick_sim_core.u_rv32i.u_regs.we_i
+@22
+quick_sim_core.u_rv32i.u_pc_cache_core.u_pc_.inst_addr[31:0]
+quick_sim_core.u_rv32i.u_pc_cache_core.u_pc_.inst_addr_pp1[31:0]
+quick_sim_core.u_rv32i.u_pc_cache_core.u_pc_.inst_addr_pp2[31:0]
+[color] 2
+quick_sim_core.u_rv32i.u_pc_cache_core.u_pc_.inst_addr_o[31:0]
+quick_sim_core.u_rv32i.u_pc_cache_core.u_pc_.inst_fifo_r[31:0]
+quick_sim_core.u_rv32i.u_pc_cache_core.u_pc_.inst_pp1[31:0]
+quick_sim_core.u_rv32i.u_pc_cache_core.u_pc_.inst_pp2[31:0]
+[color] 2
+quick_sim_core.u_rv32i.u_pc_cache_core.u_pc_.inst_o[31:0]
+@28
+quick_sim_core.u_rv32i.u_pc_cache_core.u_pc_.inst_fifo_ren_pp1
+quick_sim_core.u_rv32i.u_pc_cache_core.u_pc_.inst_fifo_ren_pp2
+@29
+quick_sim_core.u_rv32i.u_pc_cache_core.u_pc_.hold_flag_i[2:0]
+[pattern_trace] 1
+[pattern_trace] 0
