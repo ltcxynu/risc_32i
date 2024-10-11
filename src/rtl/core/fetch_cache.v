@@ -44,7 +44,7 @@ assign o_p_byte_en = 4'h0;
 assign o_p_writedata = `ZeroWord;
 //每次发出一个请求(地址) 到cache
 always @(*) begin
-    if( ~addr_fifo_empty && ~inst_fifo_full && ~i_p_waitrequest ) begin
+    if( ~addr_fifo_empty && ~inst_fifo_full && ~i_p_waitrequest && ~jump_flag_i) begin
         o_p_addr <= {4'b0,addr_fifo_r[22:2]};
         o_p_read <= 1;
         addr_fifo_ren      <= 1;
@@ -56,11 +56,11 @@ always @(*) begin
 end
 reg jmp_under_reslove;
 always @(posedge clk) begin
-    if(jump_flag_i) begin
+    if(jump_flag_i | rst) begin
         inst_fifo_r <= `INST_NOP;
         inst_fifo_wen    <= 0;
         inst_fifo_rstn <= 0;
-        if(~i_p_waitrequest) begin
+        if(i_p_waitrequest) begin
             jmp_under_reslove <= 1;
         end else begin
             jmp_under_reslove <= 0;

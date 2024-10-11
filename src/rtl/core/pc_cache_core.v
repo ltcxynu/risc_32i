@@ -85,7 +85,7 @@ sync_fifo #(
     .DSIZE (32)
 )inst_fifo(
     .clk        (clk                    ),
-    .rst_n      (~rst                   ),
+    .rst_n      (~rst & fetch_2_inst_fifo_rstn     ),
     .wr_en      (fetch_2_inst_fifo_wen               ),
     .rd_en      (pc_2_inst_fifo_ren                 ),
     .w_data     (fetch_2_inst_fifo_wdata                 ),
@@ -95,7 +95,7 @@ sync_fifo #(
 );
 fetch_cache u_fetch_cache(
     .clk                (clk                ),
-    .rst                (rst & fetch_2_inst_fifo_rstn),
+    .rst                (rst                ),
     .jump_flag_i        (jump_flag_i        ),
     .jump_addr_i        (jump_addr_i        ),
     .jtag_reset_flag_i  (jtag_reset_flag_i  ),
