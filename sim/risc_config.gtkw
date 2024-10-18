@@ -1,47 +1,37 @@
 [*]
 [*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
-[*] Tue Oct  8 08:19:06 2024
+[*] Fri Oct 18 08:03:53 2024
 [*]
 [dumpfile] "/home/host/risc_32i/sim/this.vcd"
-[dumpfile_mtime] "Tue Oct  8 08:19:06 2024"
-[dumpfile_size] 1846252983
+[dumpfile_mtime] "Fri Oct 18 08:02:52 2024"
+[dumpfile_size] 156264
 [savefile] "/home/host/risc_32i/sim/risc_config.gtkw"
-[timestart] 186
-[size] 1000 476
-[pos] 287 224
-*-5.000000 216 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[timestart] 262
+[size] 3952 2432
+[pos] -51 -51
+*-2.000000 278 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] quick_sim_core.
 [treeopen] quick_sim_core.u_rv32i.
-[sst_width] 233
-[signals_width] 174
+[treeopen] quick_sim_core.u_rv32i.u_ex.
+[sst_width] 388
+[signals_width] 574
 [sst_expanded] 1
-[sst_vpaned_height] 101
-@28
-quick_sim_core.u_rv32i.u_regs.clk
-quick_sim_core.u_rv32i.u_regs.rst
+[sst_vpaned_height] 351
 @22
-quick_sim_core.u_rv32i.u_ex.inst_o[31:0]
-quick_sim_core.u_rv32i.u_ex.inst_addr_o[31:0]
 quick_sim_core.u_rv32i.u_regs.raddr1_i[4:0]
-quick_sim_core.u_rv32i.u_regs.raddr2_i[4:0]
 quick_sim_core.u_rv32i.u_regs.rdata1_o[31:0]
+quick_sim_core.u_rv32i.u_regs.raddr2_i[4:0]
 quick_sim_core.u_rv32i.u_regs.rdata2_o[31:0]
 quick_sim_core.u_rv32i.u_regs.waddr_i[4:0]
 quick_sim_core.u_rv32i.u_regs.wdata_i[31:0]
 @28
 quick_sim_core.u_rv32i.u_regs.we_i
 @22
-quick_sim_core.u_rv32i.u_wb.i_p_readdata[31:0]
+quick_sim_core.u_rv32i.u_ex.inst_addr_i[31:0]
+quick_sim_core.u_rv32i.u_ex.inst_i[31:0]
 @28
-quick_sim_core.u_rv32i.u_wb.i_p_readdata_valid
-@29
-quick_sim_core.u_rv32i.u_wb.i_p_waitrequest
+quick_sim_core.u_rv32i.u_ex.jump_flag_o
 @22
-quick_sim_core.u_rv32i.u_wb.reg_waddr_o[4:0]
-quick_sim_core.u_rv32i.u_wb.reg_wait_wb[4:0]
-quick_sim_core.u_rv32i.u_wb.reg_wdata_o[31:0]
-quick_sim_core.u_rv32i.u_wb.reg_we_o[4:0]
-@28
-quick_sim_core.u_rv32i.u_wb.wb_done
+quick_sim_core.u_rv32i.u_ex.jump_addr_o[31:0]
 [pattern_trace] 1
 [pattern_trace] 0

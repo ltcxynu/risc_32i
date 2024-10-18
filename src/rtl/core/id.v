@@ -318,7 +318,7 @@ always@(*) begin
             op1_o           = I_rd;
             op2_o           = 32'h4;
             op1_jump_o      = reg1_rdata_i;
-            op2_jump_o      = { {11{J_imm[19]}}, J_imm,1'b0};
+            op2_jump_o      = { {20{I_imm[11]}}, I_imm};
             reg1_rdata_o    = reg1_rdata_i;
             reg2_rdata_o    = `ZeroWord;
         end

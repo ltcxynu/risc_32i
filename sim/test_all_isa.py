@@ -35,7 +35,7 @@ def main():
         else:
             print(file + '    !!!FAIL!!!')
             anyfail = True
-            break
+            # break
 
     if (anyfail == False):
         print('Congratulation, All PASS...')

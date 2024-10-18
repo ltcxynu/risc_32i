@@ -75,24 +75,30 @@ wire [`RegBus] op1_add_reg1 = op1_i + reg1_rdata_i;
 wire [`RegBus] op1_xor_reg1 = op1_i ^ reg1_rdata_i;
 wire [`RegBus] op1_or_reg1  =  op1_i | reg1_rdata_i;
 wire [`RegBus] op1_and_reg1 =  op1_i & reg1_rdata_i;
-wire [`RegBus] op1_geu_reg1 = (op1_i >= reg1_rdata_i) ? 32'd1:32'd0;
-wire [`RegBus] op1_ge_reg1  = ($signed(op1_i) >= $signed(reg1_rdata_i)) ? 32'd1:32'd0;
-wire [`RegBus] op1_ltu_reg1 = (op1_i < reg1_rdata_i) ? 32'd1:32'd0;
-wire [`RegBus] op1_lt_reg1  = ($signed(op1_i) < $signed(reg1_rdata_i)) ? 32'd1:32'd0;
 
 wire [`RegBus] reg1_sll_op1 = reg1_rdata_i << op1_i[4:0];
 wire [`RegBus] reg1_srl_op1 = reg1_rdata_i >> op1_i[4:0];
 wire [`RegBus] reg1_add_reg2= reg1_rdata_i + reg2_rdata_i;
+wire [`RegBus] reg1_sub_reg2= reg1_rdata_i - reg2_rdata_i;
 wire [`RegBus] reg1_or_reg2 = reg1_rdata_i | reg2_rdata_i;
 wire [`RegBus] reg1_and_reg2= reg1_rdata_i & reg2_rdata_i;
-wire [`RegBus] reg1_xor_reg2= reg1_rdata_i & reg2_rdata_i;
-wire [`RegBus] reg1_sll_reg2= reg1_rdata_i << reg2_rdata_i[24:20];
-wire [`RegBus] reg1_srl_reg2= reg1_rdata_i >> reg2_rdata_i[24:20];
+wire [`RegBus] reg1_xor_reg2= reg1_rdata_i ^ reg2_rdata_i;
+wire [`RegBus] reg1_sll_reg2= reg1_rdata_i << reg2_rdata_i[4:0];
+wire [`RegBus] reg1_srl_reg2= reg1_rdata_i >> reg2_rdata_i[4:0];
+
+wire [`RegBus] data_mask    = {32{reg1_rdata_i[31]}} >> reg2_rdata_i[4:0];
+wire [`RegBus] data_mask_op    = {32{reg1_rdata_i[31]}} >> op1_i[4:0];
+wire [`RegBus] reg1_sra_reg2= reg1_rdata_i[31] ? (reg1_rdata_i >> reg2_rdata_i[4:0])|~data_mask : (reg1_rdata_i >> reg2_rdata_i[4:0]);
+wire [`RegBus] reg1_sra_op1= reg1_rdata_i[31] ? (reg1_rdata_i >> op1_i[4:0])|~data_mask_op : (reg1_rdata_i >> op1_i[4:0]);
+
 
 wire [`RegBus] jump1_add_jump2 = op1_jump_i + op2_jump_i;
 wire reg1_eq_reg2  = reg1_rdata_i == reg2_rdata_i;
 wire reg1_geu_reg2 = reg1_rdata_i >= reg2_rdata_i;
 wire reg1_ge_reg2  = ($signed(reg1_rdata_i) >= $signed(reg2_rdata_i));
+wire reg1_geu_op1 = ( reg1_rdata_i >= op1_i);
+wire reg1_ge_op1  = ($signed(reg1_rdata_i) >= $signed(op1_i));
+
 wire [4:0] uimm    = inst_i[19:15];
 //按照不同指令类型划分 IRSBUJ
 wire [7:0]opcode = inst_i[6:0];
@@ -103,12 +109,14 @@ wire [4:0]I_rd = inst_i[11:7];
 wire [2:0]I_funct3 = inst_i[14:12];
 wire [4:0]I_rs1 = inst_i[19:15];
 wire [11:0]I_imm = inst_i[31:20];
+wire [6:0]I_funct7 = inst_i[31:25];
+
 // R类型 rd = rs1 ? rs2
 wire [4:0]R_rd = inst_i[11:7];
 wire [2:0]R_funct3 = inst_i[14:12];
 wire [4:0]R_rs1 = inst_i[19:15];
 wire [4:0]R_rs2 = inst_i[24:20];
-wire [4:0]R_funct7 = inst_i[31:25];
+wire [6:0]R_funct7 = inst_i[31:25];
 // S类型 Mem[rs1+imm] = rs2
 wire [2:0]S_funct3 = inst_i[14:12];
 wire [4:0]S_rs1 = inst_i[19:15];
@@ -149,12 +157,12 @@ always@(*) begin
                             `ZeroWord,`JumpDisable);
                 end
                 `INST_SLTI :begin
-                    set_reg(op2_i[4:0],op1_lt_reg1,`WriteEnable,
+                    set_reg(op2_i[4:0],{31'd0,~reg1_ge_op1},`WriteEnable,
                             `ZeroReg,`ZeroWord,`WriteDisable,
                             `ZeroWord,`JumpDisable);
                 end
                 `INST_SLTIU:begin
-                    set_reg(op2_i[4:0],op1_ltu_reg1,`WriteEnable,
+                    set_reg(op2_i[4:0],{31'd0,~reg1_geu_op1},`WriteEnable,
                             `ZeroReg,`ZeroWord,`WriteDisable,
                             `ZeroWord,`JumpDisable);
                 end
@@ -179,9 +187,16 @@ always@(*) begin
                             `ZeroWord,`JumpDisable);
                 end
                 `INST_SRLI :begin
-                    set_reg(op2_i[4:0],reg1_srl_op1,`WriteEnable,
-                            `ZeroReg,`ZeroWord,`WriteDisable,
-                            `ZeroWord,`JumpDisable);
+                    case(I_imm[11:5])
+                    7'b000_0000:
+                        set_reg(op2_i[4:0],reg1_srl_op1,`WriteEnable,
+                                `ZeroReg,`ZeroWord,`WriteDisable,
+                                `ZeroWord,`JumpDisable);
+                    7'b010_0000:
+                        set_reg(op2_i[4:0],reg1_sra_op1,`WriteEnable,
+                                `ZeroReg,`ZeroWord,`WriteDisable,
+                                `ZeroWord,`JumpDisable);
+                    endcase
                 end
                 default:begin
                     //DO NOTHING
@@ -246,12 +261,12 @@ always@(*) begin
                                     `ZeroWord,`JumpDisable);
                         end
                         `INST_SLT    :begin
-                            set_reg(op1_i[4:0],~reg1_ge_reg2,`WriteEnable,
+                            set_reg(op1_i[4:0],{31'd0,~reg1_ge_reg2},`WriteEnable,
                                     `ZeroReg,`ZeroWord,`WriteDisable,
                                     `ZeroWord,`JumpDisable);
                         end
                         `INST_SLTU   :begin
-                            set_reg(op1_i[4:0],~reg1_geu_reg2,`WriteEnable,
+                            set_reg(op1_i[4:0],{31'd0,~reg1_geu_reg2},`WriteEnable,
                                     `ZeroReg,`ZeroWord,`WriteDisable,
                                     `ZeroWord,`JumpDisable);
                         end
@@ -278,6 +293,20 @@ always@(*) begin
                         default:begin
                             //DO NOTHING
                             set_reg(`ZeroReg,`ZeroWord,`WriteDisable,
+                                    `ZeroReg,`ZeroWord,`WriteDisable,
+                                    `ZeroWord,`JumpDisable);
+                        end
+                    endcase
+                end
+                7'b010_0000:begin
+                    case(R_funct3)
+                        `INST_ADD_SUB:begin
+                            set_reg(op1_i[4:0],reg1_sub_reg2,`WriteEnable,
+                                    `ZeroReg,`ZeroWord,`WriteDisable,
+                                    `ZeroWord,`JumpDisable);
+                        end
+                        `INST_SRL    :begin
+                            set_reg(op1_i[4:0],reg1_sra_reg2,`WriteEnable,
                                     `ZeroReg,`ZeroWord,`WriteDisable,
                                     `ZeroWord,`JumpDisable);
                         end
@@ -331,7 +360,7 @@ always@(*) begin
         end
         `INST_JAL,
         `INST_JALR:begin
-            set_reg(op1_i[4:0],inst_addr_i+op2_i,`WriteDisable,
+            set_reg(op1_i[4:0],inst_addr_i+op2_i,`WriteEnable,
                     `ZeroReg,`ZeroWord,`WriteDisable,
                     op1_jump_i+op2_jump_i,`JumpEnable);
         end
