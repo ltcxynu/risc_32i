@@ -12,7 +12,8 @@
 `include "../core/regs.v"
 `include "../core/csr_reg.v"
 `include "../cache/simple_ram.v"
-`include "../cache/4way_4word.v"
+`include "../cache/free_config_cache.v"
+
 `include "../core/rv32i_defines.v"
 
 `include "../core/pc_.v"
@@ -125,6 +126,8 @@ module rv32i(
     wire [`CacheDataBus]    i_wb_readdata;            //读数据
     wire                    i_wb_readdata_valid;      //读数据有效
     wire                    i_wb_waitrequest;         //操作等待
+    //dcahce
+    wire                    ex_flush;
     //wb
     wire [`RegAddrBus]      wb_reg_waddr_o;
     wire [`RegBus]          wb_reg_wdata_o;
@@ -164,7 +167,8 @@ pc_cache_core u_pc_cache_core(
     .o_inst_write          (o_inst_write          ),
     .i_inst_readdata       (i_inst_readdata       ),
     .i_inst_readdata_valid (i_inst_readdata_valid ),
-    .i_inst_waitrequest    (i_inst_waitrequest    )
+    .i_inst_waitrequest    (i_inst_waitrequest    ),
+    .flush                 (ex_flush              )
 );
 
 if_id u_if_id(
@@ -288,7 +292,8 @@ ex u_ex(
     .o_p_write          (o_ex_write           ),
     .reg_wait_wb        (ex_reg_wait_wb       ),
     .mask_wait_wb       (ex_mask_wait_wb      ),
-    .ifunct3_wait_wb    (ex_ifunct3_wait_wb   )
+    .ifunct3_wait_wb    (ex_ifunct3_wait_wb   ),
+    .flush              (ex_flush)
 );
 wb u_wb(
     .clk                (clk                  ),
@@ -305,7 +310,9 @@ wb u_wb(
     .wb_done            (wb_done              ),
     .ex_read_mem        (o_ex_read            )
 );
-cache d_cache(
+cache #(
+    .cache_entry(2)
+)d_cache(
     .clk                (clk                  ),
     .rst                (rst                  ),
     //intra connect
@@ -333,7 +340,9 @@ cache d_cache(
     .cnt_hit_r          (                     ),
     .cnt_hit_w          (                     ),
     .cnt_wb_r           (                     ),
-    .cnt_wb_w           (                     )
+    .cnt_wb_w           (                     ),
+    .cache_config       (4'b0000              ),
+    .change             (ex_flush             )
 );
 
 ctrl u_ctrl(

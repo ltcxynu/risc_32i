@@ -35,7 +35,8 @@ module ex(
    
     output  reg  [`RegAddrBus]      reg_wait_wb,
     output  reg  [1:0]              mask_wait_wb,
-    output  reg  [2:0]              ifunct3_wait_wb
+    output  reg  [2:0]              ifunct3_wait_wb,
+    output  reg                     flush
 );
 /************************TASK***********************************/
 task set_reg(
@@ -99,58 +100,31 @@ wire reg1_ge_reg2  = ($signed(reg1_rdata_i) >= $signed(reg2_rdata_i));
 wire reg1_geu_op1 = ( reg1_rdata_i >= op1_i);
 wire reg1_ge_op1  = ($signed(reg1_rdata_i) >= $signed(op1_i));
 
-wire [4:0] uimm    = inst_i[19:15];
-//按照不同指令类型划分 IRSBUJ
-wire [7:0]opcode = inst_i[6:0];
-//注释： d:direction
-//      s:source
-// I类型 立即数类型
-wire [4:0]I_rd = inst_i[11:7];
-wire [2:0]I_funct3 = inst_i[14:12];
-wire [4:0]I_rs1 = inst_i[19:15];
-wire [11:0]I_imm = inst_i[31:20];
-wire [6:0]I_funct7 = inst_i[31:25];
+wire [7:0]  opcode  = inst_i[6:0];
+wire [4:0]  rd      = inst_i[11:7];
+wire [2:0]  funct3  = inst_i[14:12];
+wire [11:0] I_imm   = inst_i[31:20];
+wire [4:0]  uimm    = inst_i[19:15];
+wire [6:0]  funct7  = inst_i[31:25];
 
-// R类型 rd = rs1 ? rs2
-wire [4:0]R_rd = inst_i[11:7];
-wire [2:0]R_funct3 = inst_i[14:12];
-wire [4:0]R_rs1 = inst_i[19:15];
-wire [4:0]R_rs2 = inst_i[24:20];
-wire [6:0]R_funct7 = inst_i[31:25];
-// S类型 Mem[rs1+imm] = rs2
-wire [2:0]S_funct3 = inst_i[14:12];
-wire [4:0]S_rs1 = inst_i[19:15];
-wire [4:0]S_rs2 = inst_i[24:20];
-wire [11:0]S_imm = {inst_i[31:25],inst_i[11:7]};
-// B类型 if(rs1?rs2) pc+=imm;
-wire [2:0]B_funct3 = inst_i[14:12];
-wire [4:0]B_rs1 = inst_i[19:15];
-wire [4:0]B_rs2 = inst_i[24:20];
-wire [11:0]B_imm = {inst_i[31],inst_i[7],inst_i[30:25],inst_i[11:8]};
-// U类型 rd = {x'b,imm,x'b};//载入长立即数
-wire [2:0]U_rd = inst_i[11:7];
-wire [19:0]U_imm = inst_i[31:12];
-// J类型 无条件跳转 opcode += imm
-wire [2:0]J_funct3 = inst_i[14:12];
-wire [4:0] J_rd = inst_i[11:7];
-wire [19:0]J_imm = {inst_i[31],inst_i[19:12],inst_i[20],inst_i[30:21]};
 
-wire [`MemAddrBus] mem_base   = reg1_rdata_i;
-wire [`MemAddrBus] mem_bias   = op1_i;
-wire [`MemBus]     mem_wdata  = reg2_rdata_i;
-wire [`MemAddrBus] waddr       = mem_base + mem_bias;
-wire [`CacheAddrBus] mem_addr = {4'b0000,waddr[22:2]};
-reg  [`CacheDataBus] byte_data,half_data;
+
+wire [`MemAddrBus]      mem_base   = reg1_rdata_i;
+wire [`MemAddrBus]      mem_bias   = op1_i;
+wire [`MemBus]          mem_wdata  = reg2_rdata_i;
+wire [`MemAddrBus]      waddr      = mem_base + mem_bias;
+wire [`CacheAddrBus]    mem_addr   = {4'b0000,waddr[22:2]};
+reg  [`CacheDataBus]    byte_data,half_data;
 reg [3:0] byte_mask,half_mask;
 always@(*) begin
-    inst_o  =   inst_i;
+    inst_o      = inst_i;
     inst_addr_o = inst_addr_i;
 end
 
 always@(*) begin
     case(opcode)
         `INST_TYPE_I    :begin
-            case(I_funct3)
+            case(funct3)
                 `INST_ADDI :begin
                     set_reg(op2_i[4:0],op1_add_reg1,`WriteEnable,
                             `ZeroReg,`ZeroWord,`WriteDisable,
@@ -207,7 +181,7 @@ always@(*) begin
             endcase
         end
         `INST_TYPE_B    :begin
-            case(B_funct3)
+            case(funct3)
                 `INST_BEQ :begin
                     set_reg(`ZeroReg,`ZeroWord,`WriteDisable,
                             `ZeroReg,`ZeroWord,`WriteDisable,
@@ -247,9 +221,9 @@ always@(*) begin
             endcase
         end
         `INST_TYPE_R_M  :begin
-            case(R_funct7)
+            case(funct7)
                 7'b000_0000:begin
-                    case(R_funct3)
+                    case(funct3)
                         `INST_ADD_SUB:begin
                             set_reg(op1_i[4:0],reg1_add_reg2,`WriteEnable,
                                     `ZeroReg,`ZeroWord,`WriteDisable,
@@ -299,7 +273,7 @@ always@(*) begin
                     endcase
                 end
                 7'b010_0000:begin
-                    case(R_funct3)
+                    case(funct3)
                         `INST_ADD_SUB:begin
                             set_reg(op1_i[4:0],reg1_sub_reg2,`WriteEnable,
                                     `ZeroReg,`ZeroWord,`WriteDisable,
@@ -318,7 +292,7 @@ always@(*) begin
             endcase
         end
         `INST_TYPE_CSR   :begin //CSR寄存器这些我认为不应该属于常规六种 IRSJBU
-            case(I_funct3)
+            case(funct3)
                 `INST_CSRRW :begin
                     //读csr到reg，写reg到csr
                     set_reg(op1_i[4:0],csr_rdata_i,`WriteEnable,
@@ -383,7 +357,7 @@ always@(*) begin
         end
         `INST_FENCE:
         begin
-            //DO NOTHING
+            //DO NOTHING ? 实际上还是要做一些事情的，包括：1，flush Dcache. 2，flush Icache. 3. Jump next addr.
             set_reg(`ZeroReg,`ZeroWord,`WriteDisable,
                     `ZeroReg,`ZeroWord,`WriteDisable,
                     op1_jump_i+op2_jump_i,`JumpEnable);
@@ -440,7 +414,7 @@ always@(*) begin
         reg_wait_wb     = `ZeroReg;
         mask_wait_wb    = 2'b00;
         ifunct3_wait_wb = 3'b000;
-        case(S_funct3)
+        case(funct3)
             `INST_SB:begin
                 set_mem(mem_addr,byte_data,byte_mask,`ReadDisable,`WriteEnable);
             end
@@ -456,9 +430,9 @@ always@(*) begin
         endcase
     end
     `INST_TYPE_L    :begin
-        reg_wait_wb = I_rd;
+        reg_wait_wb = rd;
         mask_wait_wb    = waddr[1:0];
-        ifunct3_wait_wb = I_funct3;
+        ifunct3_wait_wb = funct3;
         set_mem(mem_addr,`ZeroWord,4'b00,`ReadEnable,`WriteDisable);
     end
     default: begin
@@ -467,5 +441,14 @@ always@(*) begin
     end
     endcase
 end
-
+always @(*) begin
+    case(opcode)
+    `INST_FENCE: begin
+        flush = 1;
+    end
+    default: begin
+        flush = 0;
+    end
+    endcase
+end
 endmodule

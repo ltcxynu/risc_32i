@@ -1,7 +1,7 @@
 `timescale 1ns/1ns
 `define SIM 1
 `include "simple_ram.v"
-`include "4way_4word.v"
+`include "free_config_cache.v"
 `define READ_ENABLE  1'b1
 `define READ_DISABLE 1'b0
 `define WRITE_ENABLE  1'b1
@@ -37,9 +37,10 @@ logic [31:0] cnt_hit_w;
 logic [31:0] cnt_wb_r;  
 logic [31:0] cnt_wb_w;  
 logic [24:0] addr_in;
+logic        change;
 //instance 
 cache #(
-    .cache_index(2)
+    .cache_entry(2)
 )uut (  
     .clk(clk),  
     .rst(rst),  
@@ -64,7 +65,9 @@ cache #(
     .cnt_hit_r(cnt_hit_r),  
     .cnt_hit_w(cnt_hit_w),  
     .cnt_wb_r(cnt_wb_r),  
-    .cnt_wb_w(cnt_wb_w)  
+    .cnt_wb_w(cnt_wb_w),
+    .cache_config(4'b0000),
+    .change(change)
 );  
 //sim body
 initial begin  
@@ -88,16 +91,19 @@ initial begin
         @(negedge rst);
         @(posedge clk);
     end
+    change <= 0;
     repeat(1000)
     begin
         //写
-        access_memory(addr_in,4'h8,`READ_DISABLE,`WRITE_ENABLE);
+        access_memory(addr_in,4'h8,`READ_DISABLE,`WRITE_ENABLE,0);
         //把这个写的地址添加进读列表
         addr_array.push_front(addr_in);
         //随即从列表里读
-        access_memory(addr_array[addr_idx],4'h2,`READ_ENABLE,`WRITE_DISABLE);
+        access_memory(addr_array[addr_idx],4'h2,`READ_ENABLE,`WRITE_DISABLE,0);
         //不从列表里读
-        access_memory(addr_array[addr_idx]+8'hff,4'hf,`READ_ENABLE,`WRITE_DISABLE);
+        access_memory(addr_array[addr_idx]+8'hff,4'hf,`READ_ENABLE,`WRITE_DISABLE,0);
+        //刷新
+        access_memory(addr_array[addr_idx]+8'hff,4'hf,`READ_DISABLE,`WRITE_DISABLE,1);
         //下一次随机化
         randomize(addr_in)with {addr_in>=0;};
         randomize(addr_idx)with{addr_idx<addr_array.size();};
@@ -129,7 +135,7 @@ initial begin
 end
 initial begin
     $dumpfile("this.vcd");
-    $dumpvars(0, uut);
+    $dumpvars(0, tb_cache);
 end
 //function
 
@@ -138,7 +144,8 @@ task access_memory (
         input logic [23:0] address,     // 24 位地址  
         input logic [3:0] mask,         // 4 位掩码  
         input logic read_enable,         // 读信号  
-        input logic write_enable         // 写信号  
+        input logic write_enable,        // 写信号  
+        input logic flush
     );  
     @(posedge clk);
     if(rst) begin
@@ -151,10 +158,9 @@ task access_memory (
     end
     i_p_addr        <= address;
     i_p_byte_en     <= mask;
+    change          <= flush;
     if(write_enable) begin
         i_p_writedata   <= $urandom_range(32'hffff_ffff,32'h0);
-    end else begin
-        i_p_writedata   <= i_p_writedata;
     end
     i_p_read        <= read_enable;
     i_p_write       <= write_enable;

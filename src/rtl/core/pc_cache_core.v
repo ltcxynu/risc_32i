@@ -17,7 +17,8 @@ module pc_cache_core(
     output wire                     o_inst_write,
     input  wire [`CacheMemDataBus]  i_inst_readdata,
     input  wire                     i_inst_readdata_valid,
-    input  wire                     i_inst_waitrequest
+    input  wire                     i_inst_waitrequest,
+    input  wire                     flush
 );
 //PC write to addr fifo
 wire[`InstAddrBus]       pc_2_addr_fifo_wdata;
@@ -126,14 +127,16 @@ cache inst_cache(
     .o_p_readdata       (i_fetch_readdata        ),
     .o_p_readdata_valid (i_fetch_readdata_valid  ),
     .o_p_waitrequest    (i_fetch_waitrequest     ),
-    .o_m_addr           (o_inst_addr            ),
-    .o_m_byte_en        (o_inst_byte_en         ),
-    .o_m_writedata      (o_inst_writedata       ),
-    .o_m_read           (o_inst_read            ),
-    .o_m_write          (o_inst_write           ),
-    .i_m_readdata       (i_inst_readdata        ),
-    .i_m_readdata_valid (i_inst_readdata_valid  ),
-    .i_m_waitrequest    (i_inst_waitrequest     )
+    .o_m_addr           (o_inst_addr             ),
+    .o_m_byte_en        (o_inst_byte_en          ),
+    .o_m_writedata      (o_inst_writedata        ),
+    .o_m_read           (o_inst_read             ),
+    .o_m_write          (o_inst_write            ),
+    .i_m_readdata       (i_inst_readdata         ),
+    .i_m_readdata_valid (i_inst_readdata_valid   ),
+    .i_m_waitrequest    (i_inst_waitrequest      ),
+    .cache_config       (4'b0000                 ),
+    .change             (flush                   )
 );
 
 endmodule

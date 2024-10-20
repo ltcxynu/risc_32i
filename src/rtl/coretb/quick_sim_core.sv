@@ -14,7 +14,7 @@
 `include "../core/csr_reg.v"
 `include "../core/rv32i.v"
 `include "../cache/simple_ram.v"
-`include "../cache/4way_4word.v"
+`include "../cache/free_config_cache.v"
 `include "../core/pc_.v"
 `include "../core/fifo_.v"
 `include "../core/fetch_cache.v"
@@ -54,7 +54,7 @@ logic                        jtag_reset_flag_i;              // jtag复位PC标�
 logic                        rib_hold_flag_i;                // 总线暂停标志
 //外部中断预留
 logic  [`INT_BUS]            int_i;                // 中断信号
-
+logic  [`InstAddrBus]        inst_addr_pp1,inst_addr_pp2;
 rv32i u_rv32i(
     .clk                   (clk                   ),
     .rst                   (rst                  ),
@@ -181,5 +181,22 @@ end
 initial begin
     #50000
     $finish;
+end
+logic is_jump_pp1,is_jump_pp2;
+initial begin
+    forever begin
+        @(posedge clk);
+        if(u_rv32i.u_ex.inst_addr_i != 32'h0000_0000) begin
+            inst_addr_pp2 = inst_addr_pp1;
+            is_jump_pp2   = is_jump_pp1;
+
+            is_jump_pp1   = u_rv32i.u_ex.jump_flag_o;
+            inst_addr_pp1 = u_rv32i.u_ex.inst_addr_i;
+            if(inst_addr_pp1 != inst_addr_pp2) begin
+                if((inst_addr_pp1 - inst_addr_pp2) != 'd4)
+                    $display("the addr is %x, while before addr is %x, this might cause by jump: %b",inst_addr_pp1,inst_addr_pp2,is_jump_pp2);
+            end
+        end
+    end
 end
 endmodule

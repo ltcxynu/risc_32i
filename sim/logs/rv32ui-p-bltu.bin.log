@@ -1,0 +1,38 @@
+WARNING: ../src/rtl/coretb/quick_sim_core.sv:107: $readmemh(../sim/inst128.data): Not enough words in the file for the requested range [0:4096].
+VCD info: dumpfile this.vcd opened for output.
+the addr is 00000020, while before addr is 00000014, this might cause by jump: 1
+the addr is 0000001c, while before addr is 00000020, this might cause by jump: 1
+the addr is 00000028, while before addr is 0000001c, this might cause by jump: 1
+the addr is 00000040, while before addr is 00000034, this might cause by jump: 1
+the addr is 0000003c, while before addr is 00000040, this might cause by jump: 1
+the addr is 00000048, while before addr is 0000003c, this might cause by jump: 1
+the addr is 00000060, while before addr is 00000054, this might cause by jump: 1
+the addr is 0000005c, while before addr is 00000060, this might cause by jump: 1
+the addr is 00000068, while before addr is 0000005c, this might cause by jump: 1
+the addr is 00000080, while before addr is 00000078, this might cause by jump: 1
+the addr is 0000009c, while before addr is 00000094, this might cause by jump: 1
+the addr is 000000b8, while before addr is 000000b0, this might cause by jump: 1
+the addr is 000000d8, while before addr is 000000d0, this might cause by jump: 1
+the addr is 000000e4, while before addr is 000000fc, this might cause by jump: 1
+the addr is 00000108, while before addr is 00000124, this might cause by jump: 1
+the addr is 00000130, while before addr is 00000150, this might cause by jump: 1
+the addr is 0000015c, while before addr is 00000178, this might cause by jump: 1
+the addr is 00000184, while before addr is 000001a4, this might cause by jump: 1
+the addr is 000001b0, while before addr is 000001d0, this might cause by jump: 1
+the addr is 000001dc, while before addr is 000001f4, this might cause by jump: 1
+the addr is 00000200, while before addr is 0000021c, this might cause by jump: 1
+the addr is 00000228, while before addr is 00000248, this might cause by jump: 1
+the addr is 00000254, while before addr is 00000270, this might cause by jump: 1
+the addr is 0000027c, while before addr is 0000029c, this might cause by jump: 1
+the addr is 000002a8, while before addr is 000002c8, this might cause by jump: 1
+the addr is 000002e4, while before addr is 000002d0, this might cause by jump: 1
+the addr is 00000308, while before addr is 000002f8, this might cause by jump: 1
+~~~~~~~~~~~~~~~~~~~ TEST_PASS ~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~ #####     ##     ####    #### ~~~~~~~~~
+~~~~~~~~~ #    #   #  #   #       #     ~~~~~~~~~
+~~~~~~~~~ #    #  #    #   ####    #### ~~~~~~~~~
+~~~~~~~~~ #####   ######       #       #~~~~~~~~~
+~~~~~~~~~ #       #    #  #    #  #    #~~~~~~~~~
+~~~~~~~~~ #       #    #   ####    #### ~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

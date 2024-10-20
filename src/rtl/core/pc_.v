@@ -120,7 +120,7 @@ always @(posedge clk) begin
             inst_wait_proc <= 1'b0;
             read_en_wait   <= 1'b1;
         end else if(inst_fifo_ren_pp2 && ~inst_fifo_ren_pp1 && ~inst_wait_proc) begin
-            inst_addr <= inst_addr_pp2;
+            inst_addr <= inst_addr;
             inst_addr_pp1 <= inst_addr_pp2;
             inst_addr_pp2 <= inst_addr_pp2;
             inst_pp1 <= inst_pp2;
@@ -128,7 +128,7 @@ always @(posedge clk) begin
         end else if(~inst_fifo_ren_pp2 && inst_fifo_ren_pp1) begin
             inst_addr <= inst_addr;
             inst_addr_pp1 <= inst_addr_pp1;
-            inst_addr_pp2 <= inst_addr;
+            inst_addr_pp2 <= inst_addr_pp1;
             inst_pp1 <= inst_pp1;
             inst_pp2 <= inst_pp1;
         end else if(inst_fifo_ren_pp2 && inst_fifo_ren_pp1) begin

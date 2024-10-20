@@ -1,8 +1,0 @@
-tb_cache.uut.COMP1
-tb_cache.uut.FETCH13
-tb_cache.uut.FETCH24
-tb_cache.uut.FETCH35
-tb_cache.uut.HIT2
-tb_cache.uut.IDLE0
-tb_cache.uut.WB16
-tb_cache.uut.WB27

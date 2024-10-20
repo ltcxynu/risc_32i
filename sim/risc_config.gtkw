@@ -1,23 +1,39 @@
 [*]
 [*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
-[*] Fri Oct 18 08:03:53 2024
+[*] Sun Oct 20 06:26:06 2024
 [*]
 [dumpfile] "/home/host/risc_32i/sim/this.vcd"
-[dumpfile_mtime] "Fri Oct 18 08:02:52 2024"
-[dumpfile_size] 156264
+[dumpfile_mtime] "Sun Oct 20 06:25:24 2024"
+[dumpfile_size] 2591776
 [savefile] "/home/host/risc_32i/sim/risc_config.gtkw"
-[timestart] 262
-[size] 3952 2432
-[pos] -51 -51
-*-2.000000 278 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[timestart] 540
+[size] 2488 1536
+[pos] -39 -39
+*-4.000000 625 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] quick_sim_core.
 [treeopen] quick_sim_core.u_rv32i.
 [treeopen] quick_sim_core.u_rv32i.u_ex.
+[treeopen] quick_sim_core.u_rv32i.u_pc_cache_core.
 [sst_width] 388
 [signals_width] 574
 [sst_expanded] 1
 [sst_vpaned_height] 351
 @22
+quick_sim_core.u_rv32i.u_pc_cache_core.u_pc_.inst_addr_o[31:0]
+quick_sim_core.u_rv32i.u_pc_cache_core.u_pc_.inst_o[31:0]
+quick_sim_core.u_rv32i.u_pc_cache_core.u_pc_.inst_addr[31:0]
+quick_sim_core.u_rv32i.u_pc_cache_core.u_pc_.inst_addr_pp1[31:0]
+quick_sim_core.u_rv32i.u_pc_cache_core.u_pc_.inst_addr_pp2[31:0]
+quick_sim_core.u_rv32i.u_pc_cache_core.u_pc_.inst_fifo_r[31:0]
+@28
+quick_sim_core.u_rv32i.u_pc_cache_core.u_pc_.inst_fifo_ren
+quick_sim_core.u_rv32i.u_pc_cache_core.u_pc_.inst_fifo_ren_pp1
+quick_sim_core.u_rv32i.u_pc_cache_core.u_pc_.inst_fifo_ren_pp2
+@29
+quick_sim_core.u_rv32i.u_pc_cache_core.u_pc_.hold_en
+@22
+quick_sim_core.u_rv32i.u_pc_cache_core.u_pc_.inst_pp1[31:0]
+quick_sim_core.u_rv32i.u_pc_cache_core.u_pc_.inst_pp2[31:0]
 quick_sim_core.u_rv32i.u_regs.raddr1_i[4:0]
 quick_sim_core.u_rv32i.u_regs.rdata1_o[31:0]
 quick_sim_core.u_rv32i.u_regs.raddr2_i[4:0]
