@@ -15,6 +15,7 @@ module fetch_cache(
     input   wire [`CacheDataBus]    i_p_readdata,            //读数据
     input   wire                    i_p_readdata_valid,      //读数据有效
     input   wire                    i_p_waitrequest,         //操作等待
+    input   wire                    flush,
     //inst fifo
     input   wire                    inst_fifo_full,
     output  reg  [`InstBus]         inst_fifo_r,
@@ -44,7 +45,7 @@ assign o_p_byte_en = 4'h0;
 assign o_p_writedata = `ZeroWord;
 //每次发出一个请求(地址) 到cache
 always @(*) begin
-    if( ~addr_fifo_empty && ~inst_fifo_full && ~i_p_waitrequest && ~jump_flag_i) begin
+    if( ~addr_fifo_empty && ~inst_fifo_full && ~i_p_waitrequest && ~jump_flag_i && ~flush) begin
         o_p_addr <= {4'b0,addr_fifo_r[22:2]};
         o_p_read <= 1;
         addr_fifo_ren      <= 1;

@@ -11,11 +11,14 @@ module wb(
     output reg [`RegAddrBus]   reg_waddr_o,
     output reg [`RegBus]       reg_wdata_o,
     output reg [`RegAddrBus]   reg_we_o,
-    output reg                 wb_done
+    output reg                 wb_done,
+    input  wire                flush_ex,
+    output reg                 flush
 );
 reg [`RegAddrBus]   reg_wait_wb_pp1;
 reg [1:0]           mask_wait_wb_pp1;
 reg [2:0]           ifunct3_wait_wb_pp1;
+reg                 flush_wb_pp1;
     always@(posedge clk) begin
         if(rst) begin
             reg_wait_wb_pp1     <= `ZeroReg;
@@ -76,6 +79,19 @@ reg [2:0]           ifunct3_wait_wb_pp1;
             reg_wdata_o <= `ZeroWord;
             reg_waddr_o <= `ZeroReg;
             wb_done     <= 1;
+        end
+    end
+    //如果cache现在无法相应，那就等待
+    always @(posedge clk) begin
+        if(i_p_waitrequest) begin
+            if(flush_ex)
+                flush_wb_pp1 <= 1'b1;
+            else
+                flush_wb_pp1 <= flush_wb_pp1;
+            flush   <= 1'b0;
+        end else begin
+            flush <= flush_wb_pp1|flush_ex;
+            flush_wb_pp1 <= 1'b0;
         end
     end
 endmodule

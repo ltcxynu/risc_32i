@@ -36,7 +36,7 @@ module ex(
     output  reg  [`RegAddrBus]      reg_wait_wb,
     output  reg  [1:0]              mask_wait_wb,
     output  reg  [2:0]              ifunct3_wait_wb,
-    output  reg                     flush
+    output  reg                     flush_ex
 );
 /************************TASK***********************************/
 task set_reg(
@@ -444,10 +444,10 @@ end
 always @(*) begin
     case(opcode)
     `INST_FENCE: begin
-        flush = 1;
+        flush_ex = 1;
     end
     default: begin
-        flush = 0;
+        flush_ex = 0;
     end
     endcase
 end

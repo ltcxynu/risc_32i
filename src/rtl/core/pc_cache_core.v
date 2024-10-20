@@ -114,9 +114,12 @@ fetch_cache u_fetch_cache(
     .inst_fifo_rstn     (fetch_2_inst_fifo_rstn      ),
     .addr_fifo_r        (fetch_2_addr_fifo_rdata        ),
     .addr_fifo_empty    (addr_fifo_empty         ),
-    .addr_fifo_ren      (fetch_2_addr_fifo_ren          )
+    .addr_fifo_ren      (fetch_2_addr_fifo_ren          ),
+    .flush              (flush)
 );
-cache inst_cache(
+cache #(
+    .cache_entry(2)
+) inst_cache(
     .clk                (clk                ),
     .rst                (rst                ),
     .i_p_addr           (o_fetch_addr            ),

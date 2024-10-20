@@ -1,12 +1,12 @@
 WARNING: ../src/rtl/coretb/quick_sim_core.sv:107: $readmemh(../sim/inst128.data): Not enough words in the file for the requested range [0:4096].
 VCD info: dumpfile this.vcd opened for output.
-the addr is 00000170, while before addr is 00000184, this might cause by jump: 1
-the addr is 00000198, while before addr is 000001b0, this might cause by jump: 1
-the addr is 000001c4, while before addr is 000001e0, this might cause by jump: 1
-the addr is 000001f4, while before addr is 00000204, this might cause by jump: 1
-the addr is 00000218, while before addr is 0000022c, this might cause by jump: 1
-the addr is 00000240, while before addr is 00000258, this might cause by jump: 1
-the addr is 0000029c, while before addr is 0000028c, this might cause by jump: 1
+addr is 00000184, this might cause jumping to 00000170
+addr is 000001b0, this might cause jumping to 00000198
+addr is 000001e0, this might cause jumping to 000001c4
+addr is 00000204, this might cause jumping to 000001f4
+addr is 0000022c, this might cause jumping to 00000218
+addr is 00000258, this might cause jumping to 00000240
+addr is 0000028c, this might cause jumping to 0000029c
 ~~~~~~~~~~~~~~~~~~~ TEST_PASS ~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~ #####     ##     ####    #### ~~~~~~~~~

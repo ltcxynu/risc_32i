@@ -1,0 +1,123 @@
+[*]
+[*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
+[*] Sun Oct 20 14:43:57 2024
+[*]
+[dumpfile] "/home/host/risc_32i/sim/this.vcd"
+[dumpfile_mtime] "Sun Oct 20 14:29:43 2024"
+[dumpfile_size] 388509
+[savefile] "/home/host/risc_32i/sim/cache.gtkw"
+[timestart] 0
+[size] 2280 1295
+[pos] -51 -51
+*-8.000000 417 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] quick_sim_core.
+[treeopen] quick_sim_core.u_rv32i.
+[treeopen] quick_sim_core.u_rv32i.u_pc_cache_core.
+[sst_width] 233
+[signals_width] 398
+[sst_expanded] 1
+[sst_vpaned_height] 386
+@200
+-addr
+@28
+quick_sim_core.u_rv32i.u_pc_cache_core.addr_fifo.clk
+quick_sim_core.u_rv32i.u_pc_cache_core.addr_fifo.rst_n
+@22
+quick_sim_core.u_rv32i.u_pc_cache_core.addr_fifo.w_data[31:0]
+@28
+quick_sim_core.u_rv32i.u_pc_cache_core.addr_fifo.wr_en
+@22
+quick_sim_core.u_rv32i.u_pc_cache_core.addr_fifo.r_data[31:0]
+@28
+quick_sim_core.u_rv32i.u_pc_cache_core.addr_fifo.rd_en
+quick_sim_core.u_rv32i.u_pc_cache_core.addr_fifo.fifo_empty
+quick_sim_core.u_rv32i.u_pc_cache_core.addr_fifo.fifo_full
+@200
+-inst
+@28
+quick_sim_core.u_rv32i.u_pc_cache_core.inst_fifo.clk
+quick_sim_core.u_rv32i.u_pc_cache_core.inst_fifo.rst_n
+@22
+quick_sim_core.u_rv32i.u_pc_cache_core.inst_fifo.w_data[31:0]
+@28
+quick_sim_core.u_rv32i.u_pc_cache_core.inst_fifo.wr_en
+@22
+quick_sim_core.u_rv32i.u_pc_cache_core.inst_fifo.r_data[31:0]
+@28
+quick_sim_core.u_rv32i.u_pc_cache_core.inst_fifo.rd_en
+quick_sim_core.u_rv32i.u_pc_cache_core.inst_fifo.fifo_empty
+quick_sim_core.u_rv32i.u_pc_cache_core.inst_fifo.fifo_full
+@200
+-cache
+@22
+quick_sim_core.u_rv32i.u_pc_cache_core.inst_cache.i_p_addr[24:0]
+@28
+quick_sim_core.u_rv32i.u_pc_cache_core.inst_cache.i_p_read
+@22
+quick_sim_core.u_rv32i.u_pc_cache_core.inst_cache.o_p_readdata[31:0]
+@28
+quick_sim_core.u_rv32i.u_pc_cache_core.inst_cache.o_p_waitrequest
+quick_sim_core.u_rv32i.u_pc_cache_core.inst_cache.o_p_readdata_valid
+quick_sim_core.u_rv32i.u_pc_cache_core.inst_cache.change
+@200
+-cache_mem
+@22
+quick_sim_core.u_rv32i.u_pc_cache_core.inst_cache.o_m_addr[25:0]
+@28
+quick_sim_core.u_rv32i.u_pc_cache_core.inst_cache.o_m_read
+@22
+quick_sim_core.u_rv32i.u_pc_cache_core.inst_cache.i_m_readdata[127:0]
+@28
+quick_sim_core.u_rv32i.u_pc_cache_core.inst_cache.i_m_readdata_valid
+@22
+quick_sim_core.u_rv32i.u_pc_cache_core.inst_cache.invalid_num[3:0]
+@28
+quick_sim_core.u_rv32i.u_pc_cache_core.inst_cache.i_m_waitrequest
+@22
+quick_sim_core.u_rv32i.u_pc_cache_core.inst_cache.o_m_byte_en[3:0]
+@28
+quick_sim_core.u_rv32i.u_pc_cache_core.inst_cache.o_m_write
+@200
+-inst_o
+@22
+quick_sim_core.u_rv32i.u_ex.inst_o[31:0]
+quick_sim_core.u_rv32i.u_ex.inst_addr_o[31:0]
+@200
+-dcache_mem
+@22
+quick_sim_core.u_rv32i.d_cache.o_m_writedata[127:0]
+quick_sim_core.u_rv32i.d_cache.o_m_addr[25:0]
+@28
+quick_sim_core.u_rv32i.d_cache.o_m_write
+@200
+-mem_io
+@22
+quick_sim_core.i_inst_readdata[127:0]
+@28
+quick_sim_core.i_inst_readdata_valid
+@22
+quick_sim_core.o_inst_addr[25:0]
+@28
+quick_sim_core.i_inst_waitrequest
+@22
+quick_sim_core.o_inst_byte_en[3:0]
+@29
+quick_sim_core.o_inst_read
+@28
+quick_sim_core.o_inst_write
+@22
+quick_sim_core.o_inst_writedata[127:0]
+quick_sim_core.i_data_readdata[127:0]
+@28
+quick_sim_core.i_data_readdata_valid
+quick_sim_core.i_data_waitrequest
+@22
+quick_sim_core.o_data_addr[25:0]
+quick_sim_core.o_data_byte_en[3:0]
+@28
+quick_sim_core.o_data_read
+quick_sim_core.o_data_write
+@22
+quick_sim_core.o_data_writedata[127:0]
+[pattern_trace] 1
+[pattern_trace] 0

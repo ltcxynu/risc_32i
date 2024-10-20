@@ -109,7 +109,7 @@ initial begin
         forever begin
             @(posedge clk);
             if(o_inst_write) begin
-                i_mem[o_inst_addr[$clog2(`RomNum):2]] <= o_inst_writedata;
+                i_mem[o_inst_addr[$clog2(`RomNum):3]] <= o_inst_writedata;
                 i_inst_waitrequest <= 0;
             end
             if(o_inst_read) begin
@@ -125,7 +125,7 @@ initial begin
         forever begin
             @(posedge clk);
             if(o_data_write) begin
-                i_mem[o_data_addr[$clog2(`RomNum):2]] <= o_data_writedata;
+                i_mem[o_data_addr[$clog2(`RomNum):3]] <= o_data_writedata;
                 i_data_waitrequest <= 0;
             end
             if(o_data_read) begin
@@ -194,7 +194,11 @@ initial begin
             inst_addr_pp1 = u_rv32i.u_ex.inst_addr_i;
             if(inst_addr_pp1 != inst_addr_pp2) begin
                 if((inst_addr_pp1 - inst_addr_pp2) != 'd4)
-                    $display("the addr is %x, while before addr is %x, this might cause by jump: %b",inst_addr_pp1,inst_addr_pp2,is_jump_pp2);
+                    if(is_jump_pp2)
+                        $display("addr is %x, this might cause jumping to %x",inst_addr_pp2,inst_addr_pp1);
+                    else
+                        $display("ERROR!!!");
+
             end
         end
     end

@@ -1,21 +1,21 @@
 WARNING: ../src/rtl/coretb/quick_sim_core.sv:107: $readmemh(../sim/inst128.data): Not enough words in the file for the requested range [0:4096].
 VCD info: dumpfile this.vcd opened for output.
-the addr is 000000fc, while before addr is 0000011c, this might cause by jump: 1
-the addr is 00000134, while before addr is 00000158, this might cause by jump: 1
-the addr is 00000170, while before addr is 00000198, this might cause by jump: 1
-the addr is 000001b0, while before addr is 000001cc, this might cause by jump: 1
-the addr is 000001e4, while before addr is 00000204, this might cause by jump: 1
-the addr is 0000021c, while before addr is 00000240, this might cause by jump: 1
-the addr is 00000258, while before addr is 00000278, this might cause by jump: 1
-the addr is 00000290, while before addr is 000002b4, this might cause by jump: 1
-the addr is 000002cc, while before addr is 000002f0, this might cause by jump: 1
-the addr is 00000308, while before addr is 00000324, this might cause by jump: 1
-the addr is 0000033c, while before addr is 0000035c, this might cause by jump: 1
-the addr is 00000374, while before addr is 00000398, this might cause by jump: 1
-the addr is 000003b0, while before addr is 000003d0, this might cause by jump: 1
-the addr is 000003e8, while before addr is 0000040c, this might cause by jump: 1
-the addr is 00000424, while before addr is 00000448, this might cause by jump: 1
-the addr is 000004d4, while before addr is 000004c4, this might cause by jump: 1
+addr is 0000011c, this might cause jumping to 000000fc
+addr is 00000158, this might cause jumping to 00000134
+addr is 00000198, this might cause jumping to 00000170
+addr is 000001cc, this might cause jumping to 000001b0
+addr is 00000204, this might cause jumping to 000001e4
+addr is 00000240, this might cause jumping to 0000021c
+addr is 00000278, this might cause jumping to 00000258
+addr is 000002b4, this might cause jumping to 00000290
+addr is 000002f0, this might cause jumping to 000002cc
+addr is 00000324, this might cause jumping to 00000308
+addr is 0000035c, this might cause jumping to 0000033c
+addr is 00000398, this might cause jumping to 00000374
+addr is 000003d0, this might cause jumping to 000003b0
+addr is 0000040c, this might cause jumping to 000003e8
+addr is 00000448, this might cause jumping to 00000424
+addr is 000004c4, this might cause jumping to 000004d4
 ~~~~~~~~~~~~~~~~~~~ TEST_PASS ~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~ #####     ##     ####    #### ~~~~~~~~~

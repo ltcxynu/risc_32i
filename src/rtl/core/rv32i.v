@@ -133,6 +133,7 @@ module rv32i(
     wire [`RegBus]          wb_reg_wdata_o;
     wire [`RegAddrBus]      wb_reg_we_o;
     wire                    wb_done;
+    wire                    wb_flush;
     //ctrl
     wire [`Hold_Flag_Bus]   ctrl_hold_flag_o;
     wire                    ctrl_jump_flag_o;
@@ -168,7 +169,7 @@ pc_cache_core u_pc_cache_core(
     .i_inst_readdata       (i_inst_readdata       ),
     .i_inst_readdata_valid (i_inst_readdata_valid ),
     .i_inst_waitrequest    (i_inst_waitrequest    ),
-    .flush                 (ex_flush              )
+    .flush                 (wb_flush              )
 );
 
 if_id u_if_id(
@@ -293,7 +294,7 @@ ex u_ex(
     .reg_wait_wb        (ex_reg_wait_wb       ),
     .mask_wait_wb       (ex_mask_wait_wb      ),
     .ifunct3_wait_wb    (ex_ifunct3_wait_wb   ),
-    .flush              (ex_flush)
+    .flush_ex           (ex_flush)
 );
 wb u_wb(
     .clk                (clk                  ),
@@ -308,7 +309,9 @@ wb u_wb(
     .reg_wdata_o        (wb_reg_wdata_o       ),
     .reg_we_o           (wb_reg_we_o          ),
     .wb_done            (wb_done              ),
-    .ex_read_mem        (o_ex_read            )
+    .ex_read_mem        (o_ex_read            ),
+    .flush_ex           (ex_flush             ),
+    .flush              (wb_flush             )
 );
 cache #(
     .cache_entry(2)
@@ -342,7 +345,7 @@ cache #(
     .cnt_wb_r           (                     ),
     .cnt_wb_w           (                     ),
     .cache_config       (4'b0000              ),
-    .change             (ex_flush             )
+    .change             (wb_flush             )
 );
 
 ctrl u_ctrl(

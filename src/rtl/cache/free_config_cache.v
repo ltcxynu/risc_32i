@@ -291,16 +291,17 @@
                     byte_en_buf <= i_p_byte_en;
                     write_buf <= i_p_write;
                     read_buf <= i_p_read;
-                    if(i_p_read) begin
+                    if(change) begin
+                        state <= FLASH;
+                        flash <= 2'b10;
+                        phase <= 0;
+                    end
+                    else if(i_p_read) begin
                         state <= COMP;
                         cnt_r <= cnt_r + 1;
                     end else if(i_p_write) begin
                         state <= COMP;
                         cnt_w <= cnt_w + 1;
-                    end else if(change) begin
-                        state <= FLASH;
-                        flash <= 2'b10;
-                        phase <= 0;
                     end
                 end
                 COMP: begin
